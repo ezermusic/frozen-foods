@@ -1,0 +1,1352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Our Team — Abak Company Limited</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Mulish:wght@300;400;500;600;700;800&family=Bebas+Neue&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ════════════════════════════════════════════
+       CSS CUSTOM PROPERTIES — consistent with site theme
+    ════════════════════════════════════════════ */
+    :root {
+      --navy:        #081B29;
+      --navy-dark:   #05121d;
+      --navy-mid:    #0d2639;
+      --ice:         #4CC9F0;
+      --ice-light:   #64d4ff;
+      --ice-glow:    rgba(76,201,240,0.18);
+      --gold:        #C9A84C;
+      --gold-lt:     rgba(201,168,76,0.15);
+      --text:        #e0f2ff;
+      --muted:       #a0b8cc;
+      --muted-dk:    #6a8aa0;
+      --white:       #ffffff;
+      --card-bg:     rgba(13,38,57,0.85);
+      --card-border: rgba(76,201,240,0.15);
+      --exec-accent: #4CC9F0;   /* ice */
+      --dept-accent: #C9A84C;   /* gold */
+    }
+
+    /* ════ RESET & BASE ════ */
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Mulish', sans-serif;
+      background: var(--navy);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    h1, h2, h3, h4 { font-family: 'Cormorant Garamond', serif; }
+    img { display: block; }
+
+    /* ════════════════════════════════════════════
+       CUSTOM CURSOR
+    ════════════════════════════════════════════ */
+    .cursor-dot, .cursor-ring {
+      position: fixed;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 99999;
+      transition: opacity 0.3s;
+    }
+    .cursor-dot {
+      width: 8px; height: 8px;
+      background: var(--ice);
+      transform: translate(-50%,-50%);
+      transition: transform 0.1s, background 0.2s;
+    }
+    .cursor-ring {
+      width: 36px; height: 36px;
+      border: 1.5px solid rgba(76,201,240,0.6);
+      transform: translate(-50%,-50%);
+      transition: transform 0.18s cubic-bezier(0.22,1,0.36,1), width 0.25s, height 0.25s, background 0.2s;
+    }
+    body:has(.team-card:hover) .cursor-ring {
+      width: 60px; height: 60px;
+      background: rgba(76,201,240,0.05);
+      border-color: var(--ice);
+    }
+    @media (hover: none) { .cursor-dot, .cursor-ring { display: none; } }
+
+    /* ════════════════════════════════════════════
+       GRAIN OVERLAY
+    ════════════════════════════════════════════ */
+    body::before {
+      content: '';
+      position: fixed; inset: 0; z-index: 0;
+      pointer-events: none;
+      opacity: 0.035;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      background-size: 180px;
+    }
+
+    /* ════════════════════════════════════════════
+       NAVIGATION — consistent with site
+    ════════════════════════════════════════════ */
+    nav {
+      position: sticky; top: 0; z-index: 1000;
+      background: rgba(8,27,41,0.98);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(76,201,240,0.2);
+    }
+    .nav-container {
+      max-width: 1400px; margin: 0 auto;
+      padding: 1rem 5vw;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.85rem; font-weight: 700;
+      color: var(--ice); text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: var(--text); text-decoration: none;
+      font-weight: 500; font-size: 0.92rem;
+      transition: color 0.3s; position: relative;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute;
+      bottom: -3px; left: 0; right: 0;
+      height: 1.5px; background: var(--ice);
+      transform: scaleX(0); transform-origin: right;
+      transition: transform 0.3s;
+    }
+    .nav-links a:hover::after,
+    .nav-links a.active::after { transform: scaleX(1); transform-origin: left; }
+    .nav-links a:hover, .nav-links a.active { color: var(--ice); }
+    .hamburger {
+      display: none; font-size: 1.8rem;
+      cursor: pointer; color: var(--ice);
+      background: none; border: none;
+      transition: transform 0.3s;
+    }
+
+    /* Mobile Menu */
+    .mobile-menu {
+      position: fixed; top: 0; left: 0;
+      width: 100%; height: 100vh;
+      background: var(--navy-dark);
+      display: none; flex-direction: column;
+      padding-top: 80px; z-index: 999;
+      clip-path: circle(0% at calc(100% - 40px) 40px);
+      transition: clip-path 0.5s cubic-bezier(0.77,0,0.175,1);
+    }
+    .mobile-menu.active {
+      display: flex;
+      clip-path: circle(150% at calc(100% - 40px) 40px);
+    }
+    .mobile-menu ul {
+      list-style: none; padding: 2rem;
+      display: flex; flex-direction: column; gap: 0.5rem;
+    }
+    .mobile-menu a {
+      color: var(--text); text-decoration: none;
+      font-size: 1.4rem; font-family: 'Cormorant Garamond', serif;
+      font-weight: 600;
+      padding: 0.9rem 0;
+      border-bottom: 1px solid rgba(76,201,240,0.12);
+      display: flex; align-items: center; justify-content: space-between;
+      transition: color 0.25s, padding-left 0.25s;
+    }
+    .mobile-menu a:hover { color: var(--ice); padding-left: 12px; }
+    .mobile-menu a::after { content: '→'; font-family: 'Mulish', sans-serif; font-size: 1rem; color: var(--ice); opacity: 0; transition: opacity 0.25s; }
+    .mobile-menu a:hover::after { opacity: 1; }
+    .mobile-close {
+      position: absolute; top: 1.5rem; right: 5vw;
+      font-size: 2rem; color: var(--ice);
+      cursor: pointer; background: none; border: none;
+    }
+
+    /* ════════════════════════════════════════════
+       HERO — cinematic full-viewport
+    ════════════════════════════════════════════ */
+    .team-hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden;
+      background: var(--navy-dark);
+    }
+
+    /* Animated mesh background */
+    .hero-mesh {
+      position: absolute; inset: 0; z-index: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 20% 50%, rgba(76,201,240,0.1) 0%, transparent 55%),
+        radial-gradient(ellipse 60% 80% at 80% 30%, rgba(201,168,76,0.07) 0%, transparent 50%),
+        radial-gradient(ellipse 50% 50% at 50% 90%, rgba(76,201,240,0.06) 0%, transparent 50%),
+        linear-gradient(160deg, #05121d 0%, #081B29 50%, #0a2035 100%);
+    }
+
+    /* Floating orbs */
+    .orb {
+      position: absolute; border-radius: 50%;
+      filter: blur(80px); pointer-events: none; z-index: 0;
+      animation: float 8s ease-in-out infinite;
+    }
+    .orb-1 {
+      width: 500px; height: 500px;
+      background: rgba(76,201,240,0.06);
+      top: -100px; left: -150px;
+      animation-delay: 0s; animation-duration: 10s;
+    }
+    .orb-2 {
+      width: 350px; height: 350px;
+      background: rgba(201,168,76,0.05);
+      bottom: 0; right: -80px;
+      animation-delay: -4s; animation-duration: 12s;
+    }
+    .orb-3 {
+      width: 200px; height: 200px;
+      background: rgba(76,201,240,0.08);
+      top: 40%; right: 20%;
+      animation-delay: -2s; animation-duration: 7s;
+    }
+    @keyframes float {
+      0%,100% { transform: translateY(0) scale(1); }
+      50%      { transform: translateY(-30px) scale(1.05); }
+    }
+
+    /* Grid lines decoration */
+    .hero-grid {
+      position: absolute; inset: 0; z-index: 0;
+      background-image:
+        linear-gradient(rgba(76,201,240,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(76,201,240,0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black 30%, transparent 80%);
+    }
+
+    .hero-content {
+      position: relative; z-index: 1;
+      text-align: center; padding: 0 5vw;
+      max-width: 1000px;
+    }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 0.8rem;
+      margin-bottom: 2rem;
+      opacity: 0; animation: fadeUp 0.8s 0.3s forwards;
+    }
+    .eyebrow-line { width: 40px; height: 1px; background: var(--ice); }
+    .eyebrow-text {
+      font-family: 'Mulish', sans-serif;
+      font-size: 0.75rem; font-weight: 800;
+      letter-spacing: 4px; text-transform: uppercase;
+      color: var(--ice);
+    }
+    .hero-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(5rem, 14vw, 12rem);
+      line-height: 0.9;
+      letter-spacing: 3px;
+      color: var(--white);
+      opacity: 0; animation: fadeUp 1s 0.5s forwards;
+    }
+    .hero-title .title-accent {
+      color: transparent;
+      -webkit-text-stroke: 1.5px var(--ice);
+    }
+    .hero-subtitle {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.2rem, 2.5vw, 1.7rem);
+      font-style: italic; color: var(--muted);
+      margin-top: 1.5rem; max-width: 600px; margin-left: auto; margin-right: auto;
+      opacity: 0; animation: fadeUp 0.9s 0.7s forwards;
+    }
+    .hero-stats {
+      display: flex; justify-content: center; gap: 4rem;
+      margin-top: 4rem; flex-wrap: wrap;
+      opacity: 0; animation: fadeUp 0.9s 0.9s forwards;
+    }
+    .hero-stat { text-align: center; }
+    .stat-number {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3.5rem; color: var(--ice);
+      line-height: 1; letter-spacing: 2px;
+    }
+    .stat-label {
+      font-size: 0.7rem; font-weight: 700;
+      letter-spacing: 2.5px; text-transform: uppercase;
+      color: var(--muted); margin-top: 0.3rem;
+    }
+    .hero-scroll {
+      position: absolute; bottom: 2.5rem; left: 50%;
+      transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+      opacity: 0; animation: fadeUp 0.8s 1.2s forwards;
+      cursor: pointer;
+    }
+    .scroll-label { font-size: 0.65rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); }
+    .scroll-line {
+      width: 1px; height: 60px;
+      background: linear-gradient(var(--ice), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+    @keyframes scrollPulse { 0%,100% { opacity:0.4; transform:scaleY(1); } 50% { opacity:1; transform:scaleY(1.1); } }
+    @keyframes fadeUp { from { opacity:0; transform:translateY(30px); } to { opacity:1; transform:translateY(0); } }
+
+    /* ════════════════════════════════════════════
+       SECTION SHARED
+    ════════════════════════════════════════════ */
+    .section-wrap { padding: 7rem 5vw; max-width: 1400px; margin: 0 auto; }
+    .section-label {
+      display: inline-flex; align-items: center; gap: 0.8rem;
+      margin-bottom: 1.2rem;
+    }
+    .sl-bar { width: 32px; height: 2px; }
+    .sl-bar-ice  { background: var(--ice); }
+    .sl-bar-gold { background: var(--gold); }
+    .sl-text {
+      font-size: 0.68rem; font-weight: 800;
+      letter-spacing: 3.5px; text-transform: uppercase;
+    }
+    .sl-text-ice  { color: var(--ice); }
+    .sl-text-gold { color: var(--gold); }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
+      font-weight: 700; line-height: 1.1;
+      margin-bottom: 0.8rem;
+    }
+    .section-desc {
+      font-size: 0.95rem; color: var(--muted);
+      max-width: 560px; line-height: 1.8;
+    }
+
+    /* ════════════════════════════════════════════
+       EXECUTIVES — 3D FLIP CARDS
+    ════════════════════════════════════════════ */
+    .exec-section {
+      background: linear-gradient(180deg, var(--navy-dark) 0%, var(--navy) 100%);
+      position: relative; overflow: hidden;
+    }
+    .exec-section::before {
+      content: 'LEADERSHIP';
+      position: absolute; right: -2rem; top: 50%;
+      transform: translateY(-50%) rotate(90deg);
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 10rem; letter-spacing: 8px;
+      color: rgba(76,201,240,0.03);
+      pointer-events: none; white-space: nowrap;
+      user-select: none;
+    }
+
+    .exec-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      margin-top: 3.5rem;
+    }
+
+    /* 3D flip card */
+    .team-card {
+      perspective: 1200px;
+      height: 480px;
+      cursor: pointer;
+      position: relative;
+    }
+    .card-inner {
+      position: relative; width: 100%; height: 100%;
+      transform-style: preserve-3d;
+      transition: transform 0.75s cubic-bezier(0.23,1,0.32,1);
+    }
+    .team-card:hover .card-inner,
+    .team-card.flipped .card-inner { transform: rotateY(180deg); }
+
+    .card-face {
+      position: absolute; inset: 0;
+      backface-visibility: hidden;
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    /* FRONT */
+    .card-front {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      backdrop-filter: blur(20px);
+      display: flex; flex-direction: column;
+    }
+    .card-photo-wrap {
+      position: relative;
+      flex: 1;
+      overflow: hidden;
+      background: linear-gradient(135deg, var(--navy-mid), var(--navy-dark));
+    }
+    .card-photo {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: top center;
+      transition: transform 0.6s ease;
+      filter: grayscale(15%) brightness(0.95);
+    }
+    .team-card:hover .card-photo { transform: scale(1.06); filter: grayscale(0%) brightness(1); }
+
+    /* Photo placeholder */
+    .photo-placeholder {
+      width: 100%; height: 100%;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 1rem;
+      background: linear-gradient(145deg, var(--navy-mid), var(--navy-dark));
+    }
+    .photo-placeholder .ph-initials {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 4rem; font-weight: 700;
+      color: rgba(76,201,240,0.6);
+    }
+    .photo-placeholder .ph-icon {
+      font-size: 1.5rem; opacity: 0.2;
+    }
+
+    /* Gradient overlay on photo */
+    .card-photo-wrap::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0;
+      height: 60%;
+      background: linear-gradient(transparent, rgba(8,27,41,0.9));
+    }
+
+    .card-flip-hint {
+      position: absolute; top: 1rem; right: 1rem;
+      width: 32px; height: 32px;
+      background: rgba(76,201,240,0.12);
+      border: 1px solid rgba(76,201,240,0.3);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.8rem; color: var(--ice);
+      transition: all 0.3s;
+      z-index: 2;
+    }
+    .team-card:hover .card-flip-hint {
+      background: var(--ice); color: var(--navy); transform: rotate(180deg);
+    }
+
+    .card-tier-badge {
+      position: absolute; top: 1rem; left: 1rem;
+      font-size: 0.58rem; font-weight: 800;
+      letter-spacing: 2px; text-transform: uppercase;
+      padding: 0.25rem 0.7rem;
+      border-radius: 50px; z-index: 2;
+    }
+    .badge-exec { background: rgba(76,201,240,0.15); border: 1px solid rgba(76,201,240,0.4); color: var(--ice); }
+    .badge-dept { background: rgba(201,168,76,0.15); border: 1px solid rgba(201,168,76,0.4); color: var(--gold); }
+
+    .card-info {
+      padding: 1.4rem 1.4rem 1.6rem;
+      position: relative; z-index: 1;
+    }
+    .card-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem; font-weight: 700;
+      color: var(--white); line-height: 1.2;
+      margin-bottom: 0.4rem;
+    }
+    .card-title {
+      font-size: 0.75rem; font-weight: 700;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      color: var(--ice); margin-bottom: 0.8rem;
+    }
+    .card-dept-title { color: var(--gold); }
+    .card-accent-line {
+      width: 36px; height: 2px;
+      background: linear-gradient(90deg, var(--ice), transparent);
+      border-radius: 2px;
+    }
+    .card-accent-line-gold {
+      background: linear-gradient(90deg, var(--gold), transparent);
+    }
+
+    /* BACK */
+    .card-back {
+      transform: rotateY(180deg);
+      background: linear-gradient(145deg, var(--navy-mid) 0%, var(--navy-dark) 100%);
+      border: 1px solid rgba(76,201,240,0.25);
+      padding: 2rem;
+      display: flex; flex-direction: column;
+      gap: 1rem;
+    }
+    .card-back-exec { border-color: rgba(76,201,240,0.3); }
+    .card-back-dept { border-color: rgba(201,168,76,0.3); }
+
+    .back-role-label {
+      font-size: 0.6rem; font-weight: 800;
+      letter-spacing: 3px; text-transform: uppercase;
+      margin-bottom: 0.2rem;
+    }
+    .back-role-label-ice  { color: var(--ice); }
+    .back-role-label-gold { color: var(--gold); }
+
+    .back-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem; font-weight: 700; color: var(--white);
+      line-height: 1.15;
+    }
+    .back-role {
+      font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 1.5px; text-transform: uppercase;
+    }
+    .back-role-ice  { color: var(--ice); }
+    .back-role-gold { color: var(--gold); }
+
+    .back-divider { height: 1px; background: rgba(76,201,240,0.12); }
+    .back-divider-gold { background: rgba(201,168,76,0.12); }
+
+    .back-bio {
+      font-size: 0.85rem; line-height: 1.75;
+      color: var(--muted); flex: 1;
+    }
+    .back-dept-tag {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.65rem; font-weight: 700;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      padding: 0.35rem 0.85rem; border-radius: 50px;
+      align-self: flex-start;
+    }
+    .tag-dept-exec { background: rgba(76,201,240,0.1); border: 1px solid rgba(76,201,240,0.3); color: var(--ice); }
+    .tag-dept-dept { background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.3); color: var(--gold); }
+
+    .back-contact {
+      display: flex; gap: 0.7rem; margin-top: auto;
+    }
+    .contact-pill {
+      display: inline-flex; align-items: center; gap: 0.35rem;
+      font-size: 0.68rem; font-weight: 700;
+      padding: 0.35rem 0.8rem; border-radius: 50px;
+      text-decoration: none; transition: all 0.2s;
+      letter-spacing: 0.5px;
+    }
+    .pill-wa {
+      background: rgba(37,211,102,0.1);
+      border: 1px solid rgba(37,211,102,0.3);
+      color: #25D366;
+    }
+    .pill-wa:hover { background: #25D366; color: white; }
+    .pill-email {
+      background: rgba(76,201,240,0.1);
+      border: 1px solid rgba(76,201,240,0.3);
+      color: var(--ice);
+    }
+    .pill-email:hover { background: var(--ice); color: var(--navy); }
+
+    /* ════════════════════════════════════════════
+       DEPARTMENT HEADS — Staggered horizontal layout
+    ════════════════════════════════════════════ */
+    .dept-section {
+      background: var(--navy);
+      position: relative; overflow: hidden;
+    }
+    .dept-section::before {
+      content: 'TEAM';
+      position: absolute; left: -1rem; top: 50%;
+      transform: translateY(-50%) rotate(-90deg);
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 10rem; letter-spacing: 8px;
+      color: rgba(201,168,76,0.03);
+      pointer-events: none; white-space: nowrap;
+      user-select: none;
+    }
+
+    .dept-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.8rem;
+      margin-top: 3.5rem;
+    }
+
+    /* ════════════════════════════════════════════
+       MARQUEE DIVIDER BETWEEN SECTIONS
+    ════════════════════════════════════════════ */
+    .marquee-strip {
+      background: rgba(76,201,240,0.06);
+      border-top: 1px solid rgba(76,201,240,0.12);
+      border-bottom: 1px solid rgba(76,201,240,0.12);
+      padding: 1rem 0;
+      overflow: hidden;
+    }
+    .marquee-track {
+      display: flex; gap: 3rem;
+      animation: marquee 20s linear infinite;
+      white-space: nowrap;
+    }
+    @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    .marquee-item {
+      font-size: 0.68rem; font-weight: 800;
+      letter-spacing: 3px; text-transform: uppercase;
+      color: rgba(76,201,240,0.4);
+      flex-shrink: 0; display: flex; align-items: center; gap: 1rem;
+    }
+    .marquee-sep { color: var(--ice); opacity: 0.6; }
+
+    /* Gold marquee for dept separator */
+    .marquee-strip-gold {
+      background: rgba(201,168,76,0.05);
+      border-color: rgba(201,168,76,0.1);
+    }
+    .marquee-strip-gold .marquee-item {
+      color: rgba(201,168,76,0.35);
+    }
+    .marquee-strip-gold .marquee-sep { color: var(--gold); }
+
+    /* ════════════════════════════════════════════
+       CULTURE / VALUES STRIP
+    ════════════════════════════════════════════ */
+    .values-strip {
+      background: linear-gradient(135deg, var(--navy-dark), var(--navy-mid));
+      padding: 5rem 5vw;
+      border-top: 1px solid rgba(76,201,240,0.1);
+    }
+    .values-inner { max-width: 1400px; margin: 0 auto; }
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+    .value-card {
+      padding: 2rem 1.5rem;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(76,201,240,0.1);
+      border-radius: 16px;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.35s, border-color 0.35s, box-shadow 0.35s;
+    }
+    .value-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(76,201,240,0.3);
+      box-shadow: 0 20px 50px rgba(76,201,240,0.08);
+    }
+    .value-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--ice), transparent);
+      transform: scaleX(0); transform-origin: left;
+      transition: transform 0.4s;
+    }
+    .value-card:hover::before { transform: scaleX(1); }
+    .value-icon { font-size: 2.2rem; margin-bottom: 1rem; }
+    .value-card h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem; font-weight: 700;
+      color: var(--white); margin-bottom: 0.6rem;
+    }
+    .value-card p { font-size: 0.84rem; color: var(--muted); line-height: 1.7; }
+
+    /* ════════════════════════════════════════════
+       JOIN US CTA
+    ════════════════════════════════════════════ */
+    .join-cta {
+      background: linear-gradient(135deg, var(--navy-dark), var(--navy));
+      padding: 6rem 5vw;
+      text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .join-cta::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 60% 60% at 50% 50%, rgba(76,201,240,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .join-cta-inner { position: relative; z-index: 1; }
+    .join-cta h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 700; color: var(--white);
+      margin-bottom: 1rem; line-height: 1.1;
+    }
+    .join-cta p { font-size: 1.05rem; color: var(--muted); max-width: 600px; margin: 0 auto 2.5rem; }
+    .join-btn {
+      display: inline-flex; align-items: center; gap: 0.7rem;
+      background: var(--ice); color: var(--navy);
+      padding: 1rem 2.8rem; border-radius: 50px;
+      font-weight: 800; font-size: 0.9rem;
+      text-decoration: none; letter-spacing: 0.5px;
+      transition: all 0.3s;
+      box-shadow: 0 8px 30px rgba(76,201,240,0.25);
+    }
+    .join-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 16px 40px rgba(76,201,240,0.35);
+      background: var(--ice-light);
+    }
+
+    /* ════════════════════════════════════════════
+       FOOTER
+    ════════════════════════════════════════════ */
+    footer {
+      background: #05121d;
+      padding: 3rem 5vw 2rem;
+      text-align: center;
+      font-size: 0.88rem; color: var(--muted);
+      border-top: 1px solid rgba(76,201,240,0.1);
+    }
+
+    /* ════════════════════════════════════════════
+       SCROLL REVEAL
+    ════════════════════════════════════════════ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1),
+                  transform 0.7s cubic-bezier(0.22,1,0.36,1);
+    }
+    .reveal.in-view { opacity: 1; transform: translateY(0); }
+    .reveal-left  { opacity:0; transform:translateX(-40px); transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1); }
+    .reveal-left.in-view  { opacity:1; transform:translateX(0); }
+    .reveal-right { opacity:0; transform:translateX(40px);  transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1); }
+    .reveal-right.in-view { opacity:1; transform:translateX(0); }
+
+    /* ════════════════════════════════════════════
+       RESPONSIVE
+    ════════════════════════════════════════════ */
+    @media (max-width: 1200px) {
+      .exec-grid { grid-template-columns: repeat(2, 1fr); }
+      .dept-grid  { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 900px) {
+      .values-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hamburger { display: block; }
+      .exec-grid { grid-template-columns: 1fr; max-width: 420px; margin-left: auto; margin-right: auto; }
+      .dept-grid  { grid-template-columns: 1fr; max-width: 420px; margin-left: auto; margin-right: auto; }
+      .team-card  { height: 440px; }
+      .hero-stats { gap: 2.5rem; }
+      .section-wrap { padding: 5rem 5vw; }
+    }
+    @media (max-width: 480px) {
+      .values-grid { grid-template-columns: 1fr; }
+      .hero-title  { font-size: clamp(4rem, 20vw, 6rem); }
+      .back-contact { flex-direction: column; gap: 0.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Custom cursor -->
+  <div class="cursor-dot"  id="cursorDot"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <!-- ══ NAVIGATION ══ -->
+  <nav>
+    <div class="nav-container">
+      <a href="index.html" class="logo">Abak Company</a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="products.html">Products</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="suppliers.html">Suppliers</a></li>
+        <li><a href="events.html">Events & Engagements</a></li>
+        <li><a href="team.html" class="active">Our Team</a></li>
+        <li><a href="articles.html">Blog</a></li>
+        <li><a href="faq.html">FAQs</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Open menu">☰</button>
+    </div>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-label="Navigation menu">
+    <button class="mobile-close" id="mobileClose" aria-label="Close menu">✕</button>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="products.html">Products</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="suppliers.html">Suppliers</a></li>
+      <li><a href="events.html">Events & Engagements</a></li>
+      <li><a href="team.html">Our Team</a></li>
+      <li><a href="articles.html">Blog</a></li>
+      <li><a href="faq.html">FAQs</a></li>
+      <li><a href="contact.html">Contact Us</a></li>
+    </ul>
+  </div>
+
+  <!-- ══ HERO ══ -->
+  <section class="team-hero" id="top">
+    <div class="hero-mesh"></div>
+    <div class="hero-grid"></div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+
+    <div class="hero-content">
+      <div class="hero-eyebrow">
+        <div class="eyebrow-line"></div>
+        <span class="eyebrow-text">The People Behind Abak</span>
+        <div class="eyebrow-line"></div>
+      </div>
+      <h1 class="hero-title">
+        OUR<br/><span class="title-accent">TEAM</span>
+      </h1>
+      <p class="hero-subtitle">
+        Driven by excellence, united by purpose — meet the visionary leaders and dedicated professionals building Ghana's most trusted frozen food company.
+      </p>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="stat-number">8</div>
+          <div class="stat-label">Team Members</div>
+        </div>
+        <div class="hero-stat">
+          <div class="stat-number">4</div>
+          <div class="stat-label">Executives</div>
+        </div>
+        <div class="hero-stat">
+          <div class="stat-number">4</div>
+          <div class="stat-label">Dept. Heads</div>
+        </div>
+        <div class="hero-stat">
+          <div class="stat-number">6+</div>
+          <div class="stat-label">Countries Sourced</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-scroll" onclick="document.getElementById('executives').scrollIntoView({behavior:'smooth'})">
+      <span class="scroll-label">Scroll to Meet the Team</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ══ MARQUEE DIVIDER ══ -->
+  <div class="marquee-strip">
+    <div class="marquee-track">
+      <span class="marquee-item">Maxwell Awuku Dekpor <span class="marquee-sep">◆</span></span>
+      <span class="marquee-item">Millicent Dekpor <span class="marquee-sep">◆</span></span>
+      <span class="marquee-item">Frederick Laryea <span class="marquee-sep">◆</span></span>
+      <span class="marquee-item">Eunice Twum-Barimah <span class="marquee-sep">◆</span></span>
+      <span class="marquee-item">Isaac Koomson <span class="marquee-sep">◆</span></span>
+      <span class="marquee-item">Nathaniel Affum Kwakwa <span class="marquee-sep">◆</span></span>
+      <span class="marquee-item">Isaac Ndzebah <span class="marquee-sep">◆</span></span>
+      <span class="marquee-item">Bernard Laryea <span class="marquee-sep">◆</span></span>
+      <!-- duplicate for seamless loop -->
+      <span class="marquee-item">Maxwell Awuku Dekpor <span class="marquee-sep">◆</span></span>
+      <span class="marquee-item">Millicent Dekpor <span class="marquee-sep">◆</span></span>
+      <span class="marquee-item">Frederick Laryea <span class="marquee-sep">◆</span></span>
+      <span class="marquee-item">Eunice Twum-Barimah <span class="marquee-sep">◆</span></span>
+      <span class="marquee-item">Isaac Koomson <span class="marquee-sep">◆</span></span>
+      <span class="marquee-item">Nathaniel Affum Kwakwa <span class="marquee-sep">◆</span></span>
+      <span class="marquee-item">Isaac Ndzebah <span class="marquee-sep">◆</span></span>
+      <span class="marquee-item">Bernard Laryea <span class="marquee-sep">◆</span></span>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       EXECUTIVE LEADERSHIP
+  ══════════════════════════════════════════════ -->
+  <section class="exec-section" id="executives">
+    <div class="section-wrap">
+      <div class="reveal-left">
+        <div class="section-label">
+          <div class="sl-bar sl-bar-ice"></div>
+          <span class="sl-text sl-text-ice">Executive Leadership</span>
+        </div>
+        <h2 class="section-title" style="color:var(--white);">The Visionaries<br/>Steering <em style="font-style:italic;color:var(--ice);">Abak Forward</em></h2>
+        <p class="section-desc">Our C-Suite leaders bring decades of combined expertise in food trade, operations, finance, and marketing — united by a singular mission to deliver excellence across every part of the business.</p>
+      </div>
+
+      <div class="exec-grid">
+
+        <!-- CEO -->
+        <div class="team-card reveal" style="transition-delay:0.05s">
+          <div class="card-inner">
+            <div class="card-face card-front">
+              <div class="card-photo-wrap">
+                <!--
+                  ★ CEO PHOTO — place image at: codes/team/maxwell-awuku-dekpor.jpg
+                -->
+                <img
+                  src="codes/team/maxwell-awuku-dekpor.jpg"
+                  alt="Maxwell Awuku Dekpor — CEO"
+                  class="card-photo"
+                  onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"
+                />
+                <div class="photo-placeholder" style="display:none;">
+                  <span class="ph-initials">MA</span>
+                  <span class="ph-icon">📷</span>
+                </div>
+                <div class="card-flip-hint" title="Click to learn more">↻</div>
+                <div class="card-tier-badge badge-exec">C-Suite</div>
+              </div>
+              <div class="card-info">
+                <div class="card-name">Maxwell Awuku Dekpor</div>
+                <div class="card-title">Chief Executive Officer</div>
+                <div class="card-accent-line"></div>
+              </div>
+            </div>
+            <div class="card-face card-back card-back-exec">
+              <div class="back-role-label back-role-label-ice">Executive</div>
+              <div class="back-name">Maxwell Awuku Dekpor</div>
+              <div class="back-role back-role-ice">Chief Executive Officer — CEO</div>
+              <div class="back-divider"></div>
+              <p class="back-bio">Maxwell leads Abak Company Limited with a bold vision for Ghana's frozen food industry. With deep expertise in international food trade, strategic business development, and supply chain management, he drives the company's mission to source the world's finest frozen proteins and deliver them with unmatched reliability across Ghana.</p>
+              <div class="back-dept-tag tag-dept-exec">🏢 Executive Leadership</div>
+              <div class="back-contact">
+                <a href="https://wa.me/233247298551" class="contact-pill pill-wa" target="_blank">💬 WhatsApp</a>
+                <a href="mailto:ceo@abakcompany.com" class="contact-pill pill-email">✉ Email</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- COO -->
+        <div class="team-card reveal" style="transition-delay:0.12s">
+          <div class="card-inner">
+            <div class="card-face card-front">
+              <div class="card-photo-wrap">
+                <!--
+                  ★ COO PHOTO — place image at: codes/team/millicent-dekpor.jpg
+                -->
+                <img
+                  src="codes/team/millicent-dekpor.jpg"
+                  alt="Millicent Dekpor — COO"
+                  class="card-photo"
+                  onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"
+                />
+                <div class="photo-placeholder" style="display:none;">
+                  <span class="ph-initials">MD</span>
+                  <span class="ph-icon">📷</span>
+                </div>
+                <div class="card-flip-hint">↻</div>
+                <div class="card-tier-badge badge-exec">C-Suite</div>
+              </div>
+              <div class="card-info">
+                <div class="card-name">Millicent Dekpor</div>
+                <div class="card-title">Chief Operating Officer</div>
+                <div class="card-accent-line"></div>
+              </div>
+            </div>
+            <div class="card-face card-back card-back-exec">
+              <div class="back-role-label back-role-label-ice">Executive</div>
+              <div class="back-name">Millicent Dekpor</div>
+              <div class="back-role back-role-ice">Chief Operating Officer — COO</div>
+              <div class="back-divider"></div>
+              <p class="back-bio">Millicent oversees the day-to-day operational excellence of Abak Company Limited. She ensures seamless coordination across all business functions — from warehousing and cold-chain logistics to customer service and supply fulfilment — maintaining the high standards that Abak's clients depend on.</p>
+              <div class="back-dept-tag tag-dept-exec">🏢 Executive Leadership</div>
+              <div class="back-contact">
+                <a href="https://wa.me/233504967111" class="contact-pill pill-wa" target="_blank">💬 WhatsApp</a>
+                <a href="mailto:coo@abakcompany.com" class="contact-pill pill-email">✉ Email</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CFO -->
+        <div class="team-card reveal" style="transition-delay:0.19s">
+          <div class="card-inner">
+            <div class="card-face card-front">
+              <div class="card-photo-wrap">
+                <!--
+                  ★ CFO PHOTO — place image at: codes/team/frederick-laryea.jpg
+                -->
+                <img
+                  src="codes/team/frederick-laryea.jpg"
+                  alt="Frederick Laryea — CFO"
+                  class="card-photo"
+                  onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"
+                />
+                <div class="photo-placeholder" style="display:none;">
+                  <span class="ph-initials">FL</span>
+                  <span class="ph-icon">📷</span>
+                </div>
+                <div class="card-flip-hint">↻</div>
+                <div class="card-tier-badge badge-exec">C-Suite</div>
+              </div>
+              <div class="card-info">
+                <div class="card-name">Frederick Laryea</div>
+                <div class="card-title">Chief Financial Officer</div>
+                <div class="card-accent-line"></div>
+              </div>
+            </div>
+            <div class="card-face card-back card-back-exec">
+              <div class="back-role-label back-role-label-ice">Executive</div>
+              <div class="back-name">Frederick Laryea</div>
+              <div class="back-role back-role-ice">Chief Financial Officer — CFO</div>
+              <div class="back-divider"></div>
+              <p class="back-bio">Frederick steers Abak's financial strategy, ensuring sound fiscal management, cost efficiency, and sustainable growth. His expertise spans financial planning, trade finance, import cost management, and regulatory compliance — providing the financial foundation that enables Abak to scale confidently.</p>
+              <div class="back-dept-tag tag-dept-exec">🏢 Executive Leadership</div>
+              <div class="back-contact">
+                <a href="mailto:cfo@abakcompany.com" class="contact-pill pill-email">✉ Email</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CMO -->
+        <div class="team-card reveal" style="transition-delay:0.26s">
+          <div class="card-inner">
+            <div class="card-face card-front">
+              <div class="card-photo-wrap">
+                <!--
+                  ★ CMO PHOTO — place image at: codes/team/eunice-twum-barimah.jpg
+                -->
+                <img
+                  src="codes/team/eunice-twum-barimah.jpg"
+                  alt="Eunice Twum-Barimah — CMO"
+                  class="card-photo"
+                  onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"
+                />
+                <div class="photo-placeholder" style="display:none;">
+                  <span class="ph-initials">ET</span>
+                  <span class="ph-icon">📷</span>
+                </div>
+                <div class="card-flip-hint">↻</div>
+                <div class="card-tier-badge badge-exec">C-Suite</div>
+              </div>
+              <div class="card-info">
+                <div class="card-name">Eunice Twum-Barimah</div>
+                <div class="card-title">Chief Marketing Officer</div>
+                <div class="card-accent-line"></div>
+              </div>
+            </div>
+            <div class="card-face card-back card-back-exec">
+              <div class="back-role-label back-role-label-ice">Executive</div>
+              <div class="back-name">Eunice Twum-Barimah</div>
+              <div class="back-role back-role-ice">Chief Marketing Officer — CMO</div>
+              <div class="back-divider"></div>
+              <p class="back-bio">Eunice leads Abak's brand presence, market positioning, and customer engagement strategy. She spearheads campaigns that connect Abak's premium products to the right clients — from restaurants and hotels to retailers — and drives growth through strategic partnerships, trade fair representation, and market activation.</p>
+              <div class="back-dept-tag tag-dept-exec">🏢 Executive Leadership</div>
+              <div class="back-contact">
+                <a href="mailto:marketing@abakcompany.com" class="contact-pill pill-email">✉ Email</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /exec-grid -->
+    </div>
+  </section>
+
+  <!-- ══ GOLD MARQUEE DIVIDER ══ -->
+  <div class="marquee-strip marquee-strip-gold">
+    <div class="marquee-track" style="animation-direction:reverse;">
+      <span class="marquee-item">Quality Assurance <span class="marquee-sep">◆</span></span>
+      <span class="marquee-item">Sales &amp; Distribution <span class="marquee-sep">◆</span></span>
+      <span class="marquee-item">Research &amp; Development <span class="marquee-sep">◆</span></span>
+      <span class="marquee-item">Operations <span class="marquee-sep">◆</span></span>
+      <span class="marquee-item">Cold Chain Excellence <span class="marquee-sep">◆</span></span>
+      <span class="marquee-item">Quality Assurance <span class="marquee-sep">◆</span></span>
+      <span class="marquee-item">Sales &amp; Distribution <span class="marquee-sep">◆</span></span>
+      <span class="marquee-item">Research &amp; Development <span class="marquee-sep">◆</span></span>
+      <span class="marquee-item">Operations <span class="marquee-sep">◆</span></span>
+      <span class="marquee-item">Cold Chain Excellence <span class="marquee-sep">◆</span></span>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       DEPARTMENT HEADS
+  ══════════════════════════════════════════════ -->
+  <section class="dept-section" id="department-heads">
+    <div class="section-wrap">
+      <div class="reveal-right">
+        <div class="section-label">
+          <div class="sl-bar sl-bar-gold"></div>
+          <span class="sl-text sl-text-gold">Department Heads</span>
+        </div>
+        <h2 class="section-title" style="color:var(--white);">The Experts Who<br/>Make It <em style="font-style:italic;color:var(--gold);">Happen</em></h2>
+        <p class="section-desc">Our department heads are seasoned professionals who translate vision into action — managing quality, sales, distribution, and innovation across every touchpoint of the business.</p>
+      </div>
+
+      <div class="dept-grid">
+
+        <!-- QA Manager -->
+        <div class="team-card reveal" style="transition-delay:0.05s">
+          <div class="card-inner">
+            <div class="card-face card-front">
+              <div class="card-photo-wrap">
+                <!--
+                  ★ QA MANAGER PHOTO — place image at: codes/team/isaac-koomson.jpg
+                -->
+                <img
+                  src="codes/team/isaac-koomson.jpg"
+                  alt="Isaac Koomson — Quality Assurance Manager"
+                  class="card-photo"
+                  onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"
+                />
+                <div class="photo-placeholder" style="display:none;">
+                  <span class="ph-initials">IK</span>
+                  <span class="ph-icon">📷</span>
+                </div>
+                <div class="card-flip-hint">↻</div>
+                <div class="card-tier-badge badge-dept">Dept. Head</div>
+              </div>
+              <div class="card-info">
+                <div class="card-name">Isaac Koomson</div>
+                <div class="card-title card-dept-title">Quality Assurance Manager</div>
+                <div class="card-accent-line card-accent-line-gold"></div>
+              </div>
+            </div>
+            <div class="card-face card-back card-back-dept">
+              <div class="back-role-label back-role-label-gold">Department Head</div>
+              <div class="back-name">Isaac Koomson</div>
+              <div class="back-role back-role-gold">Quality Assurance Manager</div>
+              <div class="back-divider back-divider-gold"></div>
+              <p class="back-bio">Isaac is the guardian of Abak's product standards. He oversees all quality inspection processes — from incoming shipment checks and temperature verification to packaging integrity and batch traceability — ensuring every product that leaves our facility meets Ghana FDA and international food safety benchmarks.</p>
+              <div class="back-dept-tag tag-dept-dept">🔬 Quality Assurance</div>
+              <div class="back-contact">
+                <a href="mailto:quality@abakcompany.com" class="contact-pill pill-email">✉ Email</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sales Manager -->
+        <div class="team-card reveal" style="transition-delay:0.12s">
+          <div class="card-inner">
+            <div class="card-face card-front">
+              <div class="card-photo-wrap">
+                <!--
+                  ★ SALES MANAGER PHOTO — place image at: codes/team/nathaniel-affum-kwakwa.jpg
+                -->
+                <img
+                  src="codes/team/nathaniel-affum-kwakwa.jpg"
+                  alt="Nathaniel Affum Kwakwa — Sales Manager"
+                  class="card-photo"
+                  onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"
+                />
+                <div class="photo-placeholder" style="display:none;">
+                  <span class="ph-initials">NA</span>
+                  <span class="ph-icon">📷</span>
+                </div>
+                <div class="card-flip-hint">↻</div>
+                <div class="card-tier-badge badge-dept">Dept. Head</div>
+              </div>
+              <div class="card-info">
+                <div class="card-name">Nathaniel Affum Kwakwa</div>
+                <div class="card-title card-dept-title">Sales Manager</div>
+                <div class="card-accent-line card-accent-line-gold"></div>
+              </div>
+            </div>
+            <div class="card-face card-back card-back-dept">
+              <div class="back-role-label back-role-label-gold">Department Head</div>
+              <div class="back-name">Nathaniel Affum Kwakwa</div>
+              <div class="back-role back-role-gold">Sales Manager</div>
+              <div class="back-divider back-divider-gold"></div>
+              <p class="back-bio">Nathaniel drives Abak's revenue and client relationships with energy and precision. He manages the full sales cycle — from prospecting and quotation through to order closure and account retention — building the strong, long-term relationships with restaurants, hotels, caterers, and retailers that fuel Abak's growth.</p>
+              <div class="back-dept-tag tag-dept-dept">📈 Sales</div>
+              <div class="back-contact">
+                <a href="https://wa.me/233247298551" class="contact-pill pill-wa" target="_blank">💬 WhatsApp</a>
+                <a href="mailto:sales@abakcompany.com" class="contact-pill pill-email">✉ Email</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Distribution Manager -->
+        <div class="team-card reveal" style="transition-delay:0.19s">
+          <div class="card-inner">
+            <div class="card-face card-front">
+              <div class="card-photo-wrap">
+                <!--
+                  ★ DISTRIBUTION MANAGER PHOTO — place image at: codes/team/isaac-ndzebah.jpg
+                -->
+                <img
+                  src="codes/team/isaac-ndzebah.jpg"
+                  alt="Isaac Ndzebah — Distribution Manager"
+                  class="card-photo"
+                  onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"
+                />
+                <div class="photo-placeholder" style="display:none;">
+                  <span class="ph-initials">IN</span>
+                  <span class="ph-icon">📷</span>
+                </div>
+                <div class="card-flip-hint">↻</div>
+                <div class="card-tier-badge badge-dept">Dept. Head</div>
+              </div>
+              <div class="card-info">
+                <div class="card-name">Isaac Ndzebah</div>
+                <div class="card-title card-dept-title">Distribution Manager</div>
+                <div class="card-accent-line card-accent-line-gold"></div>
+              </div>
+            </div>
+            <div class="card-face card-back card-back-dept">
+              <div class="back-role-label back-role-label-gold">Department Head</div>
+              <div class="back-name">Isaac Ndzebah</div>
+              <div class="back-role back-role-gold">Distribution Manager</div>
+              <div class="back-divider back-divider-gold"></div>
+              <p class="back-bio">Isaac ensures that every order placed with Abak reaches its destination on time, at the right temperature, and in perfect condition. He manages the entire distribution network — cold chain logistics, vehicle scheduling, last-mile delivery, and routing efficiency — across Accra and beyond.</p>
+              <div class="back-dept-tag tag-dept-dept">🚛 Distribution</div>
+              <div class="back-contact">
+                <a href="mailto:distribution@abakcompany.com" class="contact-pill pill-email">✉ Email</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- R&D -->
+        <div class="team-card reveal" style="transition-delay:0.26s">
+          <div class="card-inner">
+            <div class="card-face card-front">
+              <div class="card-photo-wrap">
+                <!--
+                  ★ R&D PHOTO — place image at: codes/team/bernard-laryea.jpg
+                -->
+                <img
+                  src="codes/team/bernard-laryea.jpg"
+                  alt="Bernard Laryea — R&D"
+                  class="card-photo"
+                  onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"
+                />
+                <div class="photo-placeholder" style="display:none;">
+                  <span class="ph-initials">BL</span>
+                  <span class="ph-icon">📷</span>
+                </div>
+                <div class="card-flip-hint">↻</div>
+                <div class="card-tier-badge badge-dept">Dept. Head</div>
+              </div>
+              <div class="card-info">
+                <div class="card-name">Bernard Laryea</div>
+                <div class="card-title card-dept-title">Research &amp; Development</div>
+                <div class="card-accent-line card-accent-line-gold"></div>
+              </div>
+            </div>
+            <div class="card-face card-back card-back-dept">
+              <div class="back-role-label back-role-label-gold">Department Head</div>
+              <div class="back-name">Bernard Laryea</div>
+              <div class="back-role back-role-gold">Research &amp; Development</div>
+              <div class="back-divider back-divider-gold"></div>
+              <p class="back-bio">Bernard leads Abak's innovation agenda — researching new product categories, evaluating emerging supplier markets, and identifying opportunities to expand the company's portfolio. His work ensures Abak stays ahead of consumer trends, regulatory developments, and global industry shifts in the frozen food sector.</p>
+              <div class="back-dept-tag tag-dept-dept">🔭 R&amp;D</div>
+              <div class="back-contact">
+                <a href="mailto:rd@abakcompany.com" class="contact-pill pill-email">✉ Email</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /dept-grid -->
+    </div>
+  </section>
+
+  <!-- ══ VALUES STRIP ══ -->
+  <section class="values-strip">
+    <div class="values-inner">
+      <div class="reveal" style="text-align:center; margin-bottom:0;">
+        <div class="section-label" style="justify-content:center;">
+          <div class="sl-bar sl-bar-ice"></div>
+          <span class="sl-text sl-text-ice">Our Culture</span>
+          <div class="sl-bar sl-bar-ice"></div>
+        </div>
+        <h2 class="section-title" style="color:var(--white);text-align:center;">What Drives<br/><em style="font-style:italic;color:var(--ice);">Every Decision</em></h2>
+      </div>
+      <div class="values-grid">
+        <div class="value-card reveal" style="transition-delay:0.05s">
+          <div class="value-icon">❄️</div>
+          <h4>Uncompromising Quality</h4>
+          <p>From source to delivery, every product we handle meets the highest international food safety standards — no exceptions.</p>
+        </div>
+        <div class="value-card reveal" style="transition-delay:0.12s">
+          <div class="value-icon">🤝</div>
+          <h4>Trust &amp; Transparency</h4>
+          <p>We build relationships on honesty — with our suppliers, our clients, and each other. Every promise is kept.</p>
+        </div>
+        <div class="value-card reveal" style="transition-delay:0.19s">
+          <div class="value-icon">🌍</div>
+          <h4>Global Thinking</h4>
+          <p>We source from six continents, attend international trade fairs, and bring world-class standards to the Ghanaian market.</p>
+        </div>
+        <div class="value-card reveal" style="transition-delay:0.26s">
+          <div class="value-icon">🚀</div>
+          <h4>Continuous Innovation</h4>
+          <p>We never stand still — constantly researching new products, new markets, and better ways to serve our clients and partners.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ JOIN US CTA ══ -->
+  <section class="join-cta">
+    <div class="join-cta-inner reveal">
+      <h2>Want to Join the<br/>Abak Family?</h2>
+      <p>We're always looking for passionate, dedicated professionals to grow with us. If you share our values and drive, we'd love to hear from you.</p>
+      <a href="contact.html" class="join-btn">
+        📩 Get In Touch
+      </a>
+    </div>
+  </section>
+
+  <!-- ══ FOOTER ══ -->
+  <footer>
+    <p>&copy; 2026 Abak Company Limited. All Rights Reserved.</p>
+    <p style="margin-top:0.6rem;">Trusted Frozen Food Importers &amp; Distributors • Ghana</p>
+  </footer>
+
+  <!-- ══ SCRIPT ══ -->
+  <script>
+    /* ── Custom cursor ── */
+    const dot  = document.getElementById('cursorDot');
+    const ring = document.getElementById('cursorRing');
+    let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
+    document.addEventListener('mousemove', e => { mouseX = e.clientX; mouseY = e.clientY; });
+    function animateCursor() {
+      dot.style.left  = mouseX + 'px';
+      dot.style.top   = mouseY + 'px';
+      ringX += (mouseX - ringX) * 0.14;
+      ringY += (mouseY - ringY) * 0.14;
+      ring.style.left = ringX + 'px';
+      ring.style.top  = ringY + 'px';
+      requestAnimationFrame(animateCursor);
+    }
+    animateCursor();
+
+    /* ── Mobile menu ── */
+    const hamburger  = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const mobileClose= document.getElementById('mobileClose');
+    const openMenu = () => {
+      mobileMenu.classList.add('active');
+      hamburger.textContent = '✕';
+      document.body.style.overflow = 'hidden';
+    };
+    const closeMenu = () => {
+      mobileMenu.classList.remove('active');
+      hamburger.textContent = '☰';
+      document.body.style.overflow = '';
+    };
+    hamburger.addEventListener('click', () => mobileMenu.classList.contains('active') ? closeMenu() : openMenu());
+    mobileClose.addEventListener('click', closeMenu);
+    document.querySelectorAll('.mobile-menu a').forEach(a => a.addEventListener('click', closeMenu));
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
+
+    /* ── Card touch-tap flip on mobile ── */
+    document.querySelectorAll('.team-card').forEach(card => {
+      card.addEventListener('click', function(e) {
+        // On mobile (no hover), toggle flip
+        if (window.matchMedia('(hover: none)').matches) {
+          this.classList.toggle('flipped');
+        }
+      });
+    });
+
+    /* ── Scroll reveal ── */
+    const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+    const revealObs = new IntersectionObserver(entries => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          const delay = parseFloat(entry.target.style.transitionDelay || 0) * 1000;
+          setTimeout(() => entry.target.classList.add('in-view'), delay > 0 ? 0 : 0);
+          entry.target.classList.add('in-view');
+          revealObs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    revealEls.forEach(el => revealObs.observe(el));
+
+    /* ── Hero scroll ── */
+    document.querySelector('.hero-scroll')?.addEventListener('click', () => {
+      document.getElementById('executives').scrollIntoView({ behavior: 'smooth' });
+    });
+  </script>
+</body>
+</html>

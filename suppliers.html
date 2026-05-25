@@ -571,10 +571,10 @@
       <li><a href="services.html">Services</a></li>
 	  <!-- <a href="shop.html">Shop</a> -->
       <li><a href="#" class="active">Suppliers</a></li>
-	  <li><a href="events.html">Global Partnership</a></li>
-	  <a href="FAQs.html">FAQs</a>
-      <li><a href="contact.html">Contact</a></li>
+	  <li><a href="events.html">Events & Engagements</a></li>
 	  <a href="articles.html">Blog</a>
+	  <a href="faq.html">FAQs</a>
+      <li><a href="contact.html">Contact</a></li>
     </ul>
     <a class="nav-cta" href="tel:+233 24 729 8551">Order Now</a>
     <div class="hamburger" id="hamburger">
@@ -586,7 +586,7 @@
   <header class="page-hero">
     <div class="page-hero-inner">
       <div class="breadcrumb">
-        <a href="#">Home</a>
+        <a href="index.html">Home</a>
         <span class="sep">›</span>
         <span>Suppliers &amp; Sourcing</span>
       </div>
@@ -611,6 +611,8 @@
           <p>Premium poultry (chicken, turkey) with USDA certification standards.</p>
         </div>
       </div>
+	  
+	  <!-- Brazil -->
       <div class="country-card">
         <div class="flag-circle">🇧🇷</div>
         <div class="country-info">
@@ -618,6 +620,8 @@
           <p>High-volume poultry and beef — one of the world's largest protein exporters.</p>
         </div>
       </div>
+	  
+	  <!-- Netherlands -->
       <div class="country-card">
         <div class="flag-circle">🇳🇱</div>
         <div class="country-info">
@@ -626,15 +630,16 @@
         </div>
       </div>
 	  
+	  <!-- Denmark -->
 	  <div class="country-card">
     <div class="flag-circle">🇩🇰</div>
-
     <div class="country-info">
         <h3>Denmark</h3>
 		<p>Competitively priced seafood and poultry meeting international food safety standards.</p>
     </div>
     </div>
 	  
+	  <!-- Italy -->
       <div class="country-card">
         <div class="flag-circle">🇮🇹</div>
         <div class="country-info">
@@ -642,6 +647,8 @@
           <p>Competitively priced seafood and poultry meeting international food safety standards.</p>
         </div>
       </div>
+	  
+	  <!-- Poland -->
       <div class="country-card">
         <div class="flag-circle">🇵🇱</div>
         <div class="country-info">
@@ -649,13 +656,69 @@
           <p>World-renowned Atlantic seafood from sustainable fisheries.</p>
         </div>
       </div>
+	  
+	  <!-- Ireland -->
       <div class="country-card">
         <div class="flag-circle">🇮🇪</div>
         <div class="country-info">
           <h3>Ireland</h3>
           <p>Seafood from certified aquaculture farms.</p>
         </div>
-      </div>
+		</div>
+		
+		<!-- Argentina -->
+      <div class="country-card">
+        <div class="flag-circle">🇦🇷</div>
+        <div class="country-info">
+          <h3>Argentina</h3>
+          <p>Premium beef and agricultural products renowned for rich flavor and export quality.</p>
+        </div>
+		</div>
+		
+		<!-- Paraguay -->
+      <div class="country-card">
+        <div class="flag-circle">🇵🇾</div>
+        <div class="country-info">
+          <h3>Paraguay</h3>
+          <p>High-quality meat products supported by strong livestock and farming industries.</p>
+        </div>
+		</div>
+		
+		<!-- Spain -->
+      <div class="country-card">
+        <div class="flag-circle">🇪🇸</div>
+        <div class="country-info">
+          <h3>Spain</h3>
+          <p>European-standard seafood and poultry with strict quality control practices.</p>
+        </div>
+		</div>
+		
+		<!-- United Kingdom -->
+      <div class="country-card">
+        <div class="flag-circle">🇬🇧</div>
+        <div class="country-info">
+          <h3>United Kingdom</h3>
+          <p>Trusted food sourcing standards backed by advanced processing and safety systems.</p>
+        </div>
+		</div>
+		
+		<!-- France -->
+      <div class="country-card">
+        <div class="flag-circle">🇫🇷</div>
+        <div class="country-info">
+          <h3>France</h3>
+          <p>Premium European poultry, seafood, and specialty foods known for exceptional quality standards.</p>
+        </div>
+		</div>
+		
+		<!-- South Africa -->
+     <!-- <div class="country-card">
+        <div class="flag-circle">🇿🇦</div>
+        <div class="country-info">
+          <h3>South Africa</h3>
+          <p>Reliable premium meat and seafood products sourced from world-class suppliers.</p>
+        </div> 
+      </div> -->
     </div>
   </section>
 
@@ -1126,8 +1189,8 @@
     <div class="supplier-filters">
       <button class="sf-btn active" onclick="filterSuppliers('all', this)">All Suppliers</button>
       <button class="sf-btn" onclick="filterSuppliers('poultry', this)">🍗 Poultry</button>
-      <button class="sf-btn" onclick="filterSuppliers('fish', this)">🐟 Fish &amp; Seafood</button>
-      <button class="sf-btn" onclick="filterSuppliers('meat', this)">🥩 Red Meat</button>
+      <button class="sf-btn" onclick="filterSuppliers('seafood', this)">🐟 Seafood</button>
+      <button class="sf-btn" onclick="filterSuppliers('meat', this)">🥩 Meat</button>
       <button class="sf-btn" onclick="filterSuppliers('multi', this)">🌍 Multi-Category</button>
     </div>
 
@@ -1138,7 +1201,7 @@
       <div class="supplier-card" data-category="meat">
         <div class="card-logo-wrap">
           <img class="logo-img" src="images/minervafoods.png" alt="Minerva Foods Logo" />
-          <span class="card-ribbon rib-meat">Red Meat</span>
+          <span class="card-ribbon rib-meat">Meat</span>
         </div>
         <div class="card-body">
           <div class="card-supplier-name">Minerva Foods</div>
@@ -1146,7 +1209,7 @@
           <div class="card-desc">One of South America's largest beef exporters, Minerva Foods supplies premium quality frozen beef cuts certified to international food safety standards. A cornerstone of our red meat supply chain.</div>
           <div class="card-chips">
             <span class="chip">Beef</span>
-            <span class="chip">Red Meat</span>
+            <span class="chip">Meat</span>
             <span class="chip cert-chip">✓ HACCP</span>
             <span class="chip cert-chip">✓ EU Approved</span>
           </div>
@@ -1181,18 +1244,19 @@
       </div>
 
       <!-- 3. NEOKING FOODS -->
-      <div class="supplier-card" data-category="fish">
+      <div class="supplier-card" data-category="multi">
         <div class="card-logo-wrap">
           <img class="logo-img" src="images/neokingfoods.png" alt="NeoKing Foods Logo" />
-          <span class="card-ribbon rib-fish">Fish</span>
+          <span class="card-ribbon rib-fish">Multi-Category</span>
         </div>
         <div class="card-body">
           <div class="card-supplier-name">NeoKing Foods</div>
           <div class="card-country">🌍 International</div>
           <div class="card-desc">A specialist frozen seafood supplier providing a wide range of fish and seafood products to markets across Africa and beyond. NeoKing's quality-assured supply chain ensures consistent product standards on every shipment.</div>
           <div class="card-chips">
-            <span class="chip">Fish</span>
+            <span class="chip">Meat</span>
             <span class="chip">Seafood</span>
+			<span class="chip">Poultry</span>
             <span class="chip cert-chip">✓ ISO 22000</span>
             <span class="chip cert-chip">✓ HACCP</span>
           </div>
@@ -1211,12 +1275,12 @@
         </div>
         <div class="card-body">
           <div class="card-supplier-name">Nowaco</div>
-          <div class="card-country">🇨🇿 Czech Republic / Europe</div>
+          <div class="card-country">🇩🇰 Denmark / Europe</div>
           <div class="card-desc">One of Central Europe's leading frozen food distributors, Nowaco supplies a broad range of frozen proteins and food products to markets across the globe. Their extensive product range and robust cold-chain infrastructure make them a versatile supply partner.</div>
           <div class="card-chips">
             <span class="chip">Poultry</span>
             <span class="chip">Meat</span>
-            <span class="chip">Fish</span>
+            <span class="chip">Seafood</span>
             <span class="chip cert-chip">✓ EU Certified</span>
           </div>
         </div>
@@ -1271,18 +1335,18 @@
       </div>
 
       <!-- 7. VESTEY FOODS -->
-      <div class="supplier-card" data-category="meat">
+      <div class="supplier-card" data-category="multi">
         <div class="card-logo-wrap">
           <img class="logo-img" src="images/vestey.svg" alt="Vestey Foods Logo" />
-          <span class="card-ribbon rib-meat">Red Meat</span>
+          <span class="card-ribbon rib-meat">Multi-Category</span>
         </div>
         <div class="card-body">
           <div class="card-supplier-name">Vestey Foods</div>
-          <div class="card-country">🇬🇧 United Kingdom (Since 1897)</div>
+          <div class="card-country">🇫🇷 France (Since 1897)</div>
           <div class="card-desc">With a heritage dating back to 1897, Vestey Foods is one of the world's most respected names in meat supply and processing. Their century-long expertise in sourcing, processing, and distributing premium beef and red meat products sets them apart as a truly world-class supplier.</div>
           <div class="card-chips">
             <span class="chip">Beef</span>
-            <span class="chip">Red Meat</span>
+            <span class="chip">Meat</span>
             <span class="chip">Est. 1897</span>
             <span class="chip cert-chip">✓ HACCP</span>
             <span class="chip cert-chip">✓ BRC Certified</span>
@@ -1302,7 +1366,7 @@
         </div>
         <div class="card-body">
           <div class="card-supplier-name">Marco Polo FoodEx</div>
-          <div class="card-country">🌍 International</div>
+          <div class="card-country">🇮🇹 Italy</div>
           <div class="card-desc">A global frozen food trading company bridging producers and buyers across international markets. Marco Polo FoodEx's expertise in cross-border food logistics and their diverse product catalogue make them a valuable partner in Abak's global sourcing network.</div>
           <div class="card-chips">
             <span class="chip">Poultry</span>
@@ -1321,7 +1385,7 @@
       <div class="supplier-card" data-category="meat">
         <div class="card-logo-wrap">
           <img class="logo-img" src="images/dawnmeats.webp" alt="Dawn Meats Logo" />
-          <span class="card-ribbon rib-meat">Red Meat</span>
+          <span class="card-ribbon rib-meat">Meat</span>
         </div>
         <div class="card-body">
           <div class="card-supplier-name">Dawn Meats</div>
@@ -1330,17 +1394,90 @@
           <div class="card-chips">
             <span class="chip">Beef</span>
             <span class="chip">Lamb</span>
-            <span class="chip">Red Meat</span>
+            <span class="chip">Meat</span>
             <span class="chip cert-chip">✓ BRC Grade AA</span>
             <span class="chip cert-chip">✓ HACCP</span>
           </div>
         </div>
         <div class="card-footer">
-          <span class="card-since">🌍 Ireland / UK</span>
+          <span class="card-since">🇮🇪 Ireland / UK</span>
           <span class="card-cert-badge">✓ Certified Supplier</span>
         </div>
       </div>
-
+      
+	  <!-- 10. J MAIR -->
+      <div class="supplier-card" data-category="seafood">
+        <div class="card-logo-wrap">
+          <img class="logo-img" src="images/jamir.png" alt="Jamir Logo" />
+          <span class="card-ribbon rib-meat">Seafood</span>
+        </div>
+        <div class="card-body">
+          <div class="card-supplier-name">Jamir Foods</div>
+          <div class="card-country">🇬🇧 United Kingdom</div>
+          <div class="card-desc">One of Europe's leading beef and lamb processors, Dawn Meats supplies premium frozen red meat products to markets globally. Their state-of-the-art processing facilities and rigorous quality management systems ensure consistently high-grade product with full traceability.</div>
+          <div class="card-chips">
+            <span class="chip">Seafood</span>
+           <!-- <span class="chip">Lamb</span>
+            <span class="chip">Meat</span> -->
+            <span class="chip cert-chip">✓ BRC Grade AA</span>
+            <span class="chip cert-chip">✓ HACCP</span>
+          </div>
+        </div>
+        <div class="card-footer">
+          <span class="card-since">🇮🇪 Ireland / UK</span>
+          <span class="card-cert-badge">✓ Certified Supplier</span>
+        </div>
+      </div>
+	  
+	  <!-- 11 SARA FOODS -->
+      <div class="supplier-card" data-category="multi">
+        <div class="card-logo-wrap">
+          <img class="logo-img" src="images/sarafoods.png" alt="Sara Foods Logo" />
+          <span class="card-ribbon rib-meat">Multi-Category</span>
+        </div>
+        <div class="card-body">
+          <div class="card-supplier-name">Sara Foods</div>
+          <div class="card-country">🇱🇧 Lebanon</div>
+          <div class="card-desc">One of Europe's leading beef and lamb processors, Dawn Meats supplies premium frozen red meat products to markets globally. Their state-of-the-art processing facilities and rigorous quality management systems ensure consistently high-grade product with full traceability.</div>
+          <div class="card-chips">
+            <span class="chip">Seafood</span>
+            <span class="chip">Lamb</span>
+            <span class="chip">Meat</span>
+			<span class="chip">Poultry</span>
+            <span class="chip cert-chip">✓ BRC Grade AA</span>
+            <span class="chip cert-chip">✓ HACCP</span>
+          </div>
+        </div>
+        <div class="card-footer">
+          <span class="card-since">🇱🇧 Lebanon</span>
+          <span class="card-cert-badge">✓ Certified Supplier</span>
+        </div>
+      </div>
+	  
+	  <!-- 12. WIM FOODS -->
+      <div class="supplier-card" data-category="multi">
+        <div class="card-logo-wrap">
+          <img class="logo-img" src="images/wimfoods.png" alt="Wim Foods Logo" />
+          <span class="card-ribbon rib-meat">Multi-Category</span>
+        </div>
+        <div class="card-body">
+          <div class="card-supplier-name">Wim Foods</div>
+          <div class="card-country">🇩🇰 Denmark</div>
+          <div class="card-desc">One of Europe's leading beef and lamb processors, Dawn Meats supplies premium frozen red meat products to markets globally. Their state-of-the-art processing facilities and rigorous quality management systems ensure consistently high-grade product with full traceability.</div>
+          <div class="card-chips">
+            <span class="chip">Seafood</span>
+            <span class="chip">Lamb</span>
+            <span class="chip">Meat</span>
+            <span class="chip cert-chip">✓ BRC Grade AA</span>
+            <span class="chip cert-chip">✓ HACCP</span>
+          </div>
+        </div>
+        <div class="card-footer">
+          <span class="card-since">🇩🇰 Denmark</span>
+          <span class="card-cert-badge">✓ Certified Supplier</span>
+        </div>
+      </div>
+	  
     </div><!-- /supplier-grid -->
 
     <!-- Certifications bar -->
@@ -1453,7 +1590,7 @@
       <div class="cta-buttons">
         <a href="tel:+233 24 729 8551" class="btn-primary">📞 Call Us Now</a>
         <a href="https://wa.me/233247298551" class="btn-whatsapp" target="_blank">💬 WhatsApp Us</a>
-        <a href="mailto:info@abakcompany.com" class="btn-primary" style="background:var(--blue);">✉️ Email Us</a>
+        <a href="mailto:abakcoltd@gmail.com" class="btn-primary" style="background:var(--blue);">✉️ Email Us</a>
       </div>
     </div>
   </section>
@@ -1470,7 +1607,7 @@
     </div>
     <div class="contact-item">
       <div class="contact-icon">✉️</div>
-      <span>Email: <a href="mailto:info@abakcompany.com">info@abakcompany.com</a></span>
+      <span>Email: <a href="mailto:abakcoltd@gmail.com">abakcoltd@gmail.com</a></span>
     </div>
   </div>
 
@@ -1484,7 +1621,7 @@
       <div>
         <h4>Quick Links</h4>
         <ul>
-          <li><a href="home.html">Home</a></li>
+          <li><a href="index.html">Home</a></li>
           <li><a href="about.html">About Us</a></li>
           <li><a href="products.html">Products</a></li>
           <li><a href="services.html">Services</a></li>
@@ -1494,10 +1631,10 @@
       <div>
         <h4>Products</h4>
         <ul>
-          <li><a href="product.html#Poultry">Poultry</a></li>
-          <li><a href="product.html#Fish">Seafood</a></li>
-          <li><a href="product.html#redmeat">Red Meat</a></li>
-          <li><a href="product.html#">Bulk Orders</a></li>
+          <li><a href="products.html#Poultry">Poultry</a></li>
+          <li><a href="products.html#Fish">Seafood</a></li>
+          <li><a href="products.html#redmeat">Meat</a></li>
+          <li><a href="products.html#">Bulk Orders</a></li>
         </ul>
       </div>
       <div>
@@ -1506,7 +1643,7 @@
           <li><span>📍</span>HQ1 Anunsah Clottey street, Kaneshie Market-Accra, Ghana</li>
           <li><span>📞</span> <a href="tel:+233247298551">+233 (0) 24 927 8551</a></li>
           <li><span>💬</span> <a href="https://wa.me/233247298551">WhatsApp Us</a></li>
-          <li><span>✉️</span> <a href="mailto:info@abakcompany.com">info@abakcompany.com</a></li>
+          <li><span>✉️</span> <a href="mailto:abakcoltd@gmail.com">abakcoltd@gmail.com</a></li>
           <li><span>🕐</span> Mon–Sat: 8am – 5pm</li>
         </ul>
       </div>

@@ -180,7 +180,43 @@
       font-weight: 500;
     }
 
-    /* ── PRODUCT GRID ── */
+    /* ── PRODUCT SLIDER ── */
+    .slider-outer {
+      position: relative;
+      overflow: hidden;
+      /* fade edges */
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%);
+              mask-image: linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%);
+    }
+    /* pause on hover */
+    .slider-outer:hover .slider-track { animation-play-state: paused; }
+
+    .slider-track {
+      display: flex;
+      gap: 1.5rem;
+      width: max-content;
+      animation: infiniteScroll var(--scroll-duration, 40s) linear infinite;
+    }
+    @keyframes infiniteScroll {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* Each card inside the slider keeps its original styles but gets a fixed width */
+    .slider-track .product-card {
+      flex: 0 0 290px;
+      width: 290px;
+      /* reset grid animation delays — slider handles visibility */
+      opacity: 1;
+      transform: none;
+      animation: none;
+    }
+    .slider-track .product-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 40px rgba(11,60,93,0.16);
+    }
+
+    /* Keep legacy .products-grid for any section not yet converted (none, but safe fallback) */
     .products-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -422,6 +458,33 @@
       .footer-grid { grid-template-columns: 1fr; }
       .bulk-cta { flex-direction: column; }
     }
+    /* ── BULK BANNER IMAGE ── */
+    .bulk-banner {
+      /* override: three-column layout when image is present */
+      grid-template-columns: auto 1fr auto;
+    }
+    .bulk-img-wrap {
+      flex-shrink: 0;
+      width: 220px; height: 140px;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      align-self: center;
+    }
+    .bulk-reefer-img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+    .bulk-banner:hover .bulk-reefer-img { transform: scale(1.05); }
+
+    @media (max-width: 768px) {
+      .bulk-img-wrap { width: 100%; height: 160px; }
+    }
+    @media (max-width: 480px) {
+      .bulk-img-wrap { height: 140px; }
+    }
   </style>
 </head>
 <body>
@@ -436,9 +499,10 @@
     <a href="products.html" class="active">Products</a>
     <a href="services.html">Services</a>
 	<!-- <a href="shop.html">Shop</a> -->
-    <a href="sourcing.html">Suppliers</a>
-	<a href="events.html">Global Partnership</a>
-	<a href="FAQs.html">FAQs</a>
+    <a href="suppliers.html">Suppliers</a>
+	<a href="events.html">Events & Engagements</a>
+	<a href="articles.html">Blog</a>
+	<a href="faq.html">FAQs</a>
     <a href="contact.html" class="nav-cta">Contact Us</a>
   </nav>
   <div class="hamburger" onclick="toggleMenu()" aria-label="Toggle menu">
@@ -456,7 +520,7 @@
     </nav>
     <div class="ice-badge">❄ Premium Frozen Foods</div>
     <h1>Our <em>Products</em></h1>
-    <p>Sourced globally, delivered fresh. Explore our full range of premium frozen poultry, seafood, red meat and bulk supply options for businesses across Ghana.</p>
+    <p>Sourced globally, delivered fresh. Explore our full range of premium frozen poultry, seafood, meat and bulk supply options for businesses across Ghana.</p>
   </div>
 </section>
 
@@ -473,7 +537,7 @@
       🐟 Seafood <span class="count">2</span>
     </button>
     <button class="filter-btn" onclick="filterCategory('meat', this)">
-      🥩 Red Meat <span class="count">7</span>
+      🥩 Meat <span class="count">7</span>
     </button>
     <button class="filter-btn" onclick="filterCategory('bulk', this)">
       📦 Bulk Supply <span class="count">1</span>
@@ -524,7 +588,8 @@
       <div class="cat-divider"></div>
       <div class="cat-count">10 products</div>
     </div>
-    <div class="products-grid">
+    <div class="slider-outer" style="--scroll-duration:50s;">
+    <div class="slider-track" id="poultry-track">
 
       <article class="product-card">
         <div class="card-img">
@@ -537,9 +602,9 @@
           <h3 class="card-name">Abak Brand - Oneplus Chicken</h3>
           <p class="card-desc">Premium Oneplus whole frozen chicken, packed in cartons under the Abak brand. Individually quick-frozen to lock in freshness — ideal for restaurants, caterers, and bulk buyers.</p>
           <div class="card-packaging">
-            <span class="pkg-badge">2 kg Pack</span>
-            <span class="pkg-badge">10 kg Box</span>
-            <span class="pkg-badge">25 kg Carton</span>
+            <!-- <span class="pkg-badge">2 kg Pack</span> -->
+            <span class="pkg-badge">10 kg Carton</span>
+            <!-- <span class="pkg-badge">25 kg Carton</span> -->
           </div>
         </div>
         <div class="card-actions">
@@ -562,10 +627,10 @@
           <h3 class="card-name">Whole Chicken</h3>
           <p class="card-desc">Premium whole frozen chicken, individually quick-frozen to lock in freshness and natural flavour. Ideal for households, restaurants and caterers.</p>
           <div class="card-packaging">
-            <span class="pkg-badge">1 kg</span>
-            <span class="pkg-badge">1.5 kg</span>
-            <span class="pkg-badge">2 kg</span>
-            <span class="pkg-badge">Bulk Carton</span>
+            <span class="pkg-badge">10 kg</span>
+            <!-- <span class="pkg-badge">1.5 kg</span>
+            <span class="pkg-badge">2 kg</span> -->
+            <span class="pkg-badge">Carton</span>
           </div>
         </div>
         <div class="card-actions">
@@ -587,9 +652,9 @@
           <h3 class="card-name">Turkey Wings</h3>
           <p class="card-desc">Meaty, well-portioned frozen turkey wings perfect for grilling, baking, or soups. Popular choice for festive seasons and restaurant menus.</p>
           <div class="card-packaging">
-            <span class="pkg-badge">2 kg Pack</span>
-            <span class="pkg-badge">5 kg Box</span>
-            <span class="pkg-badge">20 kg Carton</span>
+            <!-- <span class="pkg-badge">2 kg Pack</span>
+            <span class="pkg-badge">5 kg Box</span> -->
+            <span class="pkg-badge">10 kg Carton</span>
           </div>
         </div>
         <div class="card-actions">
@@ -611,9 +676,9 @@
           <h3 class="card-name">Turkey Tips</h3>
           <p class="card-desc">Flavourful, tender turkey tips ideal for stews, peppered dishes and braising. A budget-friendly favourite for bulk catering and home cooking.</p>
           <div class="card-packaging">
-            <span class="pkg-badge">2 kg Pack</span>
-            <span class="pkg-badge">10 kg Box</span>
-            <span class="pkg-badge">25 kg Carton</span>
+           <!-- <span class="pkg-badge">2 kg Pack</span> -->
+            <span class="pkg-badge">10 kg Carton</span>
+           <!-- <span class="pkg-badge">25 kg Carton</span> -->
           </div>
         </div>
         <div class="card-actions">
@@ -635,9 +700,9 @@
           <h3 class="card-name">Chicken Back</h3>
           <p class="card-desc">Meaty frozen chicken backs, ideal for making rich broths, soups, and stews. A flavourful and budget-friendly choice for households and large-scale caterers.</p>
           <div class="card-packaging">
-            <span class="pkg-badge">2 kg Pack</span>
-            <span class="pkg-badge">10 kg Box</span>
-            <span class="pkg-badge">25 kg Carton</span>
+           <!-- <span class="pkg-badge">2 kg Pack</span> -->
+            <span class="pkg-badge">10 kg Carton</span>
+           <!-- <span class="pkg-badge">25 kg Carton</span> -->
           </div>
         </div>
         <div class="card-actions">
@@ -659,9 +724,9 @@
           <h3 class="card-name">Chicken Upper Back</h3>
           <p class="card-desc">Tender frozen chicken upper backs with good meat coverage — great for slow-cooked soups and flavourful stock. A popular everyday choice for home and commercial kitchens.</p>
           <div class="card-packaging">
-            <span class="pkg-badge">2 kg Pack</span>
-            <span class="pkg-badge">10 kg Box</span>
-            <span class="pkg-badge">25 kg Carton</span>
+           <!-- <span class="pkg-badge">2 kg Pack</span> -->
+            <span class="pkg-badge">10 kg Carton</span>
+           <!-- <span class="pkg-badge">25 kg Carton</span> -->
           </div>
         </div>
         <div class="card-actions">
@@ -683,9 +748,9 @@
           <h3 class="card-name">Heavy Hen Leg Quarter</h3>
           <p class="card-desc">Generous, meaty hen leg quarters — quick-frozen to preserve their natural richness and juiciness. Excellent for grilling, frying, stewing, or serving at events.</p>
           <div class="card-packaging">
-            <span class="pkg-badge">2 kg Pack</span>
-            <span class="pkg-badge">10 kg Box</span>
-            <span class="pkg-badge">25 kg Carton</span>
+           <!-- <span class="pkg-badge">2 kg Pack</span> -->
+            <span class="pkg-badge">10 kg Carton</span>
+           <!-- <span class="pkg-badge">25 kg Carton</span> -->
           </div>
         </div>
         <div class="card-actions">
@@ -707,9 +772,9 @@
           <h3 class="card-name">Chicken Sausage</h3>
           <p class="card-desc">Seasoned frozen chicken sausages made from quality poultry — versatile, convenient, and full of flavour. Perfect for breakfast, grilling, or adding to pasta and rice dishes.</p>
           <div class="card-packaging">
-            <span class="pkg-badge">2 kg Pack</span>
-            <span class="pkg-badge">10 kg Box</span>
-            <span class="pkg-badge">25 kg Carton</span>
+           <!-- <span class="pkg-badge">2 kg Pack</span>
+            <span class="pkg-badge">10 kg Box</span> -->
+            <span class="pkg-badge">10 kg Carton</span>
           </div>
         </div>
         <div class="card-actions">
@@ -731,9 +796,9 @@
           <h3 class="card-name">Block Gizzard</h3>
           <p class="card-desc">Premium frozen chicken gizzards, packed in bulk cartons for commercial and large-scale use. Firm in texture and rich in flavour — a staple for stews, kebabs, and street food.</p>
           <div class="card-packaging">
-            <span class="pkg-badge">2 kg Pack</span>
-            <span class="pkg-badge">10 kg Box</span>
-            <span class="pkg-badge">25 kg Carton</span>
+           <!-- <span class="pkg-badge">2 kg Pack</span>
+            <span class="pkg-badge">10 kg Box</span> -->
+            <span class="pkg-badge">10 kg Carton</span>
           </div>
         </div>
         <div class="card-actions">
@@ -755,9 +820,9 @@
           <h3 class="card-name">Sachet Gizzard</h3>
           <p class="card-desc">Conveniently portioned frozen chicken gizzards in ready-to-use sachet packs. Perfect for households and small kitchens — quick to thaw and easy to cook in any dish.</p>
           <div class="card-packaging">
-            <span class="pkg-badge">2 kg Pack</span>
-            <span class="pkg-badge">10 kg Box</span>
-            <span class="pkg-badge">25 kg Carton</span>
+            <span class="pkg-badge">10 kg Pack</span>
+            <span class="pkg-badge">12 kg Pack</span>
+           <!-- <span class="pkg-badge">25 kg Carton</span> -->
           </div>
         </div>
         <div class="card-actions">
@@ -792,36 +857,38 @@
         </div>
       </article> -->
 	  
-    </div>
+    </div><!-- /slider-track poultry -->
+  </div><!-- /slider-outer poultry -->
   </section>
 
   <!-- ═══ FISH & SEAFOOD ═══ -->
-  <section class="category-section" data-category="fish" id="fish">
+  <section class="category-section" data-category="seafood" id="seafood">
     <div class="cat-header">
       <div class="cat-icon fish">🐟</div>
       <div>
-        <div class="cat-title"> <!--Fish &amp;--> Seafood</div>
+        <div class="cat-title"> Seafood</div>
         <div class="cat-desc">Ocean-fresh, expertly frozen seafood sourced from certified global suppliers</div>
       </div>
       <div class="cat-divider"></div>
       <div class="cat-count">2 products</div>
     </div>
-    <div class="products-grid">
+    <div class="slider-outer" style="--scroll-duration:28s;">
+    <div class="slider-track" id="seafood-track">
 
       <article class="product-card">
         <div class="card-img">
           <div class="img-placeholder" style="background: linear-gradient(145deg,#e3f2fd,#bbdefb);">
             <img src="images/mackerel.jpg" alt="Mackerel">
           </div>
-          <span class="card-tag tag-fish">Fish</span>
+          <span class="card-tag tag-fish">Seafood</span>
         </div>
         <div class="card-body">
           <h3 class="card-name">Mackerel</h3>
           <p class="card-desc">Rich in omega-3, our frozen mackerel (chichinga) is a Ghanaian household staple — perfect for frying, smoking or peppered dishes.</p>
           <div class="card-packaging">
-            <span class="pkg-badge">1 kg</span>
-            <span class="pkg-badge">5 kg Box</span>
-            <span class="pkg-badge">15 kg Carton</span>
+            <span class="pkg-badge">10 kg</span>
+           <!-- <span class="pkg-badge">5 kg Box</span>
+            <span class="pkg-badge">15 kg Carton</span> -->
           </div>
         </div>
         <div class="card-actions">
@@ -837,7 +904,7 @@
           <div class="img-placeholder" style="background: linear-gradient(145deg,#e8f5e9,#c8e6c9);">
             <img src="images/tilapia.jpg" alt="Tilapia">
           </div>
-          <span class="card-tag tag-fish">Fish</span>
+          <span class="card-tag tag-fish">Seafood</span>
         </div>
         <div class="card-body">
           <h3 class="card-name">Tilapia</h3>
@@ -862,15 +929,15 @@
           <div class="img-placeholder" style="background: linear-gradient(145deg,#fce4ec,#f8bbd0);">
             <img src="images/salmon.jpg" alt="Salmon">
           </div>
-          <span class="card-tag tag-fish">Fish</span>
+          <span class="card-tag tag-fish">Seafood</span>
         </div>
         <div class="card-body">
           <h3 class="card-name">Salmon</h3>
           <p class="card-desc">Premium Atlantic salmon fillets, flash-frozen at peak freshness. A high-value product for upscale restaurants, hotels and health-conscious consumers.</p>
           <div class="card-packaging">
-            <span class="pkg-badge">200g Fillet</span>
-            <span class="pkg-badge">1 kg</span>
-            <span class="pkg-badge">5 kg Box</span>
+           <!-- <span class="pkg-badge">200g Fillet</span> -->
+            <span class="pkg-badge">10 kg</span>
+           <!-- <span class="pkg-badge">5 kg Box</span> -->
           </div>
         </div>
         <div class="card-actions">
@@ -881,36 +948,38 @@
         </div>
       </article>
 
-    </div>
+    </div><!-- /slider-track seafood -->
+  </div><!-- /slider-outer seafood -->
   </section>
 
-  <!-- ═══ RED MEAT ═══ -->
+  <!-- ═══ MEAT ═══ -->
   <section class="category-section" data-category="meat" id="meat">
     <div class="cat-header">
       <div class="cat-icon meat">🥩</div>
       <div>
-        <div class="cat-title">Red Meat</div>
+        <div class="cat-title">Meat</div>
         <div class="cat-desc">Quality frozen beef, pork and lamb meat for every cooking need</div>
       </div>
       <div class="cat-divider"></div>
       <div class="cat-count">7 products</div>
     </div>
-    <div class="products-grid">
+    <div class="slider-outer" style="--scroll-duration:45s;">
+    <div class="slider-track" id="meat-track">
 
       <article class="product-card">
         <div class="card-img">
           <div class="img-placeholder" style="background: linear-gradient(145deg,#ffebee,#ffcdd2);">
             <img src="images/oneplusbeef.jpg" alt="Abak Brand - Oneplus Beef">
           </div>
-          <span class="card-tag tag-meat">Red Meat</span>
+          <span class="card-tag tag-meat">Meat</span>
         </div>
         <div class="card-body">
           <h3 class="card-name">Abak Brand - Oneplus Beef</h3>
           <p class="card-desc">Quality Oneplus frozen beef, carton-packed under the trusted Abak brand. Consistently cut and quick-frozen for maximum flavour — perfect for bulk orders and commercial kitchens.</p>
           <div class="card-packaging">
-            <span class="pkg-badge">1 kg</span>
-            <span class="pkg-badge">5 kg Box</span>
-            <span class="pkg-badge">20 kg Carton</span>
+           <!-- <span class="pkg-badge">1 kg</span>
+            <span class="pkg-badge">5 kg Box</span> -->
+            <span class="pkg-badge">10 kg Carton</span>
           </div>
         </div>
         <div class="card-actions">
@@ -926,15 +995,15 @@
           <div class="img-placeholder" style="background: linear-gradient(145deg,#ffebee,#ffcdd2);">
             <img src="images/beefsinews.jpeg" alt="Beef Sinews">
           </div>
-          <span class="card-tag tag-meat">Red Meat</span>
+          <span class="card-tag tag-meat">Meat</span>
         </div>
         <div class="card-body">
           <h3 class="card-name">Beef Sinews</h3>
           <p class="card-desc">Premium frozen beef cuts including stewing, grilling and minced varieties. Consistently sourced and inspected to meet food safety standards.</p>
           <div class="card-packaging">
-            <span class="pkg-badge">1 kg</span>
-            <span class="pkg-badge">5 kg Box</span>
-            <span class="pkg-badge">20 kg Carton</span>
+           <!-- <span class="pkg-badge">1 kg</span>
+            <span class="pkg-badge">5 kg Box</span> -->
+            <span class="pkg-badge">10 kg Carton</span>
           </div>
         </div>
         <div class="card-actions">
@@ -950,15 +1019,15 @@
           <div class="img-placeholder" style="background: linear-gradient(145deg,#ffebee,#ffcdd2);">
             <img src="images/beefheart.jpeg" alt="Beef Heart">
           </div>
-          <span class="card-tag tag-meat">Red Meat</span>
+          <span class="card-tag tag-meat">Meat</span>
         </div>
         <div class="card-body">
           <h3 class="card-name">Beef Heart</h3>
           <p class="card-desc">Tender, nutrient-rich frozen beef heart — a firm-textured cut with a deep, beefy flavour. Ideal for grilling, stewing, or slow-cooking in traditional recipes.</p>
           <div class="card-packaging">
-            <span class="pkg-badge">1 kg</span>
-            <span class="pkg-badge">5 kg Box</span>
-            <span class="pkg-badge">20 kg Carton</span>
+           <!-- <span class="pkg-badge">1 kg</span>
+            <span class="pkg-badge">5 kg Box</span> -->
+            <span class="pkg-badge">10 kg Carton</span>
           </div>
         </div>
         <div class="card-actions">
@@ -974,14 +1043,14 @@
           <div class="img-placeholder" style="background: linear-gradient(145deg,#ffebee,#ffcdd2);">
             <img src="images/beeffeet.jpeg" alt="Beef Feet">
           </div>
-          <span class="card-tag tag-meat">Red Meat</span>
+          <span class="card-tag tag-meat">Meat</span>
         </div>
         <div class="card-body">
           <h3 class="card-name">Beef Feet</h3>
           <p class="card-desc">Slow-cook frozen beef feet packed with natural collagen and bold flavour. A beloved ingredient for soups, light soup, and pepper soup across Ghanaian and West African cuisine.</p>
           <div class="card-packaging">
-            <span class="pkg-badge">1 kg</span>
-            <span class="pkg-badge">5 kg Box</span>
+           <!-- <span class="pkg-badge">1 kg</span>
+            <span class="pkg-badge">5 kg Box</span> -->
             <span class="pkg-badge">20 kg Carton</span>
           </div>
         </div>
@@ -998,15 +1067,15 @@
           <div class="img-placeholder" style="background: linear-gradient(145deg,#ffebee,#ffcdd2);">
             <img src="images/beeftripes.jpeg" alt="Beef Tripes">
           </div>
-          <span class="card-tag tag-meat">Red Meat</span>
+          <span class="card-tag tag-meat">Meat</span>
         </div>
         <div class="card-body">
           <h3 class="card-name">Beef Tripes</h3>
           <p class="card-desc">Premium frozen beef tripe and offals, carefully cleaned and prepared for cooking. A versatile, flavour-rich ingredient widely used in traditional soups, stews, and local delicacies.</p>
           <div class="card-packaging">
-            <span class="pkg-badge">1 kg</span>
-            <span class="pkg-badge">5 kg Box</span>
-            <span class="pkg-badge">20 kg Carton</span>
+           <!-- <span class="pkg-badge">1 kg</span>
+            <span class="pkg-badge">5 kg Box</span> -->
+            <span class="pkg-badge">10 kg Carton</span>
           </div>
         </div>
         <div class="card-actions">
@@ -1022,15 +1091,15 @@
           <div class="img-placeholder" style="background: linear-gradient(145deg,#fce4ec,#ffcdd2);">
             <img src="images/porkfeet.jpeg" alt="Pork Feet">
           </div>
-          <span class="card-tag tag-meat">Red Meat</span>
+          <span class="card-tag tag-meat">Meat</span>
         </div>
         <div class="card-body">
           <h3 class="card-name">Pork Feet</h3>
           <p class="card-desc">Succulent frozen pork feet — rich in collagen and full of deep, savoury flavour. Perfect for slow-cooked stews, soups, and traditional pork dishes.</p>
           <div class="card-packaging">
-            <span class="pkg-badge">1 kg</span>
-            <span class="pkg-badge">3 kg Pack</span>
-            <span class="pkg-badge">15 kg Carton</span>
+           <!-- <span class="pkg-badge">1 kg</span>
+            <span class="pkg-badge">3 kg Pack</span> -->
+            <span class="pkg-badge">10 kg Carton</span>
           </div>
         </div>
         <div class="card-actions">
@@ -1046,14 +1115,14 @@
           <div class="img-placeholder" style="background: linear-gradient(145deg,#f3e5f5,#e1bee7);">
             <img src="images/lambbreast.jpeg" alt="Lamb Breast">
           </div>
-          <span class="card-tag tag-meat">Red Meat</span>
+          <span class="card-tag tag-meat">Meat</span>
         </div>
         <div class="card-body">
           <h3 class="card-name">Lamb Breast</h3>
           <p class="card-desc">Authentic frozen lamb breast cuts, expertly portioned. A favourite for traditional Ghanaian dishes, festive events, and busy catering operations.</p>
           <div class="card-packaging">
-            <span class="pkg-badge">1 kg</span>
-            <span class="pkg-badge">5 kg Box</span>
+           <!-- <span class="pkg-badge">1 kg</span> -->
+            <span class="pkg-badge">15 kg Carton</span>
             <span class="pkg-badge">20 kg Carton</span>
           </div>
         </div>
@@ -1065,13 +1134,23 @@
         </div>
       </article>
 
-    </div>
+    </div><!-- /slider-track meat -->
+  </div><!-- /slider-outer meat -->
   </section>
 
   <!-- ═══ BULK SUPPLY BANNER ═══ -->
   <div class="bulk-banner" id="bulk">
+    <!-- Reefer container image -->
+    <div class="bulk-img-wrap">
+      <img
+        src="images/reefer-container.jpg"
+        alt="Abak reefer container — temperature-controlled cold-chain delivery"
+        class="bulk-reefer-img"
+        loading="lazy"
+      />
+    </div>
     <div>
-      <h2>📦 Bulk Supply for Businesses</h2>
+      <h2>Bulk Supply for Businesses</h2>
       <p>Reliable, consistent supply for hotels, restaurants, caterers and food businesses across Ghana. Competitive pricing, flexible packaging, and dedicated account support.</p>
       <div class="bulk-tags">
         <span class="bulk-tag">🏨 Hotels</span>
@@ -1110,8 +1189,8 @@
       <h5>Products</h5>
       <ul>
         <li><a href="#poultry">Poultry</a></li>
-        <li><a href="#fish">Fish &amp; Seafood</a></li>
-        <li><a href="#meat">Red Meat</a></li>
+        <li><a href="#seafood">Seafood</a></li>
+        <li><a href="#meat">Meat</a></li>
         <li><a href="#bulk">Bulk Orders</a></li>
       </ul>
     </div>
@@ -1120,7 +1199,7 @@
       <p>📍 HQ1 Anunsah Clottey street, Kaneshie Market-Accra, Ghana</p>
       <p>📞 +233 24 729 8551 / +233 50 496 7111</p>
       <p>💬 WhatsApp Orders Available</p>
-      <p>✉ info@abakcompany.com</p>
+      <p>✉ abakcoltd@gmail.com</p>
     </div>
   </div>
   <div class="footer-bottom">
@@ -1142,27 +1221,20 @@
 <script>
   // ── Filter functionality ──
   function filterCategory(cat, btn) {
-    // Update active tab
     document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
 
-    // Show/hide sections
     document.querySelectorAll('.category-section').forEach(section => {
-      if (cat === 'all' || section.dataset.category === cat) {
-        section.style.display = '';
-      } else {
-        section.style.display = 'none';
-      }
+      section.style.display = (cat === 'all' || section.dataset.category === cat) ? '' : 'none';
     });
 
-    // Bulk banner visibility
     const bulk = document.getElementById('bulk');
     if (bulk) bulk.style.display = (cat === 'all' || cat === 'bulk') ? '' : 'none';
   }
 
   // ── WhatsApp order ──
   function orderWhatsApp(product) {
-    const phone = '233247298551'; // Replace with actual WhatsApp number
+    const phone = '233247298551';
     const message = encodeURIComponent(`Hello Abak Company Limited, I'm interested in ordering: ${product}. Please send me details and pricing.`);
     window.open(`https://wa.me/${phone}?text=${message}`, '_blank');
   }
@@ -1174,26 +1246,22 @@
 
   // ── Hamburger (stub) ──
   function toggleMenu() {
-    // Hook up to your mobile nav implementation
     alert('Mobile navigation: connect to your nav drawer here.');
   }
 
-  // ── Scroll-triggered animation for cards ──
-  if ('IntersectionObserver' in window) {
-    const obs = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.style.animationPlayState = 'running';
-          obs.unobserve(e.target);
-        }
+  // ── Infinite Slider: clone each track for seamless loop ──
+  (function initSliders() {
+    const tracks = document.querySelectorAll('.slider-track');
+    tracks.forEach(track => {
+      // Clone all current children (the original set of cards)
+      const origCards = Array.from(track.children);
+      origCards.forEach(card => {
+        const clone = card.cloneNode(true);
+        clone.setAttribute('aria-hidden', 'true'); // hide duplicates from screen readers
+        track.appendChild(clone);
       });
-    }, { threshold: 0.1 });
-
-    document.querySelectorAll('.product-card').forEach(card => {
-      card.style.animationPlayState = 'paused';
-      obs.observe(card);
     });
-  }
+  })();
 </script>
 </body>
 </html>

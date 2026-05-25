@@ -10,13 +10,15 @@
 
   <style>
     :root {
-      --navy: #081B29;
-      --navy-dark: #05121d;
-      --ice: #4CC9F0;
-      --ice-light: #64d4ff;
-      --text: #e0f2ff;
-      --muted: #a0b8cc;
-      --cream: #f7f9fb;
+      --navy:       #081B29;
+      --navy-dark:  #05121d;
+      --ice:        #4CC9F0;
+      --ice-light:  #64d4ff;
+      --text:       #e0f2ff;
+      --muted:      #a0b8cc;
+      --cream:      #f7f9fb;
+      --upcoming-accent: #00E5A0;   /* vivid teal-green for Upcoming */
+      --past-accent:     #4CC9F0;   /* existing ice blue for Past */
     }
 
     * { margin:0; padding:0; box-sizing:border-box; }
@@ -28,7 +30,7 @@
     }
     h1, h2, h3 { font-family: 'Cormorant Garamond', serif; }
 
-    /* NAVIGATION */
+    /* ─── NAVIGATION ─── */
     nav {
       position: sticky;
       top: 0;
@@ -51,199 +53,304 @@
       font-weight: 700;
       color: var(--ice);
     }
-    .nav-links {
-      display: flex;
-      gap: 2rem;
-      list-style: none;
-    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
     .nav-links a {
-      color: var(--text);
-      text-decoration: none;
-      font-weight: 500;
-      transition: color 0.3s;
+      color: var(--text); text-decoration: none;
+      font-weight: 500; transition: color 0.3s;
     }
     .nav-links a:hover, .nav-links a.active { color: var(--ice); }
-
     .hamburger {
-      display: none;
-      font-size: 1.8rem;
-      cursor: pointer;
-      color: var(--ice);
+      display: none; font-size: 1.8rem;
+      cursor: pointer; color: var(--ice);
     }
 
     /* Mobile Menu */
     .mobile-menu {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100vh;
+      position: fixed; top: 0; left: 0;
+      width: 100%; height: 100vh;
       background: var(--navy-dark);
-      display: none;
-      flex-direction: column;
-      padding-top: 80px;
-      z-index: 999;
+      display: none; flex-direction: column;
+      padding-top: 80px; z-index: 999;
     }
     .mobile-menu.active { display: flex; }
     .mobile-menu ul {
-      list-style: none;
-      padding: 2rem;
-      display: flex;
-      flex-direction: column;
-      gap: 1.2rem;
+      list-style: none; padding: 2rem;
+      display: flex; flex-direction: column; gap: 1.2rem;
     }
     .mobile-menu a {
-      color: var(--text);
-      text-decoration: none;
-      font-size: 1.25rem;
-      padding: 0.8rem 0;
+      color: var(--text); text-decoration: none;
+      font-size: 1.25rem; padding: 0.8rem 0;
       border-bottom: 1px solid rgba(76,201,240,0.15);
+      transition: all 0.25s;
     }
     .mobile-menu a:hover { color: var(--ice); padding-left: 10px; }
 
-    /* HERO */
+    /* ─── HERO ─── */
     .hero {
-      height: 100vh;
-      min-height: 680px;
-      background: linear-gradient(rgba(8,27,41,0.82), rgba(8,27,41,0.88)), url('images/events/hero.jpg') center/cover no-repeat;
-      display: flex;
-      align-items: center;
-      text-align: center;
+      height: 100vh; min-height: 680px;
+      background: linear-gradient(rgba(8,27,41,0.82), rgba(8,27,41,0.88)),
+                  url('images/events/hero.jpg') center/cover no-repeat;
+      display: flex; align-items: center; text-align: center;
     }
     .hero-content { max-width: 1100px; margin: 0 auto; padding: 0 5vw; }
     .hero h1 { font-size: clamp(2.8rem, 6vw, 4.5rem); margin-bottom: 1rem; }
     .hero p { font-size: 1.25rem; max-width: 720px; margin: 0 auto; color: var(--muted); }
 
+    /* ─── SECTIONS ─── */
     section { padding: 6rem 5vw; }
-    .section-header { text-align: center; margin-bottom: 4rem; }
+    .section-header { text-align: center; margin-bottom: 3rem; }
     .section-header span {
-      color: var(--ice);
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      font-size: 0.9rem;
+      color: var(--ice); font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase; font-size: 0.9rem;
     }
     .section-header h2 { font-size: clamp(2.4rem, 5vw, 3.4rem); margin: 1rem 0; }
 
-    /* Filters */
+    /* ─── FILTERS ─── */
     .filters {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-      justify-content: center;
-      margin-bottom: 3rem;
+      display: flex; flex-wrap: wrap;
+      gap: 0.9rem; justify-content: center;
+      margin-bottom: 3.5rem;
     }
     .filter-btn {
-      padding: 0.85rem 2rem;
-      background: rgba(255,255,255,0.08);
+      padding: 0.75rem 1.6rem;
+      background: rgba(255,255,255,0.07);
       border: 1px solid rgba(76,201,240,0.25);
-      color: white;
-      border-radius: 50px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s;
+      color: white; border-radius: 50px;
+      font-weight: 600; font-size: 0.88rem;
+      cursor: pointer; transition: all 0.3s;
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .filter-btn .fb-icon { font-size: 1rem; }
+    .filter-btn .fb-count {
+      background: rgba(76,201,240,0.15);
+      border-radius: 50px; padding: 0.05rem 0.5rem;
+      font-size: 0.72rem; font-weight: 700; color: var(--ice);
     }
     .filter-btn.active, .filter-btn:hover {
-      background: var(--ice);
-      color: #081B29;
+      background: var(--ice); color: #081B29;
+    }
+    .filter-btn.active .fb-count,
+    .filter-btn:hover  .fb-count { background: rgba(8,27,41,0.2); color: #081B29; }
+
+    /* ─── EPOCH DIVIDERS (Upcoming / Past) ─── */
+    .epoch-divider {
+      display: flex; align-items: center; gap: 1.2rem;
+      margin: 3rem 0 2.5rem;
+    }
+    .epoch-divider .ep-line { flex: 1; height: 1px; }
+    .epoch-label {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      padding: 0.5rem 1.4rem; border-radius: 50px;
+      font-family: 'Mulish', sans-serif;
+      font-size: 0.82rem; font-weight: 800;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      white-space: nowrap;
+    }
+    /* Upcoming style — vivid green */
+    .epoch-upcoming .ep-line { background: rgba(0,229,160,0.35); }
+    .epoch-upcoming .epoch-label {
+      background: rgba(0,229,160,0.12);
+      border: 1.5px solid rgba(0,229,160,0.5);
+      color: var(--upcoming-accent);
+    }
+    .epoch-upcoming .ep-pulse {
+      width: 9px; height: 9px;
+      background: var(--upcoming-accent);
+      border-radius: 50%;
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%,100% { box-shadow: 0 0 0 0 rgba(0,229,160,0.5); }
+      50%      { box-shadow: 0 0 0 7px rgba(0,229,160,0); }
+    }
+    /* Past style — ice blue */
+    .epoch-past .ep-line { background: rgba(76,201,240,0.25); }
+    .epoch-past .epoch-label {
+      background: rgba(76,201,240,0.1);
+      border: 1.5px solid rgba(76,201,240,0.4);
+      color: var(--ice);
     }
 
-    /* Gallery */
-    .event-group { margin-bottom: 5.5rem; }
-    .event-group h3 { font-size: 1.8rem; margin-bottom: 0.8rem; color: var(--ice-light); }
-    .event-date { color: var(--ice); font-weight: 600; margin-bottom: 2rem; display: block; }
+    /* ─── CATEGORY LABEL CHIP on each event group ─── */
+    .cat-chip {
+      display: inline-flex; align-items: center; gap: 0.45rem;
+      padding: 0.28rem 0.9rem;
+      border-radius: 50px;
+      font-size: 0.68rem; font-weight: 800;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      margin-bottom: 0.6rem;
+    }
+    .chip-upcoming { background: rgba(0,229,160,0.12);  border: 1px solid rgba(0,229,160,0.45);  color: var(--upcoming-accent); }
+    .chip-supplier  { background: rgba(255,190,80,0.12); border: 1px solid rgba(255,190,80,0.4);  color: #FFB940; }
+    .chip-expo      { background: rgba(76,201,240,0.12); border: 1px solid rgba(76,201,240,0.4);  color: var(--ice); }
+    .chip-cert      { background: rgba(150,120,255,0.12);border: 1px solid rgba(150,120,255,0.4); color: #a78bfa; }
+    .chip-internal  { background: rgba(100,200,100,0.12);border: 1px solid rgba(100,200,100,0.4); color: #6dd46d; }
 
-    .gallery-scroll {
+    /* ─── EVENT GROUP ─── */
+    .event-group { margin-bottom: 5rem; }
+    .event-group-header { margin-bottom: 1rem; }
+    .event-group h3 {
+      font-size: 1.75rem;
+      color: var(--ice-light);
+      line-height: 1.25;
+      margin-top: 0.2rem;
+    }
+    .event-date {
+      color: var(--ice); font-weight: 600;
+      margin-top: 0.4rem; display: block; font-size: 0.92rem;
+    }
+
+    /* ─── INFINITE SLIDER ─── */
+    .slider-wrapper {
+      position: relative;
+      overflow: hidden;
+      border-radius: 16px;
+      /* Fade edges */
+      -webkit-mask-image: linear-gradient(
+        to right, transparent 0%, black 6%, black 94%, transparent 100%
+      );
+      mask-image: linear-gradient(
+        to right, transparent 0%, black 6%, black 94%, transparent 100%
+      );
+      cursor: grab;
+    }
+    .slider-wrapper:active { cursor: grabbing; }
+
+    /* Pause on hover */
+    .slider-wrapper:hover .slider-track { animation-play-state: paused; }
+
+    .slider-track {
       display: flex;
-      gap: 1.8rem;
-      overflow-x: auto;
-      padding-bottom: 1.8rem;
-      scroll-behavior: smooth;
-      -webkit-overflow-scrolling: touch;
-      scroll-snap-type: x mandatory;
+      gap: 1.6rem;
+      width: max-content;
+      /* animation set via JS per-slider with unique name */
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
     }
-    .gallery-scroll::-webkit-scrollbar { height: 8px; }
-    .gallery-scroll::-webkit-scrollbar-thumb { background: var(--ice); border-radius: 10px; }
 
+    /* Gallery items inside slider */
     .gallery-item {
-      flex: 0 0 420px;
+      flex: 0 0 400px;
       background: rgba(255,255,255,0.06);
-      border-radius: 18px;
+      border-radius: 16px;
       overflow: hidden;
       border: 1px solid rgba(76,201,240,0.15);
-      scroll-snap-align: start;
-      transition: transform 0.3s ease;
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+      cursor: pointer;
     }
-    .gallery-item:hover { transform: scale(1.03); }
+    .gallery-item:hover {
+      transform: scale(1.04) translateY(-4px);
+      box-shadow: 0 12px 36px rgba(76,201,240,0.18);
+      border-color: rgba(76,201,240,0.4);
+    }
     .gallery-item img {
-      width: 100%;
-      height: auto;
-      display: block;
-      object-fit: contain;
+      width: 100%; height: 240px;
+      display: block; object-fit: cover;
       background: #0a1f2e;
     }
     .item-caption {
-      padding: 1.2rem 1.2rem 1.4rem;
-      font-size: 0.95rem;
-      color: var(--muted);
+      padding: 1rem 1.1rem 1.2rem;
+      font-size: 0.85rem; color: var(--muted);
       text-align: center;
       border-top: 1px solid rgba(76,201,240,0.1);
+      line-height: 1.55;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
 
-    /* Lightbox */
+    /* Slider controls */
+    .slider-controls {
+      display: flex; align-items: center; gap: 0.6rem;
+      margin-top: 1rem; justify-content: flex-end;
+    }
+    .slider-btn {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: rgba(76,201,240,0.12);
+      border: 1px solid rgba(76,201,240,0.3);
+      color: var(--ice); font-size: 1rem;
+      cursor: pointer; display: flex;
+      align-items: center; justify-content: center;
+      transition: all 0.2s;
+    }
+    .slider-btn:hover { background: var(--ice); color: #081B29; }
+    .pause-btn {
+      width: auto; padding: 0 0.9rem;
+      border-radius: 50px; font-size: 0.7rem;
+      font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+      gap: 0.4rem;
+    }
+    .slider-dots {
+      display: flex; gap: 0.4rem; align-items: center;
+      flex: 1;
+    }
+    .slider-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: rgba(76,201,240,0.25);
+      cursor: pointer; transition: all 0.25s;
+      border: none; padding: 0;
+    }
+    .slider-dot.active {
+      background: var(--ice);
+      width: 20px; border-radius: 50px;
+    }
+
+    /* Keyframe template injected by JS */
+
+    /* ─── LIGHTBOX ─── */
     .lightbox {
-      position: fixed;
-      inset: 0;
+      position: fixed; inset: 0;
       background: rgba(5,18,29,0.97);
-      display: none;
-      align-items: center;
+      display: none; align-items: center;
       justify-content: center;
-      z-index: 10000;
-      padding: 2rem;
+      z-index: 10000; padding: 2rem;
     }
     .lightbox-content {
-      max-width: 1100px;
-      width: 100%;
-      max-height: 90vh;
-      overflow: auto;
+      max-width: 1100px; width: 100%;
+      max-height: 90vh; overflow: auto;
       border-radius: 12px;
     }
     .lightbox-close {
-      position: absolute;
-      top: 30px;
-      right: 30px;
-      font-size: 2.8rem;
-      color: white;
-      cursor: pointer;
-      z-index: 101;
+      position: absolute; top: 30px; right: 30px;
+      font-size: 2.8rem; color: white;
+      cursor: pointer; z-index: 101;
+      transition: color 0.2s;
     }
+    .lightbox-close:hover { color: var(--ice); }
 
-    /* CTA */
+    /* ─── CTA ─── */
     .cta {
       background: linear-gradient(135deg, var(--navy-dark), var(--navy));
-      text-align: center;
-      padding: 5rem 5vw;
+      text-align: center; padding: 5rem 5vw;
     }
 
-    /* FOOTER */
+    /* ─── FOOTER ─── */
     footer {
-      background: #05121d;
-      padding: 4rem 5vw 2rem;
-      text-align: center;
-      font-size: 0.9rem;
-      color: var(--muted);
+      background: #05121d; padding: 4rem 5vw 2rem;
+      text-align: center; font-size: 0.9rem; color: var(--muted);
     }
 
+    /* ─── RESPONSIVE ─── */
     @media (max-width: 992px) {
       .nav-links { display: none; }
       .hamburger { display: block; }
       .gallery-item { flex: 0 0 300px; }
+      .gallery-item img { height: 190px; }
+    }
+    @media (max-width: 560px) {
+      .gallery-item { flex: 0 0 260px; }
+      .gallery-item img { height: 165px; }
+      .filters { gap: 0.6rem; }
+      .filter-btn { padding: 0.6rem 1.1rem; font-size: 0.8rem; }
     }
   </style>
 </head>
 <body>
 
-  <!-- NAVIGATION -->
+  <!-- ══ NAVIGATION ══ -->
   <nav>
     <div class="nav-container">
       <div class="logo">Abak Company</div>
@@ -252,8 +359,10 @@
         <li><a href="about.html">About Us</a></li>
         <li><a href="products.html">Products</a></li>
         <li><a href="services.html">Services</a></li>
-        <li><a href="sourcing.html">Suppliers</a></li>
-        <li><a href="events.html" style="color:var(--ice); font-weight:700;">Events</a></li>
+        <li><a href="suppliers.html">Suppliers</a></li>
+        <li><a href="events.html" class="active">Events & Engagements</a></li>
+        <li><a href="articles.html">Blog</a></li>
+        <li><a href="faq.html">FAQs</a></li>
         <li><a href="contact.html">Contact</a></li>
       </ul>
       <div class="hamburger" id="hamburger">☰</div>
@@ -267,218 +376,624 @@
       <li><a href="about.html">About Us</a></li>
       <li><a href="products.html">Products</a></li>
       <li><a href="services.html">Services</a></li>
-      <li><a href="sourcing.html">Suppliers</a></li>
+      <li><a href="suppliers.html">Suppliers</a></li>
       <li><a href="events.html">Events & Engagements</a></li>
+      <li><a href="articles.html">Blog</a></li>
+      <li><a href="faq.html">FAQs</a></li>
       <li><a href="contact.html">Contact Us</a></li>
     </ul>
   </div>
 
-  <!-- HERO -->
+  <!-- ══ HERO ══ -->
   <section class="hero">
     <div class="hero-content">
-      <span style="background:rgba(76,201,240,0.15); color:var(--ice); padding:0.6rem 1.8rem; border-radius:50px; font-size:0.9rem; font-weight:700;">CORPORATE ENGAGEMENTS</span>
-      <h1>Events &amp; Global Partnerships</h1>
-      <p>Showcasing Abak Company Limited’s active participation in the international frozen food industry</p>
+      <span style="background:rgba(76,201,240,0.15); color:var(--ice); padding:0.6rem 1.8rem; border-radius:50px; font-size:0.9rem; font-weight:700; letter-spacing:1px;">CORPORATE ENGAGEMENTS</span>
+      <h1 style="margin-top:1.2rem;">Events &amp; Global Partnerships</h1>
+      <p>Showcasing Abak Company Limited's active participation in the international frozen food industry</p>
     </div>
   </section>
 
-  <section>
+  <!-- ══ EVENTS SECTION ══ -->
+  <section id="eventsSection">
     <div class="section-header">
       <span>OUR JOURNEY</span>
       <h2>Events &amp; Supplier Engagements</h2>
     </div>
 
-    <!-- FILTER BUTTONS -->
-    <div class="filters">
-      <button class="filter-btn active" onclick="filterCategory('all')">All Events</button>
-      <button class="filter-btn" onclick="filterCategory('upcoming')">Upcoming Events</button>
-      <button class="filter-btn" onclick="filterCategory('supplier')">Supplier Visits</button>
-      <button class="filter-btn" onclick="filterCategory('expo')">International Expos</button>
-      <button class="filter-btn" onclick="filterCategory('cert')">Certifications</button>
-      <button class="filter-btn" onclick="filterCategory('internal')">Operations</button>
+    <!-- ── FILTER BUTTONS ── -->
+    <div class="filters" id="filterBar">
+      <button class="filter-btn active" onclick="filterCategory('all', this)">
+        <span class="fb-icon">🗂️</span> All Events <span class="fb-count">8</span>
+      </button>
+      <button class="filter-btn" onclick="filterCategory('upcoming', this)">
+        <span class="fb-icon">📅</span> Upcoming Events <span class="fb-count">1</span>
+      </button>
+      <button class="filter-btn" onclick="filterCategory('supplier', this)">
+        <span class="fb-icon">🤝</span> Supplier Visits <span class="fb-count">3</span>
+      </button>
+      <button class="filter-btn" onclick="filterCategory('expo', this)">
+        <span class="fb-icon">🌐</span> International Expos <span class="fb-count">3</span>
+      </button>
+      <button class="filter-btn" onclick="filterCategory('cert', this)">
+        <span class="fb-icon">🏅</span> Certifications <span class="fb-count">1</span>
+      </button>
+      <button class="filter-btn" onclick="filterCategory('internal', this)">
+        <span class="fb-icon">🏭</span> Operations <span class="fb-count">2</span>
+      </button>
+    </div>
+
+    <!-- ════════════════════════════
+         ★ UPCOMING EVENTS ★
+    ════════════════════════════ -->
+    <div class="epoch-divider epoch-upcoming" data-epoch="upcoming">
+      <div class="ep-line"></div>
+      <div class="epoch-label">
+        <span class="ep-pulse"></span>
+        Upcoming Event
+      </div>
+      <div class="ep-line"></div>
     </div>
 
     <div id="eventsContainer">
 
-      <!-- Africa Food Show -->
-      <div class="event-group" data-category="upcoming">
-        <h3>Africa Food Show 2026</h3>
-        <span class="event-date">10th — 12th June, 2026 • Accra, Ghana</span>
-        <div class="gallery-scroll">
-          <div class="gallery-item" onclick="openLightbox('images/events/africa-food-show-1.jpg', 'Africa Food Show 2026 - Exhibition Stand')">
-            <img src="images/events/africa-foodshow-2025.jpeg" loading="lazy" alt=""><div class="item-caption">Upcoming Africa Food Show Scheduled for 10th to 12th June, 2026</div>
+      <!-- ── Africa Food Show 2026 ── -->
+      <div class="event-group" data-category="upcoming" data-label="Upcoming Event">
+        <div class="event-group-header">
+          <div class="cat-chip chip-upcoming">📅 Upcoming Event</div>
+          <h3>Africa Food Show 2026</h3>
+          <span class="event-date">📍 Cape Town, South Africa &nbsp;·&nbsp; 🗓 10th – 12th June, 2026</span>
+        </div>
+        <div class="slider-wrapper" data-speed="35">
+          <div class="slider-track">
+            <div class="gallery-item" onclick="openLightbox('images/events/africa-food-show-1.jpg','Africa Food Show 2026 – Exhibition Stand')">
+              <img src="images/events/africa-foodshow-2025.jpeg" loading="lazy" alt="Africa Food Show 2026" />
+              <div class="item-caption">Upcoming Africa Food Show — 10th to 12th June, 2026, Cape Town</div>
+            </div>
+		<!--	
+            <div class="gallery-item" onclick="openLightbox('images/events/africa-food-show-2.jpg','Africa Food Show 2026 – Team at Booth')">
+              <img src="images/events/africa-food-show-2.jpg" loading="lazy" alt="Africa Food Show 2026 Team" />
+              <div class="item-caption">Abak Team at the Booth</div>
+            </div>
+            <!-- Clones appended by JS for seamless loop -->
           </div>
-          <div class="gallery-item" onclick="openLightbox('images/events/africa-food-show-2.jpg', 'Africa Food Show 2026 - Team at Booth')">
-            <img src="images/events/africa-food-show-2.jpg" loading="lazy" alt=""><div class="item-caption">Abak Team at the Booth</div>
+        </div>
+        <div class="slider-controls">
+          <div class="slider-dots"></div>
+          <button class="slider-btn" title="Previous" onclick="manualSlide(this,-1)">‹</button>
+          <button class="slider-btn pause-btn" title="Pause / Resume" onclick="togglePause(this)">⏸ Pause</button>
+          <button class="slider-btn" title="Next" onclick="manualSlide(this,1)">›</button>
+        </div> -->
+      </div>
+
+
+      <!-- ════════════════════════════
+           ★ PAST EVENTS ★
+      ════════════════════════════ -->
+      <div class="epoch-divider epoch-past" data-epoch="past">
+        <div class="ep-line"></div>
+        <div class="epoch-label">
+          🕐 Past Events
+        </div>
+        <div class="ep-line"></div>
+      </div>
+
+      <!-- ── Norwest Foods UK ── -->
+      <div class="event-group" data-category="supplier" data-label="Supplier Visit">
+        <div class="event-group-header">
+          <div class="cat-chip chip-supplier">🤝 Supplier Visit</div>
+          <h3>Norwest Foods International (UK) Delegation</h3>
+        </div>
+        <div class="slider-wrapper" data-speed="40">
+          <div class="slider-track">
+            <div class="gallery-item" onclick="openLightbox('images/events/norwest-delegation-1.jpg','Norwest UK – Meeting')">
+              <img src="images/events/norwest-uk.jpeg" loading="lazy" alt="Norwest Foods UK Delegation" />
+              <div class="item-caption">Norwest UK visited Abak Company Limited to explore potential business opportunities and strengthen mutual collaboration.</div>
+            </div>
+			
+            <div class="gallery-item" onclick="openLightbox('images/events/norwest-delegation-2.jpg','Norwest UK – Group Photo')">
+              <img src="images/events/norwest-delegation-2.jpg" loading="lazy" alt="Norwest Group Photo" />
+              <div class="item-caption">Group Photo — Norwest UK Delegation</div>
+            </div>
           </div>
         </div>
-      </div>
-
-      <!-- Supplier Visits -->
-      <div class="event-group" data-category="supplier">
-        <h3>Norwest Foods International (UK) Delegation</h3>
-        <div class="gallery-scroll">
-          <div class="gallery-item" onclick="openLightbox('images/events/norwest-delegation-1.jpg', 'Norwest UK Delegation - Meeting')"><img src="images/events/norwest-uk.jpeg" loading="lazy" alt=""><div class="item-caption">Norwest UK visited Abak Company Limited to explore potential business opportunities and strengthen mutual collaboration.</div></div>
-          <div class="gallery-item" onclick="openLightbox('images/events/norwest-delegation-2.jpg', 'Norwest UK Delegation - Group Photo')"><img src="images/events/norwest-delegation-2.jpg" loading="lazy" alt=""><div class="item-caption">Group Photo</div></div>
+        <div class="slider-controls">
+          <div class="slider-dots"></div>
+          <button class="slider-btn" title="Previous" onclick="manualSlide(this,-1)">‹</button>
+          <button class="slider-btn pause-btn" title="Pause / Resume" onclick="togglePause(this)">⏸ Pause</button>
+          <button class="slider-btn" title="Next" onclick="manualSlide(this,1)">›</button>
         </div>
       </div>
 
-      <div class="event-group" data-category="supplier">
-        <h3>ICC Ireland Delegation Visit</h3>
-        <div class="gallery-scroll">
-          <div class="gallery-item" onclick="openLightbox('images/events/icc-ireland-1.jpeg', 'ICC Ireland - Office Tour')"><img src="images/events/icc-ireland.jpeg" loading="lazy" alt=""><div class="item-caption">A delegation led by the CEO of ICC Ireland visited Abak Company Limited to engage in strategic discussions on business collaboration and to explore potential partnership opportunities.</div></div>
-          <div class="gallery-item" onclick="openLightbox('images/events/icc-ireland-2.jpg', 'ICC Ireland - Partnership Discussion')"><img src="images/events/icc-ireland-2.jpg" loading="lazy" alt=""><div class="item-caption">Partnership Discussion</div></div>
+      <!-- ── ICC Ireland ── -->
+      <div class="event-group" data-category="supplier" data-label="Supplier Visit">
+        <div class="event-group-header">
+          <div class="cat-chip chip-supplier">🤝 Supplier Visit</div>
+          <h3>ICC Ireland Delegation Visit</h3>
+        </div>
+        <div class="slider-wrapper" data-speed="42">
+          <div class="slider-track">
+            <div class="gallery-item" onclick="openLightbox('images/events/icc-ireland-1.jpeg','ICC Ireland – Office Tour')">
+              <img src="images/events/icc-ireland.jpeg" loading="lazy" alt="ICC Ireland Delegation" />
+              <div class="item-caption">A delegation led by the CEO of ICC Ireland visited Abak to engage in strategic discussions on business collaboration and partnership opportunities.</div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox('images/events/icc-ireland-2.jpg','ICC Ireland – Partnership Discussion')">
+              <img src="images/events/icc-ireland-2.jpg" loading="lazy" alt="ICC Ireland Partnership" />
+              <div class="item-caption">Partnership Discussion — ICC Ireland</div>
+            </div>
+          </div>
+        </div>
+        <div class="slider-controls">
+          <div class="slider-dots"></div>
+          <button class="slider-btn" title="Previous" onclick="manualSlide(this,-1)">‹</button>
+          <button class="slider-btn pause-btn" title="Pause / Resume" onclick="togglePause(this)">⏸ Pause</button>
+          <button class="slider-btn" title="Next" onclick="manualSlide(this,1)">›</button>
         </div>
       </div>
 
-      <div class="event-group" data-category="supplier">
-        <h3>Sara Foods Lebanon Delegation</h3>
-        <div class="gallery-scroll">
-          <div class="gallery-item" onclick="openLightbox('images/events/sara-foods-1.jpg', 'Sara Foods Lebanon - Arrival')"><img src="images/events/sarafoods-lebanon.jpeg" loading="lazy" alt=""><div class="item-caption">A delegation from Sara Food Lebanon visited Abak Company Limited to explore potential areas of collaboration and strengthen business relations. The meeting centered on supply opportunities, product distribution strategies, and potential strategic partnerships aimed at expanding market reach and enhancing value chains within the food and beverage sector.</div></div>
-          <div class="gallery-item" onclick="openLightbox('images/events/sara-foods-2.jpg', 'Sara Foods Lebanon - Strategic Meeting')"><img src="images/events/sara-foods-2.jpg" loading="lazy" alt=""><div class="item-caption">Strategic Meeting</div></div>
+      <!-- ── Sara Foods Lebanon ── -->
+      <div class="event-group" data-category="supplier" data-label="Supplier Visit">
+        <div class="event-group-header">
+          <div class="cat-chip chip-supplier">🤝 Supplier Visit</div>
+          <h3>Sara Foods Lebanon Delegation</h3>
+        </div>
+        <div class="slider-wrapper" data-speed="38">
+          <div class="slider-track">
+            <div class="gallery-item" onclick="openLightbox('images/events/sara-foods-1.jpg','Sara Foods Lebanon – Arrival')">
+              <img src="images/events/sarafoods-lebanon.jpeg" loading="lazy" alt="Sara Foods Lebanon" />
+              <div class="item-caption">A delegation from Sara Food Lebanon visited Abak to explore supply opportunities, distribution strategies, and strategic partnerships in the food and beverage sector.</div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox('images/events/sara-foods-2.jpg','Sara Foods Lebanon – Strategic Meeting')">
+              <img src="images/events/sara-foods-2.jpg" loading="lazy" alt="Sara Foods Strategic Meeting" />
+              <div class="item-caption">Strategic Meeting — Sara Foods Lebanon</div>
+            </div>
+          </div>
+        </div>
+        <div class="slider-controls">
+          <div class="slider-dots"></div>
+          <button class="slider-btn" title="Previous" onclick="manualSlide(this,-1)">‹</button>
+          <button class="slider-btn pause-btn" title="Pause / Resume" onclick="togglePause(this)">⏸ Pause</button>
+          <button class="slider-btn" title="Next" onclick="manualSlide(this,1)">›</button>
         </div>
       </div>
 
-      <!-- Gulfood January 2026 - 9 Images -->
-      <div class="event-group" data-category="expo">
-        <h3>Dubai Gulfood - January 2026</h3>
-        <span class="event-date">January 2026 • Dubai World Trade Centre</span>
-        <div class="gallery-scroll">
-          <div class="gallery-item" onclick="openLightbox('images/events/gulfood-jan2026-1.jpg', 'Gulfood 2026 - Abak Booth Overview')"><img src="images/events/gulfood-jan2026-1.jpeg" loading="lazy" alt=""><div class="item-caption">Abak Company Limited participated in the Singapore FHA Food & Beverage Event to engage with global suppliers and explore strategic partnerships. The team visited various country pavilions, including China, Japan, and the European Union zones, and actively took part in seminars and networking sessions to strengthen industry connections and gain valuable market insights.</div></div>
-          <div class="gallery-item" onclick="openLightbox('images/events/gulfood-jan2026-2.jpg', 'Gulfood 2026 - Product Display')"><img src="images/events/gulfood-jan2026-2.jpeg" loading="lazy" alt=""><div class="item-caption">Dubai Gulfood - January 2026</div></div>
-          <!-- <div class="gallery-item" onclick="openLightbox('images/events/gulfood-jan2026-3.jpg', 'Gulfood 2026 - Business Meeting')"><img src="images/events/gulfood-jan2026-3.jpeg" loading="lazy" alt=""><div class="item-caption">Dubai Gulfood - January 2026</div></div> -->
-          <div class="gallery-item" onclick="openLightbox('images/events/gulfood-jan2026-4.jpg', 'Gulfood 2026 - Team at Stand')"><img src="images/events/gulfood-jan2026-4.jpeg" loading="lazy" alt=""><div class="item-caption">Dubai Gulfood - January 2026</div></div>
-          <div class="gallery-item" onclick="openLightbox('images/events/gulfood-jan2026-5.jpg', 'Gulfood 2026 - Product Sampling')"><img src="images/events/gulfood-jan2026-5.jpeg" loading="lazy" alt=""><div class="item-caption">Dubai Gulfood - January 2026</div></div>
-          <div class="gallery-item" onclick="openLightbox('images/events/gulfood-jan2026-6.jpg', 'Gulfood 2026 - Networking')"><img src="images/events/gulfood-jan2026-6.jpeg" loading="lazy" alt=""><div class="item-caption">Dubai Gulfood - January 2026</div></div>
-          <div class="gallery-item" onclick="openLightbox('images/events/gulfood-jan2026-7.jpg', 'Gulfood 2026 - Booth Branding')"><img src="images/events/gulfood-jan2026-7.jpeg" loading="lazy" alt=""><div class="item-caption">Dubai Gulfood - January 2026</div></div>
-          <div class="gallery-item" onclick="openLightbox('images/events/gulfood-jan2026-8.jpg', 'Gulfood 2026 - Visitor Engagement')"><img src="images/events/gulfood-jan2026-8.jpeg" loading="lazy" alt=""><div class="item-caption">Dubai Gulfood - January 2026</div></div>
-          <div class="gallery-item" onclick="openLightbox('images/events/gulfood-jan2026-9.jpg', 'Gulfood 2026 - Team Group Photo')"><img src="images/events/gulfood-jan2026-9.jpeg" loading="lazy" alt=""><div class="item-caption">Dubai Gulfood - January 2026</div></div>
-		  <div class="gallery-item" onclick="openLightbox('images/events/gulfood-jan2026-10.jpg', 'Gulfood 2026 - Visitor Engagement')"><img src="images/events/gulfood-jan2026-10.jpeg" loading="lazy" alt=""><div class="item-caption">Dubai Gulfood - January 2026</div></div>
-          <div class="gallery-item" onclick="openLightbox('images/events/gulfood-jan2026-11.jpg', 'Gulfood 2026 - Team Group Photo')"><img src="images/events/gulfood-jan2026-11.jpeg" loading="lazy" alt=""><div class="item-caption">Dubai Gulfood - January 2026</div></div>
+      <!-- ── Dubai Gulfood January 2026 ── -->
+      <div class="event-group" data-category="expo" data-label="International Expo">
+        <div class="event-group-header">
+          <div class="cat-chip chip-expo">🌐 International Expo</div>
+          <h3>Dubai Gulfood — January 2026</h3>
+          <span class="event-date">📍 Dubai World Trade Centre &nbsp;·&nbsp; 🗓 January 2026</span>
         </div>
-      </div>
-	  
-	   <!-- FHA Foods and Beverages Expo -->
-      <div class="event-group" data-category="expo">
-        <h3>FHA Foods and Beverages Expo 2025</h3>
-        <div class="gallery-scroll">
-          <div class="gallery-item" onclick="openLightbox('images/events/fha-foods-beverages-2025.jpg', 'Singapore Expo 2024 - Booth View')"><img src="images/events/fha-foods-beverages-2025.jpeg" loading="lazy" alt=""><div class="item-caption">Asia's Leading Foods and Beverages event Held in 2025.</div></div>
-          <div class="gallery-item" onclick="openLightbox('images/events/fha-foods-beverages-2025-2.jpg', 'Singapore Expo 2024 - Product Showcase')"><img src="images/events/fha-foods-beverages-2025-2.jpeg" loading="lazy" alt=""><div class="item-caption">Product Showcase</div></div>
-          <div class="gallery-item" onclick="openLightbox('images/events/fha-foods-beverages-2025-3.jpg', 'Singapore Expo 2024 - Team Interaction')"><img src="images/events/fha-foods-beverages-2025-3.jpeg" loading="lazy" alt=""><div class="item-caption">Team Interaction</div></div>
+        <div class="slider-wrapper" data-speed="30">
+          <div class="slider-track">
+            <div class="gallery-item" onclick="openLightbox('images/events/gulfood-jan2026-1.jpg','Gulfood 2026 – Abak Booth Overview')">
+              <img src="images/events/gulfood-jan2026-1.jpeg" loading="lazy" alt="Gulfood 2026 Booth" />
+              <div class="item-caption">Dubai Gulfood 2026 — Abak Booth Overview</div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox('images/events/gulfood-jan2026-2.jpg','Gulfood 2026 – Product Display')">
+              <img src="images/events/gulfood-jan2026-2.jpeg" loading="lazy" alt="Gulfood Product Display" />
+              <div class="item-caption">Dubai Gulfood — Product Display</div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox('images/events/gulfood-jan2026-4.jpg','Gulfood 2026 – Team at Stand')">
+              <img src="images/events/gulfood-jan2026-4.jpeg" loading="lazy" alt="Gulfood Team" />
+              <div class="item-caption">Dubai Gulfood — Team at Stand</div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox('images/events/gulfood-jan2026-5.jpg','Gulfood 2026 – Product Sampling')">
+              <img src="images/events/gulfood-jan2026-5.jpeg" loading="lazy" alt="Gulfood Sampling" />
+              <div class="item-caption">Dubai Gulfood — Product Sampling</div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox('images/events/gulfood-jan2026-6.jpg','Gulfood 2026 – Networking')">
+              <img src="images/events/gulfood-jan2026-6.jpeg" loading="lazy" alt="Gulfood Networking" />
+              <div class="item-caption">Dubai Gulfood — Networking Session</div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox('images/events/gulfood-jan2026-7.jpg','Gulfood 2026 – Booth Branding')">
+              <img src="images/events/gulfood-jan2026-7.jpeg" loading="lazy" alt="Gulfood Branding" />
+              <div class="item-caption">Dubai Gulfood — Booth Branding</div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox('images/events/gulfood-jan2026-8.jpg','Gulfood 2026 – Visitor Engagement')">
+              <img src="images/events/gulfood-jan2026-8.jpeg" loading="lazy" alt="Gulfood Visitors" />
+              <div class="item-caption">Dubai Gulfood — Visitor Engagement</div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox('images/events/gulfood-jan2026-9.jpg','Gulfood 2026 – Team Group Photo')">
+              <img src="images/events/gulfood-jan2026-9.jpeg" loading="lazy" alt="Gulfood Group Photo" />
+              <div class="item-caption">Dubai Gulfood — Team Group Photo</div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox('images/events/gulfood-jan2026-10.jpg','Gulfood 2026 – Exhibition Floor')">
+              <img src="images/events/gulfood-jan2026-10.jpeg" loading="lazy" alt="Gulfood Exhibition" />
+              <div class="item-caption">Dubai Gulfood — Exhibition Floor</div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox('images/events/gulfood-jan2026-11.jpg','Gulfood 2026 – Closing Day')">
+              <img src="images/events/gulfood-jan2026-11.jpeg" loading="lazy" alt="Gulfood Closing" />
+              <div class="item-caption">Dubai Gulfood — Closing Day</div>
+            </div>
+          </div>
         </div>
-      </div>
-
-      <!-- Singapore Expo -->
-      <div class="event-group" data-category="expo">
-        <h3>Singapore Expo • 23rd - 26th April 2024</h3>
-        <div class="gallery-scroll">
-          <div class="gallery-item" onclick="openLightbox('images/events/singapore-expo-1.jpg', 'Singapore Expo 2024 - Booth View')"><img src="images/events/singapore-expo-1.jpeg" loading="lazy" alt=""><div class="item-caption">Abak Company Limited participated in the Singapore FHA Food & Beverage Event to engage with global suppliers and explore strategic partnerships. The team visited various country pavilions, including China, Japan, and the European Union zones, and actively took part in seminars and networking sessions to strengthen industry connections and gain valuable market insights.</div></div>
-          <div class="gallery-item" onclick="openLightbox('images/events/singapore-expo-2.jpg', 'Singapore Expo 2024 - Product Showcase')"><img src="images/events/singapore-expo-2.jpeg" loading="lazy" alt=""><div class="item-caption">Singapore Expo 2024</div></div>
-          <div class="gallery-item" onclick="openLightbox('images/events/singapore-expo-3.jpg', 'Singapore Expo 2024 - Team Interaction')"><img src="images/events/singapore-expo-3.jpeg" loading="lazy" alt=""><div class="item-caption">Singapore Expo 2024</div></div>
-		  <div class="gallery-item" onclick="openLightbox('images/events/singapore-expo-4
-.jpg', 'Singapore Expo 2024 - Team Interaction')"><img src="images/events/singapore-expo-4.jpeg" loading="lazy" alt=""><div class="item-caption">Singapore Expo 2024</div></div>
-        </div>
-      </div>
-
-      <!-- Certification -->
-      <div class="event-group" data-category="cert">
-        <h3>American Chamber of Commerce (AmCham) Ghana Certification</h3>
-        <div class="gallery-scroll">
-          <div class="gallery-item" onclick="openLightbox('images/events/amcham-cert-1.jpg', 'AmCham Ghana Certification Ceremony')"><img src="images/events/amcham.jpeg" loading="lazy" alt=""><div class="item-caption">Mr. Kimathi, President of the American Chamber of Commerce, Ghana, presented a membership certificate to Abak Company Limited in recognition of its official induction into the Chamber.</div></div>
-          <div class="gallery-item" onclick="openLightbox('images/events/amcham-cert-2.jpg', 'AmCham Ghana - Group Photo')"><img src="images/events/amcham-cert-2.jpg" loading="lazy" alt=""><div class="item-caption">Official Group Photo</div></div>
-        </div>
-      </div>
-
-      <!-- Operations -->
-      <div class="event-group" data-category="internal">
-        <h3>Office &amp; Coldroom Operations</h3>
-        <div class="gallery-scroll">
-          <div class="gallery-item" onclick="openLightbox('images/events/coldroom-operations-1.jpg', 'Cold Room Temperature Check')"><img src="images/events/warehouse-daily-operations-1.jpeg" loading="lazy" alt=""><div class="item-caption">Warehouse Operations</div></div>
-          <div class="gallery-item" onclick="openLightbox('images/events/coldroom-operations-2.jpg', 'Warehouse Daily Operations')"><img src="images/events/warehouse-daily-operations-2.jpeg" loading="lazy" alt=""><div class="item-caption">Warehouse Operations</div></div>
-          <div class="gallery-item" onclick="openLightbox('images/events/coldroom-operations-3.jpg', 'Quality Control Inspection')"><img src="images/events/warehouse-daily-operations-3.jpeg" loading="lazy" alt=""><div class="item-caption">Warehouse Operations</div></div>
-		  <div class="gallery-item" onclick="openLightbox('images/events/coldroom-operations-4.jpg', 'Warehouse Daily Operations')"><img src="images/events/warehouse-daily-operations-4.jpeg" loading="lazy" alt=""><div class="item-caption">Warehouse Operations</div></div>
-          <div class="gallery-item" onclick="openLightbox('images/events/coldroom-operations-5.jpg', 'Quality Control Inspection')"><img src="images/events/warehouse-daily-operations-5.jpeg" loading="lazy" alt=""><div class="item-caption">Quality Control</div></div>
+        <div class="slider-controls">
+          <div class="slider-dots"></div>
+          <button class="slider-btn" title="Previous" onclick="manualSlide(this,-1)">‹</button>
+          <button class="slider-btn pause-btn" title="Pause / Resume" onclick="togglePause(this)">⏸ Pause</button>
+          <button class="slider-btn" title="Next" onclick="manualSlide(this,1)">›</button>
         </div>
       </div>
 
-      <div class="event-group" data-category="internal">
-        <h3>Customer Engagements &amp; Market Activations</h3>
-        <div class="gallery-scroll">
-          <div class="gallery-item" onclick="openLightbox('images/events/market-activation-1.jpg', 'Market Activation Campaign')"><img src="images/events/market-activation-1.jpg" loading="lazy" alt=""><div class="item-caption">Customer Engagement</div></div>
-          <div class="gallery-item" onclick="openLightbox('images/events/market-activation-2.jpg', 'Retail Outlet Promotion')"><img src="images/events/market-activation-2.jpg" loading="lazy" alt=""><div class="item-caption">Retail Promotion</div></div>
+      <!-- ── FHA Singapore 2025 ── -->
+      <div class="event-group" data-category="expo" data-label="International Expo">
+        <div class="event-group-header">
+          <div class="cat-chip chip-expo">🌐 International Expo</div>
+          <h3>FHA Singapore Foods &amp; Beverages Expo 2025</h3>
+          <span class="event-date">📍 Singapore &nbsp;·&nbsp; 🗓 2025</span>
+        </div>
+        <div class="slider-wrapper" data-speed="36">
+          <div class="slider-track">
+            <div class="gallery-item" onclick="openLightbox('images/events/fha-foods-beverages-2025.jpg','FHA Singapore – Booth View')">
+              <img src="images/events/fha-foods-beverages-2025.jpeg" loading="lazy" alt="FHA Singapore 2025" />
+              <div class="item-caption">Asia's Leading Foods &amp; Beverages Event — Singapore 2025</div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox('images/events/fha-foods-beverages-2025-2.jpg','FHA Singapore – Product Showcase')">
+              <img src="images/events/fha-foods-beverages-2025-2.jpeg" loading="lazy" alt="FHA Product Showcase" />
+              <div class="item-caption">FHA Singapore 2025 — Product Showcase</div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox('images/events/fha-foods-beverages-2025-3.jpg','FHA Singapore – Team Interaction')">
+              <img src="images/events/fha-foods-beverages-2025-3.jpeg" loading="lazy" alt="FHA Team" />
+              <div class="item-caption">FHA Singapore 2025 — Team Interaction</div>
+            </div>
+          </div>
+        </div>
+        <div class="slider-controls">
+          <div class="slider-dots"></div>
+          <button class="slider-btn" title="Previous" onclick="manualSlide(this,-1)">‹</button>
+          <button class="slider-btn pause-btn" title="Pause / Resume" onclick="togglePause(this)">⏸ Pause</button>
+          <button class="slider-btn" title="Next" onclick="manualSlide(this,1)">›</button>
         </div>
       </div>
 
-    </div>
+      <!-- ── Singapore Expo 2024 ── -->
+      <div class="event-group" data-category="expo" data-label="International Expo">
+        <div class="event-group-header">
+          <div class="cat-chip chip-expo">🌐 International Expo</div>
+          <h3>Singapore Expo — FHA Food &amp; Beverage 2024</h3>
+          <span class="event-date">📍 Singapore &nbsp;·&nbsp; 🗓 23rd – 26th April 2024</span>
+        </div>
+        <div class="slider-wrapper" data-speed="33">
+          <div class="slider-track">
+            <div class="gallery-item" onclick="openLightbox('images/events/singapore-expo-1.jpg','Singapore Expo 2024 – Booth View')">
+              <img src="images/events/singapore-expo-1.jpeg" loading="lazy" alt="Singapore Expo 2024" />
+              <div class="item-caption">Abak participated in the Singapore FHA Food &amp; Beverage Event, engaging global suppliers and visiting pavilions from China, Japan, and the EU.</div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox('images/events/singapore-expo-2.jpg','Singapore Expo 2024 – Product Showcase')">
+              <img src="images/events/singapore-expo-2.jpeg" loading="lazy" alt="Singapore Expo Showcase" />
+              <div class="item-caption">Singapore Expo 2024 — Product Showcase</div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox('images/events/singapore-expo-3.jpg','Singapore Expo 2024 – Team Interaction')">
+              <img src="images/events/singapore-expo-3.jpeg" loading="lazy" alt="Singapore Expo Team" />
+              <div class="item-caption">Singapore Expo 2024 — Team Interaction</div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox('images/events/singapore-expo-4.jpg','Singapore Expo 2024 – Networking')">
+              <img src="images/events/singapore-expo-4.jpeg" loading="lazy" alt="Singapore Expo Networking" />
+              <div class="item-caption">Singapore Expo 2024 — Networking</div>
+            </div>
+          </div>
+        </div>
+        <div class="slider-controls">
+          <div class="slider-dots"></div>
+          <button class="slider-btn" title="Previous" onclick="manualSlide(this,-1)">‹</button>
+          <button class="slider-btn pause-btn" title="Pause / Resume" onclick="togglePause(this)">⏸ Pause</button>
+          <button class="slider-btn" title="Next" onclick="manualSlide(this,1)">›</button>
+        </div>
+      </div>
+
+      <!-- ── AmCham Certification ── -->
+      <div class="event-group" data-category="cert" data-label="Certification">
+        <div class="event-group-header">
+          <div class="cat-chip chip-cert">🏅 Certification</div>
+          <h3>American Chamber of Commerce (AmCham) Ghana — Membership Certification</h3>
+        </div>
+        <div class="slider-wrapper" data-speed="45">
+          <div class="slider-track">
+            <div class="gallery-item" onclick="openLightbox('images/events/amcham-cert-1.jpg','AmCham Ghana – Certification Ceremony')">
+              <img src="images/events/amcham.jpeg" loading="lazy" alt="AmCham Certification" />
+              <div class="item-caption">Mr. Kimathi, President of AmCham Ghana, presented a membership certificate to Abak Company Limited in recognition of its official induction into the Chamber.</div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox('images/events/amcham-cert-2.jpg','AmCham Ghana – Group Photo')">
+              <img src="images/events/amcham-cert-2.jpg" loading="lazy" alt="AmCham Group Photo" />
+              <div class="item-caption">AmCham Ghana — Official Group Photo</div>
+            </div>
+          </div>
+        </div>
+        <div class="slider-controls">
+          <div class="slider-dots"></div>
+          <button class="slider-btn" title="Previous" onclick="manualSlide(this,-1)">‹</button>
+          <button class="slider-btn pause-btn" title="Pause / Resume" onclick="togglePause(this)">⏸ Pause</button>
+          <button class="slider-btn" title="Next" onclick="manualSlide(this,1)">›</button>
+        </div>
+      </div>
+
+      <!-- ── Cold Room & Warehouse Operations ── -->
+      <div class="event-group" data-category="internal" data-label="Operations">
+        <div class="event-group-header">
+          <div class="cat-chip chip-internal">🏭 Operations</div>
+          <h3>Office &amp; Cold Room Operations</h3>
+        </div>
+        <div class="slider-wrapper" data-speed="32">
+          <div class="slider-track">
+            <div class="gallery-item" onclick="openLightbox('images/events/coldroom-operations-1.jpg','Cold Room – Temperature Check')">
+              <img src="images/events/warehouse-daily-operations-1.jpeg" loading="lazy" alt="Warehouse Operations" />
+              <div class="item-caption">Warehouse Daily Operations</div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox('images/events/coldroom-operations-2.jpg','Warehouse – Daily Operations')">
+              <img src="images/events/warehouse-daily-operations-2.jpeg" loading="lazy" alt="Warehouse Operations 2" />
+              <div class="item-caption">Warehouse Daily Operations</div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox('images/events/coldroom-operations-3.jpg','Warehouse – Quality Inspection')">
+              <img src="images/events/warehouse-daily-operations-3.jpeg" loading="lazy" alt="Quality Control" />
+              <div class="item-caption">Warehouse Operations</div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox('images/events/coldroom-operations-4.jpg','Warehouse – Logistics')">
+              <img src="images/events/warehouse-daily-operations-4.jpeg" loading="lazy" alt="Warehouse Logistics" />
+              <div class="item-caption">Warehouse Daily Operations</div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox('images/events/coldroom-operations-5.jpg','Warehouse – Quality Control')">
+              <img src="images/events/warehouse-daily-operations-5.jpeg" loading="lazy" alt="Quality Control 2" />
+              <div class="item-caption">Quality Control</div>
+            </div>
+          </div>
+        </div>
+        <div class="slider-controls">
+          <div class="slider-dots"></div>
+          <button class="slider-btn" title="Previous" onclick="manualSlide(this,-1)">‹</button>
+          <button class="slider-btn pause-btn" title="Pause / Resume" onclick="togglePause(this)">⏸ Pause</button>
+          <button class="slider-btn" title="Next" onclick="manualSlide(this,1)">›</button>
+        </div>
+      </div>
+
+      <!-- ── Customer Engagements ── -->
+      <div class="event-group" data-category="internal" data-label="Operations">
+        <div class="event-group-header">
+          <div class="cat-chip chip-internal">🏭 Operations</div>
+          <h3>Customer Engagements &amp; Market Activations</h3>
+        </div>
+        <div class="slider-wrapper" data-speed="40">
+          <div class="slider-track">
+            <div class="gallery-item" onclick="openLightbox('images/events/market-activation-1.jpg','Market Activation Campaign')">
+              <img src="images/events/market-activation-1.jpg" loading="lazy" alt="Market Activation" />
+              <div class="item-caption">Customer Engagement — Market Activation</div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox('images/events/market-activation-2.jpg','Retail Outlet Promotion')">
+              <img src="images/events/market-activation-2.jpg" loading="lazy" alt="Retail Promotion" />
+              <div class="item-caption">Retail Promotion</div>
+            </div>
+          </div>
+        </div>
+        <div class="slider-controls">
+          <div class="slider-dots"></div>
+          <button class="slider-btn" title="Previous" onclick="manualSlide(this,-1)">‹</button>
+          <button class="slider-btn pause-btn" title="Pause / Resume" onclick="togglePause(this)">⏸ Pause</button>
+          <button class="slider-btn" title="Next" onclick="manualSlide(this,1)">›</button>
+        </div>
+      </div>
+
+    </div><!-- /eventsContainer -->
   </section>
 
-  <!-- CTA -->
+  <!-- ══ CTA ══ -->
   <section class="cta">
     <h2 style="font-size:2.8rem; margin-bottom:1rem;">Interested in Partnering With Us?</h2>
     <p style="font-size:1.2rem; max-width:700px; margin:0 auto 2.5rem; color:var(--muted);">Join our growing network of trusted suppliers, distributors, and clients across the globe.</p>
     <div style="display:flex; gap:1.5rem; justify-content:center; flex-wrap:wrap;">
-      <a href="sourcing.html" style="background:var(--ice); color:#081B29; padding:1.1rem 2.8rem; border-radius:50px; font-weight:700; text-decoration:none;">Become a Supplier</a>
+      <a href="suppliers.html" style="background:var(--ice); color:#081B29; padding:1.1rem 2.8rem; border-radius:50px; font-weight:700; text-decoration:none;">Become a Supplier</a>
       <a href="contact.html" style="border:2px solid var(--ice); color:var(--ice); padding:1.1rem 2.8rem; border-radius:50px; font-weight:700; text-decoration:none;">Contact Us</a>
     </div>
   </section>
 
-  <!-- FOOTER -->
+  <!-- ══ FOOTER ══ -->
   <footer>
     <p>&copy; 2026 Abak Company Limited. All Rights Reserved.</p>
     <p style="margin-top:0.8rem;">Trusted Frozen Food Importers &amp; Distributors • Ghana</p>
   </footer>
 
-  <!-- LIGHTBOX -->
+  <!-- ══ LIGHTBOX ══ -->
   <div class="lightbox" id="lightbox">
     <span class="lightbox-close" onclick="closeLightbox()">×</span>
     <div class="lightbox-content" id="lightbox-content"></div>
   </div>
 
+  <!-- ══ SCRIPT ══ -->
   <script>
-    // Mobile Menu
-    const hamburger = document.getElementById('hamburger');
+    /* ─── Mobile Menu ─── */
+    const hamburger  = document.getElementById('hamburger');
     const mobileMenu = document.getElementById('mobileMenu');
-
     hamburger.addEventListener('click', () => {
       mobileMenu.classList.toggle('active');
       hamburger.textContent = mobileMenu.classList.contains('active') ? '✕' : '☰';
     });
-
-    document.querySelectorAll('.mobile-menu a').forEach(link => {
-      link.addEventListener('click', () => {
-        mobileMenu.classList.remove('active');
-        hamburger.textContent = '☰';
-      });
+    document.querySelectorAll('.mobile-menu a').forEach(a => {
+      a.addEventListener('click', () => { mobileMenu.classList.remove('active'); hamburger.textContent = '☰'; });
     });
 
-    // Filter
-    function filterCategory(cat) {
-      document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
-      event.target.classList.add('active');
+    /* ─── INFINITE SLIDER INIT ─── */
+    let styleSheet = document.createElement('style');
+    document.head.appendChild(styleSheet);
 
-      document.querySelectorAll('.event-group').forEach(group => {
-        group.style.display = (cat === 'all' || group.dataset.category === cat) ? 'block' : 'none';
+    let sliderIndex = 0;
+
+    function initSliders() {
+      document.querySelectorAll('.slider-wrapper').forEach(wrapper => {
+        const track  = wrapper.querySelector('.slider-track');
+        const items  = Array.from(track.querySelectorAll('.gallery-item'));
+        const speed  = parseFloat(wrapper.dataset.speed) || 35; // seconds for one full pass
+        const count  = items.length;
+
+        if (count === 0) return;
+
+        /* Clone all items for seamless looping */
+        items.forEach(item => track.appendChild(item.cloneNode(true)));
+
+        /* Create unique keyframe animation for this slider */
+        const uid = 'slide' + (sliderIndex++);
+        const trackWidth = (count * (400 + 25.6)); // item width + gap
+        styleSheet.sheet.insertRule(`
+          @keyframes ${uid} {
+            0%   { transform: translateX(0); }
+            100% { transform: translateX(-${trackWidth}px); }
+          }
+        `, styleSheet.sheet.cssRules.length);
+
+        track.style.animationName     = uid;
+        track.style.animationDuration = speed + 's';
+
+        wrapper._uid   = uid;
+        wrapper._speed = speed;
+        wrapper._count = count;
+        wrapper._trackWidth = trackWidth;
+        wrapper._paused = false;
+        wrapper._offset = 0; /* manual offset in px */
+
+        /* Build dots */
+        const dotsContainer = wrapper.closest('.event-group').querySelector('.slider-dots');
+        if (dotsContainer) {
+          for (let i = 0; i < count; i++) {
+            const d = document.createElement('button');
+            d.className = 'slider-dot' + (i === 0 ? ' active' : '');
+            d.setAttribute('aria-label', `Go to slide ${i+1}`);
+            d.addEventListener('click', () => jumpToSlide(wrapper, i));
+            dotsContainer.appendChild(d);
+          }
+        }
+
+        /* Active dot tracker */
+        let dotInterval = setInterval(() => {
+          if (wrapper._paused) return;
+          const dots = dotsContainer ? dotsContainer.querySelectorAll('.slider-dot') : [];
+          if (!dots.length) return;
+          const elapsed  = (Date.now() - wrapper._startTime) % (speed * 1000);
+          const progress = elapsed / (speed * 1000);
+          const active   = Math.floor(progress * count) % count;
+          dots.forEach((d, i) => d.classList.toggle('active', i === active));
+        }, 300);
+
+        wrapper._startTime    = Date.now();
+        wrapper._dotInterval  = dotInterval;
+
+        /* Drag / swipe to scroll */
+        let isDragging = false, startX = 0, currentOffset = 0;
+        wrapper.addEventListener('mousedown',  e => { isDragging = true; startX = e.clientX; pauseSlider(wrapper); });
+        wrapper.addEventListener('mousemove',  e => {
+          if (!isDragging) return;
+          const delta = e.clientX - startX;
+          currentOffset += delta;
+          startX = e.clientX;
+          track.style.transform = `translateX(${currentOffset % -wrapper._trackWidth}px)`;
+        });
+        wrapper.addEventListener('mouseup',   () => { isDragging = false; resumeSlider(wrapper); });
+        wrapper.addEventListener('mouseleave',() => { if (isDragging) { isDragging = false; resumeSlider(wrapper); } });
+        wrapper.addEventListener('touchstart', e => { startX = e.touches[0].clientX; pauseSlider(wrapper); });
+        wrapper.addEventListener('touchmove',  e => {
+          const delta = e.touches[0].clientX - startX;
+          currentOffset += delta;
+          startX = e.touches[0].clientX;
+          track.style.transform = `translateX(${currentOffset % -wrapper._trackWidth}px)`;
+        });
+        wrapper.addEventListener('touchend',  () => resumeSlider(wrapper));
       });
     }
 
-    // Lightbox
-    function openLightbox(src, caption = '') {
-      const lightbox = document.getElementById('lightbox');
-      const content = document.getElementById('lightbox-content');
-      content.innerHTML = `
-        <img src="${src}" style="width:100%; height:auto; display:block; border-radius:12px;" alt="Event Image" loading="lazy">
-        ${caption ? `<p style="text-align:center; margin-top:1.5rem; color:var(--muted); font-size:1.05rem;">${caption}</p>` : ''}
+    function pauseSlider(wrapper) {
+      const track = wrapper.querySelector('.slider-track');
+      track.style.animationPlayState = 'paused';
+      wrapper._paused = true;
+    }
+    function resumeSlider(wrapper) {
+      const track = wrapper.querySelector('.slider-track');
+      track.style.animationPlayState = 'running';
+      wrapper._paused = false;
+      wrapper._startTime = Date.now();
+    }
+    function jumpToSlide(wrapper, index) {
+      const track = wrapper.querySelector('.slider-track');
+      const itemW = 400 + 25.6;
+      pauseSlider(wrapper);
+      track.style.animation = 'none';
+      track.style.transform = `translateX(${-(index * itemW)}px)`;
+      const dots = wrapper.closest('.event-group').querySelectorAll('.slider-dot');
+      dots.forEach((d, i) => d.classList.toggle('active', i === index));
+      setTimeout(() => {
+        track.style.transform = '';
+        track.style.animation = '';
+        track.style.animationName     = wrapper._uid;
+        track.style.animationDuration = wrapper._speed + 's';
+        track.style.animationTimingFunction = 'linear';
+        track.style.animationIterationCount = 'infinite';
+        resumeSlider(wrapper);
+      }, 400);
+    }
+
+    /* Manual prev/next via buttons */
+    function manualSlide(btn, dir) {
+      const group   = btn.closest('.event-group');
+      const wrapper = group.querySelector('.slider-wrapper');
+      const track   = wrapper.querySelector('.slider-track');
+      const items   = track.querySelectorAll('.gallery-item');
+      const itemW   = 400 + 25.6;
+      const count   = wrapper._count;
+
+      wrapper._manualIdx = ((wrapper._manualIdx || 0) + dir + count) % count;
+      jumpToSlide(wrapper, wrapper._manualIdx);
+    }
+
+    /* Pause / Resume toggle button */
+    function togglePause(btn) {
+      const wrapper = btn.closest('.event-group').querySelector('.slider-wrapper');
+      if (wrapper._paused) {
+        resumeSlider(wrapper);
+        btn.textContent = '⏸ Pause';
+      } else {
+        pauseSlider(wrapper);
+        btn.textContent = '▶ Play';
+      }
+    }
+
+    /* ─── FILTER ─── */
+    function filterCategory(cat, btn) {
+      /* Highlight active button */
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const groups    = document.querySelectorAll('.event-group');
+      const upDiv     = document.querySelector('.epoch-divider.epoch-upcoming');
+      const pastDiv   = document.querySelector('.epoch-divider.epoch-past');
+
+      let hasUpcoming = false, hasPast = false;
+
+      groups.forEach(g => {
+        const match = (cat === 'all' || g.dataset.category === cat);
+        g.style.display = match ? '' : 'none';
+        if (match) {
+          if (g.dataset.category === 'upcoming') hasUpcoming = true;
+          else hasPast = true;
+        }
+      });
+
+      /* Show/hide epoch dividers based on what's visible */
+      upDiv.style.display  = hasUpcoming ? '' : 'none';
+      pastDiv.style.display = hasPast    ? '' : 'none';
+    }
+
+    /* ─── LIGHTBOX ─── */
+    function openLightbox(src, caption) {
+      const lb = document.getElementById('lightbox');
+      document.getElementById('lightbox-content').innerHTML = `
+        <img src="${src}" style="width:100%;height:auto;display:block;border-radius:12px;" alt="Event" loading="lazy" />
+        ${caption ? `<p style="text-align:center;margin-top:1.5rem;color:var(--muted);font-size:1.05rem;">${caption}</p>` : ''}
       `;
-      lightbox.style.display = 'flex';
+      lb.style.display = 'flex';
     }
-
-    function closeLightbox() {
-      document.getElementById('lightbox').style.display = 'none';
-    }
-
+    function closeLightbox() { document.getElementById('lightbox').style.display = 'none'; }
     document.getElementById('lightbox').addEventListener('click', function(e) {
       if (e.target === this) closeLightbox();
     });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+    /* ─── INIT ─── */
+    document.addEventListener('DOMContentLoaded', initSliders);
   </script>
 </body>
 </html>
