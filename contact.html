@@ -608,9 +608,216 @@
       .footer-grid { grid-template-columns: 1fr; }
       .form-panel { padding: 1.75rem 1.25rem; }
     }
+
+    /* ══════════════════════════════════════
+       MOBILE DRAWER — full implementation
+    ══════════════════════════════════════ */
+
+    /* Dim overlay behind drawer */
+    .nav-overlay {
+      display: none;
+      position: fixed; inset: 0; z-index: 490;
+      background: rgba(5, 14, 20, 0.72);
+      backdrop-filter: blur(4px);
+      opacity: 0;
+      transition: opacity 0.35s var(--ease-std);
+    }
+    .nav-overlay.open {
+      display: block;
+      opacity: 1;
+    }
+
+    /* Slide-in drawer panel */
+    .mobile-drawer {
+      position: fixed;
+      top: 0; right: 0;
+      width: min(320px, 88vw);
+      height: 100dvh; /* dynamic viewport height — handles mobile browser chrome */
+      z-index: 500;
+      background: var(--ink);
+      border-left: 1px solid rgba(114,212,247,0.12);
+      display: flex; flex-direction: column;
+      transform: translateX(100%);
+      transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+      overflow-y: auto;
+      overscroll-behavior: contain;
+    }
+    .mobile-drawer.open {
+      transform: translateX(0);
+    }
+
+    /* Drawer header row */
+    .drawer-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.1rem 1.4rem;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      flex-shrink: 0;
+    }
+    .drawer-wordmark {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.3rem; color: var(--white); text-decoration: none;
+    }
+    .drawer-wordmark em { color: var(--ice); font-style: normal; }
+
+    /* Close ✕ button */
+    .drawer-close {
+      width: 36px; height: 36px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; color: var(--white);
+      font-size: 1.1rem; line-height: 1;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .drawer-close:hover {
+      background: rgba(114,212,247,0.12);
+      border-color: rgba(114,212,247,0.3);
+      color: var(--ice);
+    }
+
+    /* Nav links list */
+    .drawer-nav {
+      list-style: none;
+      padding: 1rem 0;
+      flex: 1;
+    }
+    .drawer-nav li a {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.9rem 1.5rem;
+      font-size: 0.97rem; font-weight: 600;
+      color: rgba(255,255,255,0.72);
+      text-decoration: none;
+      border-left: 3px solid transparent;
+      transition: color 0.2s, background 0.2s, border-color 0.2s;
+    }
+    .drawer-nav li a:hover {
+      color: var(--white);
+      background: rgba(255,255,255,0.04);
+      border-left-color: rgba(114,212,247,0.4);
+    }
+    .drawer-nav li a.active {
+      color: var(--ice);
+      background: rgba(114,212,247,0.06);
+      border-left-color: var(--ice);
+    }
+    .drawer-nav li a .arrow {
+      font-size: 0.8rem; opacity: 0.35;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .drawer-nav li a:hover .arrow { opacity: 0.8; transform: translateX(3px); }
+
+    /* Divider inside drawer */
+    .drawer-divider {
+      height: 1px;
+      background: rgba(255,255,255,0.07);
+      margin: 0.5rem 1.5rem;
+    }
+
+    /* Drawer footer — contact pills */
+    .drawer-footer {
+      padding: 1.2rem 1.5rem 1.5rem;
+      border-top: 1px solid rgba(255,255,255,0.07);
+      flex-shrink: 0;
+    }
+    .drawer-footer-label {
+      font-size: 0.62rem; font-weight: 800; letter-spacing: 0.12em;
+      text-transform: uppercase; color: rgba(255,255,255,0.28);
+      margin-bottom: 0.9rem;
+    }
+    .drawer-contact-links {
+      display: flex; flex-direction: column; gap: 0.6rem;
+    }
+    .drawer-contact-link {
+      display: flex; align-items: center; gap: 0.7rem;
+      font-size: 0.86rem; font-weight: 600;
+      color: rgba(255,255,255,0.65); text-decoration: none;
+      padding: 0.6rem 0.85rem;
+      border-radius: 9px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.07);
+      transition: all 0.2s;
+    }
+    .drawer-contact-link:hover {
+      color: var(--white);
+      background: rgba(114,212,247,0.08);
+      border-color: rgba(114,212,247,0.25);
+    }
+    .drawer-contact-link.wa {
+      background: rgba(37,211,102,0.08);
+      border-color: rgba(37,211,102,0.2);
+      color: #4edb89;
+    }
+    .drawer-contact-link.wa:hover {
+      background: rgba(37,211,102,0.16);
+      border-color: rgba(37,211,102,0.4);
+      color: #6deea0;
+    }
+    .drawer-contact-link .dc-icon { font-size: 1.05rem; flex-shrink: 0; }
+
+    /* Hamburger → ✕ morph animation */
+    .hamburger { cursor: pointer; }
+    .hamburger span {
+      transition: transform 0.3s var(--ease-std),
+                  opacity 0.2s,
+                  top 0.3s var(--ease-std);
+      position: relative;
+    }
+    .hamburger.is-open span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+    .hamburger.is-open span:nth-child(2) {
+      opacity: 0;
+      transform: scaleX(0);
+    }
+    .hamburger.is-open span:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
   </style>
 </head>
 <body>
+
+<!-- ══════════ MOBILE NAV OVERLAY ══════════ -->
+<div class="nav-overlay" id="navOverlay" aria-hidden="true"></div>
+
+<!-- ══════════ MOBILE DRAWER ══════════ -->
+<aside class="mobile-drawer" id="mobileDrawer" role="dialog" aria-modal="true" aria-label="Navigation menu">
+
+  <div class="drawer-header">
+    <a href="index.html" class="drawer-wordmark">Abak<em>.</em></a>
+    <button class="drawer-close" id="drawerClose" aria-label="Close navigation">✕</button>
+  </div>
+
+  <ul class="drawer-nav">
+    <li><a href="index.html">Home <span class="arrow">›</span></a></li>
+    <li><a href="about.html">About Us <span class="arrow">›</span></a></li>
+    <li><a href="products.html">Products <span class="arrow">›</span></a></li>
+    <li><a href="services.html">Services <span class="arrow">›</span></a></li>
+    <li><a href="suppliers.html">Suppliers <span class="arrow">›</span></a></li>
+    <li><a href="events.html">Events &amp; Engagements <span class="arrow">›</span></a></li>
+    <li><a href="team.html">Our Team <span class="arrow">›</span></a></li>
+    <li><a href="articles.html">Blog <span class="arrow">›</span></a></li>
+    <li><a href="faq.html">FAQs <span class="arrow">›</span></a></li>
+    <div class="drawer-divider"></div>
+    <li><a href="contact.html" class="active">Contact Us <span class="arrow">›</span></a></li>
+  </ul>
+
+  <div class="drawer-footer">
+    <div class="drawer-footer-label">Reach Us Directly</div>
+    <div class="drawer-contact-links">
+      <a href="tel:+233247298551" class="drawer-contact-link">
+        <span class="dc-icon">📞</span> +233 24 729 8551
+      </a>
+      <a href="tel:+233504967111" class="drawer-contact-link">
+        <span class="dc-icon">📞</span> +233 50 496 7111
+      </a>
+      <a href="https://wa.me/233504967111" class="drawer-contact-link wa" target="_blank" rel="noopener">
+        <span class="dc-icon">💬</span> WhatsApp Us
+      </a>
+    </div>
+  </div>
+
+</aside>
 
 <!-- ══════════ HEADER ══════════ -->
 <header>
@@ -629,6 +836,7 @@
     <a href="services.html">Services</a>
     <a href="suppliers.html">Suppliers</a>
 	<a href="events.html">Events & Engagements</a>
+	<a href="team.html">Our Team</a>
 	<a href="articles.html">Blog</a>
 	<a href="faq.html">FAQs</a>
     <a href="contact.html" class="active nav-cta">Contact Us</a>
@@ -1052,10 +1260,69 @@
   initLogoSlot('mainLogoImg', 'mainLogoSlot');
   initLogoSlot('footerLogoImg', null);
 
-  /* ── Mobile nav stub ── */
-  function toggleMenu() {
-    alert('Mobile navigation: connect your nav drawer here.');
-  }
+  /* ── Mobile Navigation Drawer ── */
+  (function () {
+    const hamburger   = document.querySelector('.hamburger');
+    const drawer      = document.getElementById('mobileDrawer');
+    const overlay     = document.getElementById('navOverlay');
+    const closeBtn    = document.getElementById('drawerClose');
+    let   isOpen      = false;
+
+    function openDrawer() {
+      isOpen = true;
+      drawer.classList.add('open');
+      overlay.classList.add('open');
+      hamburger.classList.add('is-open');
+      hamburger.setAttribute('aria-expanded', 'true');
+      drawer.setAttribute('aria-hidden', 'false');
+      overlay.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden'; /* prevent page scroll behind drawer */
+      /* Move focus into drawer for accessibility */
+      closeBtn.focus();
+    }
+
+    function closeDrawer() {
+      isOpen = false;
+      drawer.classList.remove('open');
+      overlay.classList.remove('open');
+      hamburger.classList.remove('is-open');
+      hamburger.setAttribute('aria-expanded', 'false');
+      drawer.setAttribute('aria-hidden', 'true');
+      overlay.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      hamburger.focus();
+    }
+
+    /* Replace the stub toggleMenu called by the onclick attribute */
+    window.toggleMenu = function () {
+      isOpen ? closeDrawer() : openDrawer();
+    };
+
+    /* Close button inside drawer */
+    closeBtn.addEventListener('click', closeDrawer);
+
+    /* Click on overlay closes drawer */
+    overlay.addEventListener('click', closeDrawer);
+
+    /* Escape key closes drawer */
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && isOpen) closeDrawer();
+    });
+
+    /* Close drawer when a nav link is tapped (SPA-friendly) */
+    drawer.querySelectorAll('a').forEach(function (link) {
+      link.addEventListener('click', function () {
+        /* Small delay so the click registers before drawer closes */
+        setTimeout(closeDrawer, 120);
+      });
+    });
+
+    /* Set initial aria state */
+    hamburger.setAttribute('aria-expanded', 'false');
+    hamburger.setAttribute('aria-controls', 'mobileDrawer');
+    drawer.setAttribute('aria-hidden', 'true');
+    overlay.setAttribute('aria-hidden', 'true');
+  })();
 
   /* ── Scroll-triggered animations ── */
   if ('IntersectionObserver' in window) {
