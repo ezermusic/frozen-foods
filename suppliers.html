@@ -7,6 +7,7 @@
   <meta name="description" content="Learn about Abak Company Limited's global sourcing standards, supplier certifications, cold-chain logistics, and quality assurance processes." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -51,7 +52,7 @@
       text-decoration: none;
     }
     .nav-logo span { color: var(--blue); }
-    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links { display: flex; list-style: none; }
     .nav-links a {
       color: rgba(255,255,255,0.8);
       text-decoration: none;
@@ -62,17 +63,8 @@
     }
     .nav-links a:hover, .nav-links a.active { color: var(--white); }
     .nav-links a.active { border-bottom: 2px solid var(--blue); padding-bottom: 2px; }
-    .nav-cta {
-      background: var(--blue);
-      color: var(--white);
-      padding: 0.5rem 1.3rem;
-      border-radius: 50px;
-      text-decoration: none;
-      font-size: 0.85rem;
-      font-weight: 600;
-      transition: background 0.2s, transform 0.2s;
-    }
-    .nav-cta:hover { background: #2178ab; transform: translateY(-1px); }
+    
+    
     .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
     .hamburger span { width: 24px; height: 2px; background: var(--white); border-radius: 2px; transition: 0.3s; }
 
@@ -561,26 +553,48 @@
 </head>
 <body>
 
-  <!-- NAV -->
-  <nav>
-    <a class="nav-logo" href="index.html">Abak<span>.</span></a>
-    <ul class="nav-links" id="navLinks">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="products.html">Products</a></li>
-      <li><a href="services.html">Services</a></li>
-	  <!-- <a href="shop.html">Shop</a> -->
-      <li><a href="#" class="active">Suppliers</a></li>
-	  <li><a href="events.html">Events & Engagements</a></li>
-	  <a href="articles.html">Blog</a>
-	  <a href="faq.html">FAQs</a>
-      <li><a href="contact.html">Contact</a></li>
-    </ul>
-    <a class="nav-cta" href="tel:+233 24 729 8551">Order Now</a>
-    <div class="hamburger" id="hamburger">
-      <span></span><span></span><span></span>
+  <!-- ══════════════ NAVBAR ══════════════ -->
+  <nav class="navbar" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="index.html" class="logo">
+        <span class="logo-icon"><img src="images/abak-logo-7.png" alt="Abak Logo"></span>
+        
+      </a>
+      <ul class="nav-links" role="list">
+        <li><a href="index.html" >Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="products.html">Products</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="suppliers.html" class="active">Suppliers</a></li>
+		<li><a href="events.html">Events & Engagements</a></li>
+		<li><a href="team.html">Our Team</a></li>
+        <li><a href="articles.html">Blog</a></li>
+		<li><a href="faq.html">FAQs</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="nav-cta">
+        <a href="#" class="btn btn-whatsapp">📱 Order Now</a>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Toggle mobile menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </nav>
+
+  <!-- Mobile Nav -->
+  <div class="mobile-nav" id="mobileNav" role="navigation">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="products.html">Products</a>
+    <a href="services.html">Services</a>
+    <a href="suppliers.html">Suppliers</a>
+	<a href="events.html">Events & Engagements</a>
+	<a href="team.html">Our Team</a>
+    <a href="articles.html">Blog</a>
+	<a href="faq.html">FAQs</a>
+    <a href="contact.html">Contact</a>
+    <a href="https://wa.me/233247298551" class="btn btn-whatsapp">📱 Order via WhatsApp</a>
+  </div>
 
   <!-- PAGE HERO -->
   <header class="page-hero">

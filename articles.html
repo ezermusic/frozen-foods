@@ -6,6 +6,7 @@
   <title>Blog & Insights | Abak Company Limited – Frozen Foods Ghana</title>
   <meta name="description" content="Expert tips, industry insights, recipes, and news from Abak Company Limited – Ghana's leading frozen foods and cold storage provider." />
   <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,700;0,6..96,900;1,6..96,400;1,6..96,700&family=Karla:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
   <style>
 
     /* ════════════════════════════════════════
@@ -872,45 +873,27 @@
 <body>
 
   <!-- ══════════════════ NAVBAR ══════════════════ -->
+  
   <nav class="navbar" aria-label="Main navigation">
     <div class="nav-inner">
-
-      <a href="index.html" class="logo" aria-label="Abak Company Limited – Home">
-        <!--
-          ═══════════════════════════════════════════════════
-          NAVBAR LOGO IMAGE PLACEHOLDER
-          ───────────────────────────────────────────────────
-          To insert your logo, REPLACE the div below with:
-
-          <img
-            src="images/abak-logo.png"
-            alt="Abak Company Limited"
-            class="logo-img"
-            height="42"
-          />
-
-          • Size   : 42px height (square or horizontal)
-          • Format : PNG (transparent bg) or SVG
-          • Colour : White/light version for dark navbar
-          ═══════════════════════════════════════════════════
-        -->
-        <div class="logo-img-wrap" title="Insert company logo here" aria-hidden="true"></div>
-        <span>Abak</span>
+      <a href="index.html" class="logo">
+        <span class="logo-icon"><img src="images/abak-logo-7.png" alt="Abak Logo"></span>
+        
       </a>
-
-      <div class="nav-links">
-        <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="products.html">Products</a>
-        <a href="services.html">Services</a>
-		<a href="suppliers.html">Suppliers</a>
-        <a href="events.html">Events & Engagements</a>
-		<a href="articles.html" class="active">Blogs</a>
-        <a href="faq.html">FAQs</a>
-        <a href="contact.html">Contact</a>
-      </div>
-      <div class="nav-right">
-        <a href="https://wa.me/233247298551" class="btn btn-wa" target="_blank" rel="noopener">📱 Order Now</a>
+      <ul class="nav-links" role="list">
+        <li><a href="index.html" >Home</a></li>
+        <li><a href="about.html" >About</a></li>
+        <li><a href="products.html">Products</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="suppliers.html">Suppliers</a></li>
+		<li><a href="events.html">Events & Engagements</a></li>
+		<li><a href="team.html">Our Team</a></li>
+    <li><a href="articles.html" class="active">Blog</a></li>
+		<a href="faq.html">FAQs</a>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="nav-cta">
+        <a href="#" class="btn btn-whatsapp">📱 Order Now</a>
       </div>
       <button class="hamburger" id="hamburger" aria-label="Toggle mobile menu" aria-expanded="false">
         <span></span><span></span><span></span>
@@ -919,17 +902,18 @@
   </nav>
 
   <!-- Mobile Nav -->
-  <div class="mobile-nav" id="mobileNav" role="navigation" aria-label="Mobile navigation">
+  <div class="mobile-nav" id="mobileNav" role="navigation">
     <a href="index.html">Home</a>
     <a href="about.html">About</a>
     <a href="products.html">Products</a>
     <a href="services.html">Services</a>
-	<a href="suppliers.html">Suppliers</a>
+    <a href="suppliers.html">Suppliers</a>
 	<a href="events.html">Events & Engagements</a>
-	<a href="articles.html" class="active">Blogs</a>
-    <a href="faq.html">FAQ</a>
+	<a href="team.html">Our Team</a>
+    <a href="articles.html">Blog</a>
+	<a href="faq.html">FAQs</a>
     <a href="contact.html">Contact</a>
-    <a href="https://wa.me/233247298551" class="btn btn-wa" target="_blank" rel="noopener">💬 Order via WhatsApp</a>
+    <a href="https://wa.me/233247298551" class="btn btn-whatsapp">📱 Order via WhatsApp</a>
   </div>
 
   <!-- ══════════════════ PAGE HERO / MASTHEAD ══════════════════ -->
