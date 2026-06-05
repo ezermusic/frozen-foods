@@ -56,7 +56,7 @@
       color: var(--white); text-decoration: none; letter-spacing: -0.5px;
     }
     .logo sup { color: var(--blue-light); font-size: 0.7em; vertical-align: super; }
-    nav { display: flex; gap: 0.25rem; align-items: center; }
+    /* nav { display: flex; gap: 0.25rem; align-items: center; } */
     nav a {
       color: rgba(255,255,255,0.65); font-size: 0.88rem; font-weight: 500;
       text-decoration: none; padding: 0.4rem 0.85rem; border-radius: 6px;
@@ -67,9 +67,9 @@
     nav a.active { color: var(--blue-light); font-weight: 600; }
     
     
-    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
-    .hamburger span { display: block; width: 24px; height: 2px; background: var(--white); border-radius: 2px; }
-
+    /* .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: var(--white); border-radius: 2px; } */
+    
     /* ══════════════════════════════
        PAGE HERO
     ══════════════════════════════ */
@@ -476,8 +476,8 @@
       .services-row2 { grid-template-columns: 1fr 1fr; }
       .steps-track { grid-template-columns: 1fr 1fr; gap: 2rem; }
       .steps-track::before { display: none; }
-      nav { display: none; }
-      .hamburger { display: flex; }
+      /* nav { display: none; }
+      .hamburger { display: flex; } */
       .footer-grid { grid-template-columns: 1fr 1fr; }
       .footer-brand { grid-column: 1 / -1; }
     }
@@ -675,7 +675,7 @@
         <li><a href="contact.html">Contact</a></li>
       </ul>
       <div class="nav-cta">
-        <a href="#" class="btn btn-whatsapp">📱 Order Now</a>
+        <a href="https://wa.me/233247298551" class="btn btn-whatsapp">📱 Order Now</a>
       </div>
       <button class="hamburger" id="hamburger" aria-label="Toggle mobile menu" aria-expanded="false">
         <span></span><span></span><span></span>
@@ -698,25 +698,8 @@
     <a href="https://wa.me/233247298551" class="btn btn-whatsapp">📱 Order via WhatsApp</a>
   </div>
 
-<!-- ══════════ HEADER ══════════ -->
-<header>
-  <a href="index.html" class="logo">Abak<sup>.</sup></a>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="products.html">Products</a> 
-    <a href="services.html" class="active">Services</a>
-	<!-- <a href="shop.html">Shop</a> -->
-    <a href="suppliers.html">Suppliers</a>
-	<a href="events.html">Events & Engagements</a>
-	<a href="articles.html">Blog</a>
-	<a href="faq.html">FAQs</a>
-    <a href="contact.html" class="nav-cta">Contact Us</a>
-  </nav>
-  <div class="hamburger" onclick="toggleMenu()" aria-label="Toggle navigation">
-    <span></span><span></span><span></span>
-  </div>
-</header>
+
+
 
 
 <!-- ══════════ HERO ══════════ -->
@@ -998,67 +981,13 @@
     window.open(`https://wa.me/${phone}?text=${msg}`, '_blank');
   }
 
-  /* ── Mobile Navigation Drawer ── */
-  (function () {
-    const hamburger  = document.querySelector('.hamburger');
-    const drawer     = document.getElementById('mobileDrawer');
-    const overlay    = document.getElementById('navOverlay');
-    const closeBtn   = document.getElementById('drawerClose');
-    let   isOpen     = false;
-
-    function openDrawer() {
-      isOpen = true;
-      drawer.classList.add('open');
-      overlay.classList.add('open');
-      hamburger.classList.add('is-open');
-      hamburger.setAttribute('aria-expanded', 'true');
-      drawer.setAttribute('aria-hidden', 'false');
-      overlay.setAttribute('aria-hidden', 'false');
-      document.body.style.overflow = 'hidden';
-      closeBtn.focus();
-    }
-
-    function closeDrawer() {
-      isOpen = false;
-      drawer.classList.remove('open');
-      overlay.classList.remove('open');
-      hamburger.classList.remove('is-open');
-      hamburger.setAttribute('aria-expanded', 'false');
-      drawer.setAttribute('aria-hidden', 'true');
-      overlay.setAttribute('aria-hidden', 'true');
-      document.body.style.overflow = '';
-      hamburger.focus();
-    }
-
-    /* Replaces the stub called by the hamburger onclick */
-    window.toggleMenu = function () {
-      isOpen ? closeDrawer() : openDrawer();
-    };
-
-    /* ✕ button inside drawer */
-    closeBtn.addEventListener('click', closeDrawer);
-
-    /* Tapping the dim overlay closes drawer */
-    overlay.addEventListener('click', closeDrawer);
-
-    /* Escape key closes drawer */
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && isOpen) closeDrawer();
+   /* — Hamburger menu — */
+    const hamburger = document.getElementById('hamburger');
+    const mobileNav = document.getElementById('mobileNav');
+    hamburger.addEventListener('click', () => {
+      const open = mobileNav.classList.toggle('open');
+      hamburger.setAttribute('aria-expanded', open);
     });
-
-    /* Tapping any nav link closes drawer after brief delay */
-    drawer.querySelectorAll('a').forEach(function (link) {
-      link.addEventListener('click', function () {
-        setTimeout(closeDrawer, 120);
-      });
-    });
-
-    /* Initial ARIA state */
-    hamburger.setAttribute('aria-expanded', 'false');
-    hamburger.setAttribute('aria-controls', 'mobileDrawer');
-    drawer.setAttribute('aria-hidden', 'true');
-    overlay.setAttribute('aria-hidden', 'true');
-  })();
 
   // Scroll-triggered reveal for cards
   if ('IntersectionObserver' in window) {

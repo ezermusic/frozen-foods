@@ -59,10 +59,10 @@
       font-weight: 500; transition: color 0.3s;
     } */
     .nav-links a:hover, .nav-links a.active { color: var(--ice); }
-    .hamburger {
+    /* .hamburger {
       display: none; font-size: 1.8rem;
       cursor: pointer; color: var(--ice);
-    }
+    } */
 
     /* Mobile Menu */
     .mobile-menu {
@@ -336,7 +336,7 @@
     /* ─── RESPONSIVE ─── */
     @media (max-width: 992px) {
       .nav-links { display: none; }
-      .hamburger { display: block; }
+      /* .hamburger { display: block; } */
       .gallery-item { flex: 0 0 300px; }
       .gallery-item img { height: 190px; }
     }
@@ -370,7 +370,7 @@
         <li><a href="contact.html">Contact</a></li>
       </ul>
       <div class="nav-cta">
-        <a href="#" class="btn btn-whatsapp">📱 Order Now</a>
+        <a href="https://wa.me/233247298551" class="btn btn-whatsapp">📱 Order Now</a>
       </div>
       <button class="hamburger" id="hamburger" aria-label="Toggle mobile menu" aria-expanded="false">
         <span></span><span></span><span></span>
@@ -806,15 +806,12 @@
 
   <!-- ══ SCRIPT ══ -->
   <script>
-    /* ─── Mobile Menu ─── */
-    const hamburger  = document.getElementById('hamburger');
-    const mobileMenu = document.getElementById('mobileMenu');
+    /* — Hamburger menu — */
+    const hamburger = document.getElementById('hamburger');
+    const mobileNav = document.getElementById('mobileNav');
     hamburger.addEventListener('click', () => {
-      mobileMenu.classList.toggle('active');
-      hamburger.textContent = mobileMenu.classList.contains('active') ? '✕' : '☰';
-    });
-    document.querySelectorAll('.mobile-menu a').forEach(a => {
-      a.addEventListener('click', () => { mobileMenu.classList.remove('active'); hamburger.textContent = '☰'; });
+      const open = mobileNav.classList.toggle('open');
+      hamburger.setAttribute('aria-expanded', open);
     });
 
     /* ─── INFINITE SLIDER INIT ─── */

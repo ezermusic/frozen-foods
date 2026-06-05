@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
+
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -55,11 +56,11 @@
 	
     .logo span { color: #64c8f5; }
 
-    nav { display: flex; gap: 2rem; align-items: center; }
+    /* nav { display: flex; gap: 2rem; align-items: center; }
     nav a {
       color: rgba(255,255,255,0.75); font-size: 0.9rem; font-weight: 500;
       text-decoration: none; transition: color var(--transition);
-    }
+    } */
 	
 	.nav-links a.active { border-bottom: 2px solid var(--blue); padding-bottom: 2px; }
 	
@@ -75,8 +76,8 @@
     .nav-cta:hover { background: #1e7aaa !important; transform: translateY(-1px); } */
 
     /* Hamburger */
-    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
-    .hamburger span { display: block; width: 24px; height: 2px; background: var(--white); border-radius: 2px; transition: var(--transition); }
+    /* .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: var(--white); border-radius: 2px; transition: var(--transition); } */
 
     /* ── HERO BANNER ── */
     .page-hero {
@@ -442,7 +443,7 @@
     .footer-links a:hover { color: rgba(255,255,255,0.8); }
 
     /* ── RESPONSIVE ── */
-    @media (max-width: 768px) {
+    /* @media (max-width: 768px) {
       nav { display: none; }
       .hamburger { display: flex; }
       .page-hero { padding: 3rem 5vw 2.5rem; }
@@ -458,7 +459,7 @@
       .trust-strip { grid-template-columns: 1fr 1fr; }
       .footer-grid { grid-template-columns: 1fr; }
       .bulk-cta { flex-direction: column; }
-    }
+    } */
     /* ── BULK BANNER IMAGE ── */
     .bulk-banner {
       /* override: three-column layout when image is present */
@@ -668,7 +669,7 @@
         <li><a href="contact.html">Contact</a></li>
       </ul>
       <div class="nav-cta">
-        <a href="#" class="btn btn-whatsapp">📱 Order Now</a>
+        <a href="https://wa.me/233247298551" class="btn btn-whatsapp">📱 Order Now</a>
       </div>
       <button class="hamburger" id="hamburger" aria-label="Toggle mobile menu" aria-expanded="false">
         <span></span><span></span><span></span>
@@ -1429,66 +1430,74 @@
 
   // ── Hamburger (stub) ──
   // ── Mobile Navigation Drawer ──
-  (function () {
-    const hamburger = document.querySelector('.hamburger');
-    const drawer    = document.getElementById('mobileDrawer');
-    const overlay   = document.getElementById('navOverlay');
-    const closeBtn  = document.getElementById('drawerClose');
-    let   isOpen    = false;
+  // (function () {
+  //   const hamburger = document.querySelector('.hamburger');
+  //   const drawer    = document.getElementById('mobileDrawer');
+  //   const overlay   = document.getElementById('navOverlay');
+  //   const closeBtn  = document.getElementById('drawerClose');
+  //   let   isOpen    = false;
 
-    function openDrawer() {
-      isOpen = true;
-      drawer.classList.add('open');
-      overlay.classList.add('open');
-      hamburger.classList.add('is-open');
-      hamburger.setAttribute('aria-expanded', 'true');
-      drawer.setAttribute('aria-hidden', 'false');
-      overlay.setAttribute('aria-hidden', 'false');
-      document.body.style.overflow = 'hidden';
-      closeBtn.focus();
-    }
+  //   function openDrawer() {
+  //     isOpen = true;
+  //     drawer.classList.add('open');
+  //     overlay.classList.add('open');
+  //     hamburger.classList.add('is-open');
+  //     hamburger.setAttribute('aria-expanded', 'true');
+  //     drawer.setAttribute('aria-hidden', 'false');
+  //     overlay.setAttribute('aria-hidden', 'false');
+  //     document.body.style.overflow = 'hidden';
+  //     closeBtn.focus();
+  //   }
 
-    function closeDrawer() {
-      isOpen = false;
-      drawer.classList.remove('open');
-      overlay.classList.remove('open');
-      hamburger.classList.remove('is-open');
-      hamburger.setAttribute('aria-expanded', 'false');
-      drawer.setAttribute('aria-hidden', 'true');
-      overlay.setAttribute('aria-hidden', 'true');
-      document.body.style.overflow = '';
-      hamburger.focus();
-    }
+  //   function closeDrawer() {
+  //     isOpen = false;
+  //     drawer.classList.remove('open');
+  //     overlay.classList.remove('open');
+  //     hamburger.classList.remove('is-open');
+  //     hamburger.setAttribute('aria-expanded', 'false');
+  //     drawer.setAttribute('aria-hidden', 'true');
+  //     overlay.setAttribute('aria-hidden', 'true');
+  //     document.body.style.overflow = '';
+  //     hamburger.focus();
+  //   }
 
-    /* Called by the existing onclick="toggleMenu()" on the hamburger */
-    window.toggleMenu = function () {
-      isOpen ? closeDrawer() : openDrawer();
-    };
+  //   /* Called by the existing onclick="toggleMenu()" on the hamburger */
+  //   window.toggleMenu = function () {
+  //     isOpen ? closeDrawer() : openDrawer();
+  //   };
 
-    /* ✕ close button inside drawer */
-    closeBtn.addEventListener('click', closeDrawer);
+  //   /* ✕ close button inside drawer */
+  //   closeBtn.addEventListener('click', closeDrawer);
 
-    /* Clicking the dim overlay closes the drawer */
-    overlay.addEventListener('click', closeDrawer);
+  //   /* Clicking the dim overlay closes the drawer */
+  //   overlay.addEventListener('click', closeDrawer);
 
-    /* Escape key closes drawer */
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && isOpen) closeDrawer();
+  //   /* Escape key closes drawer */
+  //   document.addEventListener('keydown', function (e) {
+  //     if (e.key === 'Escape' && isOpen) closeDrawer();
+  //   });
+
+  //   /* Tapping any nav link closes drawer after a short delay */
+  //   drawer.querySelectorAll('a').forEach(function (link) {
+  //     link.addEventListener('click', function () {
+  //       setTimeout(closeDrawer, 120);
+  //     });
+  //   });
+
+  //   /* Set initial ARIA attributes */
+  //   hamburger.setAttribute('aria-expanded', 'false');
+  //   hamburger.setAttribute('aria-controls', 'mobileDrawer');
+  //   drawer.setAttribute('aria-hidden', 'true');
+  //   overlay.setAttribute('aria-hidden', 'true');
+  // })();
+  
+   /* — Hamburger menu — */
+    const hamburger = document.getElementById('hamburger');
+    const mobileNav = document.getElementById('mobileNav');
+    hamburger.addEventListener('click', () => {
+      const open = mobileNav.classList.toggle('open');
+      hamburger.setAttribute('aria-expanded', open);
     });
-
-    /* Tapping any nav link closes drawer after a short delay */
-    drawer.querySelectorAll('a').forEach(function (link) {
-      link.addEventListener('click', function () {
-        setTimeout(closeDrawer, 120);
-      });
-    });
-
-    /* Set initial ARIA attributes */
-    hamburger.setAttribute('aria-expanded', 'false');
-    hamburger.setAttribute('aria-controls', 'mobileDrawer');
-    drawer.setAttribute('aria-hidden', 'true');
-    overlay.setAttribute('aria-hidden', 'true');
-  })();
 
   // ── Infinite Slider: clone each track for seamless loop ──
   (function initSliders() {

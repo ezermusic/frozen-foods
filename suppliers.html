@@ -38,7 +38,7 @@
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       background: rgba(11,60,93,0.96);
       backdrop-filter: blur(10px);
-      display: flex; align-items: center; justify-content: space-between;
+      
       padding: 0 5%;
       height: 68px;
       border-bottom: 1px solid rgba(255,255,255,0.08);
@@ -65,8 +65,8 @@
     .nav-links a.active { border-bottom: 2px solid var(--blue); padding-bottom: 2px; }
     
     
-    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
-    .hamburger span { width: 24px; height: 2px; background: var(--white); border-radius: 2px; transition: 0.3s; }
+    /* .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+    .hamburger span { width: 24px; height: 2px; background: var(--white); border-radius: 2px; transition: 0.3s; } */
 
     /* ── PAGE HERO ── */
     .page-hero {
@@ -573,7 +573,7 @@
         <li><a href="contact.html">Contact</a></li>
       </ul>
       <div class="nav-cta">
-        <a href="#" class="btn btn-whatsapp">📱 Order Now</a>
+        <a href="https://wa.me/233247298551" class="btn btn-whatsapp">📱 Order Now</a>
       </div>
       <button class="hamburger" id="hamburger" aria-label="Toggle mobile menu" aria-expanded="false">
         <span></span><span></span><span></span>
@@ -1209,6 +1209,8 @@
 </head>
 <body>
 
+
+
 <section class="suppliers-section" id="our-suppliers">
   <div class="suppliers-inner">
 
@@ -1693,11 +1695,12 @@
   <a class="float-wa" href="https://wa.me/247298551" target="_blank" title="Chat on WhatsApp">💬</a>
 
   <script>
-    // Mobile nav toggle
+     /* — Hamburger menu — */
     const hamburger = document.getElementById('hamburger');
-    const navLinks = document.getElementById('navLinks');
+    const mobileNav = document.getElementById('mobileNav');
     hamburger.addEventListener('click', () => {
-      navLinks.classList.toggle('open');
+      const open = mobileNav.classList.toggle('open');
+      hamburger.setAttribute('aria-expanded', open);
     });
 
     // Scroll reveal

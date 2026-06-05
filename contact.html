@@ -80,7 +80,7 @@
     }
     .logo-wordmark em { color: var(--ice); font-style: normal; }
 
-    nav { display: flex; gap: 0.1rem; align-items: center; }
+    
     nav a {
       font-size: 0.85rem; font-weight: 600; color: rgba(255,255,255,0.55);
       text-decoration: none; padding: 0.45rem 0.9rem; border-radius: 6px;
@@ -590,7 +590,7 @@
     @media (max-width: 860px) {
       .info-bar-inner { grid-template-columns: 1fr 1fr; }
       .channels-grid { grid-template-columns: 1fr 1fr; }
-      nav { display: none; }
+      /* nav { display: none; } */
       .hamburger { display: flex; }
       .footer-grid { grid-template-columns: 1fr 1fr; }
       .footer-brand { grid-column: 1 / -1; }
@@ -793,7 +793,7 @@
         <li><a href="contact.html" class="active">Contact</a></li>
       </ul>
       <div class="nav-cta">
-        <a href="#" class="btn btn-whatsapp">📱 Order Now</a>
+        <a href="https://wa.me/233247298551" class="btn btn-whatsapp">📱 Order Now</a>
       </div>
       <button class="hamburger" id="hamburger" aria-label="Toggle mobile menu" aria-expanded="false">
         <span></span><span></span><span></span>
@@ -1229,69 +1229,13 @@
   initLogoSlot('mainLogoImg', 'mainLogoSlot');
   initLogoSlot('footerLogoImg', null);
 
-  /* ── Mobile Navigation Drawer ── */
-  (function () {
-    const hamburger   = document.querySelector('.hamburger');
-    const drawer      = document.getElementById('mobileDrawer');
-    const overlay     = document.getElementById('navOverlay');
-    const closeBtn    = document.getElementById('drawerClose');
-    let   isOpen      = false;
-
-    function openDrawer() {
-      isOpen = true;
-      drawer.classList.add('open');
-      overlay.classList.add('open');
-      hamburger.classList.add('is-open');
-      hamburger.setAttribute('aria-expanded', 'true');
-      drawer.setAttribute('aria-hidden', 'false');
-      overlay.setAttribute('aria-hidden', 'false');
-      document.body.style.overflow = 'hidden'; /* prevent page scroll behind drawer */
-      /* Move focus into drawer for accessibility */
-      closeBtn.focus();
-    }
-
-    function closeDrawer() {
-      isOpen = false;
-      drawer.classList.remove('open');
-      overlay.classList.remove('open');
-      hamburger.classList.remove('is-open');
-      hamburger.setAttribute('aria-expanded', 'false');
-      drawer.setAttribute('aria-hidden', 'true');
-      overlay.setAttribute('aria-hidden', 'true');
-      document.body.style.overflow = '';
-      hamburger.focus();
-    }
-
-    /* Replace the stub toggleMenu called by the onclick attribute */
-    window.toggleMenu = function () {
-      isOpen ? closeDrawer() : openDrawer();
-    };
-
-    /* Close button inside drawer */
-    closeBtn.addEventListener('click', closeDrawer);
-
-    /* Click on overlay closes drawer */
-    overlay.addEventListener('click', closeDrawer);
-
-    /* Escape key closes drawer */
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && isOpen) closeDrawer();
+   /* — Hamburger menu — */
+    const hamburger = document.getElementById('hamburger');
+    const mobileNav = document.getElementById('mobileNav');
+    hamburger.addEventListener('click', () => {
+      const open = mobileNav.classList.toggle('open');
+      hamburger.setAttribute('aria-expanded', open);
     });
-
-    /* Close drawer when a nav link is tapped (SPA-friendly) */
-    drawer.querySelectorAll('a').forEach(function (link) {
-      link.addEventListener('click', function () {
-        /* Small delay so the click registers before drawer closes */
-        setTimeout(closeDrawer, 120);
-      });
-    });
-
-    /* Set initial aria state */
-    hamburger.setAttribute('aria-expanded', 'false');
-    hamburger.setAttribute('aria-controls', 'mobileDrawer');
-    drawer.setAttribute('aria-hidden', 'true');
-    overlay.setAttribute('aria-hidden', 'true');
-  })();
 
   /* ── Scroll-triggered animations ── */
   if ('IntersectionObserver' in window) {

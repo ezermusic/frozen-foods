@@ -50,7 +50,6 @@
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 200;
       height: 72px;
-      display: flex; align-items: center; justify-content: space-between;
       padding: 0 5%;
       background: rgba(7,31,48,0.97);
       backdrop-filter: blur(16px);
@@ -854,7 +853,7 @@
         <li><a href="contact.html">Contact</a></li>
       </ul>
       <div class="nav-cta">
-        <a href="#" class="btn btn-whatsapp">📱 Order Now</a>
+        <a href="https://wa.me/233247298551" class="btn btn-whatsapp">📱 Order Now</a>
       </div>
       <button class="hamburger" id="hamburger" aria-label="Toggle mobile menu" aria-expanded="false">
         <span></span><span></span><span></span>
@@ -1678,10 +1677,13 @@
   <a class="float-wa" href="https://wa.me/233247298551" target="_blank" title="Chat on WhatsApp">💬</a>
 
   <script>
-    /* ─── MOBILE NAV ─── */
+     /* — Hamburger menu — */
     const hamburger = document.getElementById('hamburger');
-    const navLinks  = document.getElementById('navLinks');
-    hamburger.addEventListener('click', () => navLinks.classList.toggle('open'));
+    const mobileNav = document.getElementById('mobileNav');
+    hamburger.addEventListener('click', () => {
+      const open = mobileNav.classList.toggle('open');
+      hamburger.setAttribute('aria-expanded', open);
+    });
 
     /* ─── ACCORDION ─── */
     document.querySelectorAll('.acc-trigger').forEach(btn => {
