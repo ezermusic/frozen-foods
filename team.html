@@ -99,7 +99,7 @@
       font-size: 1.85rem; font-weight: 700;
       color: var(--ice); text-decoration: none;
     }
-    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    
     .nav-links a {
       color: var(--text); text-decoration: none;
       font-weight: 500; font-size: 0.92rem;
@@ -112,7 +112,7 @@
       transform: scaleX(0); transform-origin: right;
       transition: transform 0.3s;
     }
-    .nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); transform-origin: left; }
+    .nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(); transform-origin: left; }
     .nav-links a:hover, .nav-links a.active { color: var(--ice); }
     .hamburger {
       display: none; font-size: 1.8rem; cursor: pointer;
@@ -240,7 +240,7 @@
     ════════════════════════════════════════════ */
     .team-card { perspective: 1200px; height: 480px; cursor: pointer; position: relative; }
     .card-inner {
-      position: relative; width: 100%; height: 100%;
+      position: relative; width: 105%; height: 100%;
       transform-style: preserve-3d;
       transition: transform 0.75s cubic-bezier(0.23,1,0.32,1);
     }
@@ -572,12 +572,12 @@
       </a>
       <ul class="nav-links">
         <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About Us</a></li>
+        <li><a href="about.html">About</a></li>
         <li><a href="products.html">Products</a></li>
         <li><a href="services.html">Services</a></li>
         <li><a href="suppliers.html">Suppliers</a></li>
         <li><a href="events.html">Events &amp; Engagements</a></li>
-        <li><a href="team.html" class="active">Our Team</a></li>
+        <li><a href="team.html" class="active">Team</a></li>
         <li><a href="articles.html">Blog</a></li>
         <li><a href="faq.html">FAQs</a></li>
         <li><a href="contact.html">Contact</a></li>
@@ -594,12 +594,12 @@
     <button class="mobile-close" id="mobileClose" aria-label="Close menu">✕</button>
     <ul>
       <li><a href="index.html">Home</a></li>
-      <li><a href="about.html">About Us</a></li>
+      <li><a href="about.html">About</a></li>
       <li><a href="products.html">Products</a></li>
       <li><a href="services.html">Services</a></li>
       <li><a href="suppliers.html">Suppliers</a></li>
       <li><a href="events.html">Events &amp; Engagements</a></li>
-      <li><a href="team.html">Our Team</a></li>
+      <li><a href="team.html">Team</a></li>
       <li><a href="articles.html">Blog</a></li>
       <li><a href="faq.html">FAQs</a></li>
       <li><a href="contact.html">Contact Us</a></li>
@@ -626,7 +626,7 @@
         <div class="hero-stat"><div class="stat-number">16</div><div class="stat-label">Team Members</div></div>
         <div class="hero-stat"><div class="stat-number">2</div><div class="stat-label">Founders</div></div>
         <div class="hero-stat"><div class="stat-number">4</div><div class="stat-label">Senior Managers</div></div>
-        <div class="hero-stat"><div class="stat-number">14+</div><div class="stat-label">Countries Sourced</div></div>
+        <div class="hero-stat"><div class="stat-number">1</div><div class="stat-label">Vision</div></div>
       </div>
     </div>
     <div class="hero-scroll" onclick="document.getElementById('founders').scrollIntoView({behavior:'smooth'})">
@@ -801,7 +801,7 @@
           <span class="sl-text sl-text-ice">Tier 2 · Senior Management</span>
         </div>
         <h2 class="section-title" style="color:var(--white);">Steering the<br/><em style="font-style:italic;color:var(--ice);">Core Functions</em></h2>
-        <p class="section-desc">Our senior managers lead Abak's core operational departments — each an expert in their field, ensuring the business runs with precision, accountability, and excellence.</p>
+        <p class="section-desc">Our senior managers lead Abak's core operational departments — each an expert in their field, ensuring the business runs with precision, accountability and excellence.</p>
       </div>
 
       <div class="exec-grid">
@@ -830,7 +830,7 @@
               <div class="back-name">Eunice Twum Barimah</div>
               <div class="back-role back-role-ice">Import Manager</div>
               <div class="back-divider back-divider-ice"></div>
-              <p class="back-bio">Eunice manages Abak's entire import operations — overseeing supplier negotiations, shipping documentation, customs clearance, and regulatory compliance. Her meticulous management of the import pipeline ensures that products arrive on schedule and in full compliance with Ghana FDA standards.</p>
+              <p class="back-bio">Eunice oversees import operations, supplier coordination, shipping documentation, customs clearance, and regulatory compliance, ensuring products arrive on time and meet Ghana FDA requirements.</p>
               <div class="back-dept-tag tag-exec">🌍 Import &amp; Procurement</div>
               <div class="back-contact">
                 <a href="mailto:imports@abakcompany.com" class="contact-pill pill-email">✉ Email</a>
@@ -863,7 +863,7 @@
               <div class="back-name">Nathaniel Affum Kwakwa</div>
               <div class="back-role back-role-ice">Operations Manager</div>
               <div class="back-divider back-divider-ice"></div>
-              <p class="back-bio">Nathaniel oversees day-to-day operational efficiency across Abak's facilities — warehouse management, cold storage operations, inventory control, and process optimisation. His leadership ensures that every part of the business functions at its highest capacity without disruption.</p>
+              <p class="back-bio">Nathaniel leads warehouse, cold storage, inventory, and operational processes, ensuring efficiency, continuity and high performance across the business.</p>
               <div class="back-dept-tag tag-exec">⚙ Operations</div>
               <div class="back-contact">
                 <a href="mailto:operations@abakcompany.com" class="contact-pill pill-email">✉ Email</a>
@@ -896,7 +896,7 @@
               <div class="back-name">Isaac Nzebah</div>
               <div class="back-role back-role-ice">Sales Manager</div>
               <div class="back-divider back-divider-ice"></div>
-              <p class="back-bio">Isaac leads Abak's commercial sales operations — managing key accounts, driving wholesale and retail revenue growth, and building strategic client relationships across hotels, restaurants, caterers, and distributors throughout Ghana. His sales strategy is central to Abak's continued market expansion.</p>
+              <p class="back-bio">Isaac leads sales operations, manages key accounts, drives revenue growth, and builds strategic relationships that support Abak’s market expansion.</p>
               <div class="back-dept-tag tag-exec">📈 Sales</div>
               <div class="back-contact">
                 <a href="mailto:sales@abakcompany.com" class="contact-pill pill-email">✉ Email</a>
@@ -929,7 +929,7 @@
               <div class="back-name">Isaac Koomson</div>
               <div class="back-role back-role-ice">Quality Control Manager</div>
               <div class="back-divider back-divider-ice"></div>
-              <p class="back-bio">Isaac is Abak's quality guardian — overseeing all product inspection, food safety compliance, cold-chain verification and supplier quality audits. His rigorous standards ensure that every product leaving Abak's facilities meets international food safety benchmarks and exceeds customer expectations.</p>
+              <p class="back-bio">Isaac oversees quality assurance, food safety compliance, supplier audits, and product inspections, ensuring every product meets the highest standards.</p>
               <div class="back-dept-tag tag-exec">✅ Quality Control</div>
               <div class="back-contact">
                 <a href="mailto:abakcoltd@gmail.com" class="contact-pill pill-email">✉ Email</a>
@@ -1001,7 +1001,7 @@
               <div class="back-name">Mr Eric Amuzu</div>
               <div class="back-role back-role-emerald">Deputy Sales Manager</div>
               <div class="back-divider back-divider-emerald"></div>
-              <p class="back-bio">Eric supports the Sales Manager in driving revenue across Abak's product portfolio. He manages key client relationships, coordinates sales team activities, and handles day-to-day account management — ensuring targets are met and customers receive consistent, high-quality service.</p>
+              <p class="back-bio">Eric supports sales growth through account management, client relationships, and sales team coordination, ensuring excellent service and target achievement.</p>
               <div class="back-dept-tag tag-manager">📈 Sales Department</div>
               <div class="back-contact">
                 <a href="mailto:sales@abakcompany.com" class="contact-pill pill-email">✉ Email</a>
@@ -1034,7 +1034,7 @@
               <div class="back-name">Ebenezer Asamani</div>
               <div class="back-role back-role-emerald">Accounts Head</div>
               <div class="back-divider back-divider-emerald"></div>
-              <p class="back-bio">Ezer heads Abak's accounts department, managing financial records, accounts payable and receivable, payroll, tax and other statutory compliance, and monthly reporting. He provides the financial clarity that enables leadership to make confident, data-driven business decisions.</p>
+              <p class="back-bio">Ezer heads Abak's accounts department, managing financial records, accounts payable and receivable, payroll, tax and other statutory compliance and monthly reporting. He provides the financial clarity that enables leadership to make confident, data-driven business decisions.</p>
               <div class="back-dept-tag tag-manager">💼 Accounts &amp; Finance</div>
               <div class="back-contact">
                 <a href="mailto:accounts@abakcompany.com" class="contact-pill pill-email">✉ Email</a>
@@ -1067,7 +1067,7 @@
               <div class="back-name">Joshua Kumi Kwakwa</div>
               <div class="back-role back-role-emerald">Logistics &amp; Transport Manager</div>
               <div class="back-divider back-divider-emerald"></div>
-              <p class="back-bio">Joshua manages Abak's full logistics and transport operation — fleet scheduling, delivery routing, cold-chain compliance, and last-mile distribution across Greater Accra and beyond. His expertise ensures every order arrives on time, at the right temperature, and in perfect condition.</p>
+              <p class="back-bio">Joshua manages logistics, transport operations, delivery routing, fleet scheduling, and cold-chain compliance to ensure reliable and timely deliveries.</p>
               <div class="back-dept-tag tag-manager">🚚 Logistics &amp; Transport</div>
               <div class="back-contact">
                 <a href="mailto:logistics@abakcompany.com" class="contact-pill pill-email">✉ Email</a>
@@ -1100,7 +1100,7 @@
               <div class="back-name">Bernard Laryea</div>
               <div class="back-role back-role-emerald">IT Manager</div>
               <div class="back-divider back-divider-emerald"></div>
-              <p class="back-bio">Bernard manages Abak's technology infrastructure — systems administration, network security, software tools, and digital transformation initiatives. He ensures that the company's technology backbone remains secure, efficient, and capable of supporting Abak's ongoing growth and operations.</p>
+              <p class="back-bio">Bernard oversees technology infrastructure, cybersecurity, systems administration, and digital solutions, ensuring reliable and secure business operations.</p>
               <div class="back-dept-tag tag-manager">💻 Information Technology</div>
               <div class="back-contact">
                 <a href="mailto:it@abakcompany.com" class="contact-pill pill-email">✉ Email</a>
@@ -1133,7 +1133,7 @@
               <div class="back-name">Kobby Harriban</div>
               <div class="back-role back-role-emerald">Deputy Logistics &amp; Transport Manager</div>
               <div class="back-divider back-divider-emerald"></div>
-              <p class="back-bio">Kobby assists in managing Abak's transport and logistics function — coordinating daily deliveries, driver scheduling, vehicle maintenance oversight, and cold-chain documentation. He ensures smooth operational continuity and supports the Logistics Manager in maintaining Abak's high delivery standards.</p>
+              <p class="back-bio">Kobby supports transport and logistics operations, coordinating deliveries, drivers, documentation and fleet activities to maintain service excellence.</p>
               <div class="back-dept-tag tag-dep">🚛 Logistics &amp; Transport</div>
               <div class="back-contact">
                 <a href="mailto:logistics@abakcompany.com" class="contact-pill pill-email">✉ Email</a>
@@ -1175,7 +1175,7 @@
           <span class="sl-text sl-text-rose">Tier 4 · Officers &amp; Staff</span>
         </div>
         <h2 class="section-title" style="color:var(--white);">The Specialists<br/><em style="font-style:italic;color:var(--rose);">Who Deliver Daily</em></h2>
-        <p class="section-desc">Our officers and specialist staff are the hands-on professionals who interact with clients, process accounts, move products, and keep Abak's engine running every single day.</p>
+        <p class="section-desc">Our officers and specialist staff are the hands-on professionals who interact with clients, process accounts, move products and keep Abak's engine running every single day.</p>
       </div>
 
       <div class="officers-grid">
@@ -1204,7 +1204,7 @@
               <div class="back-name">Rosemary Adwoa Arkoful</div>
               <div class="back-role back-role-rose">Customer Experience Officer</div>
               <div class="back-divider back-divider-rose"></div>
-              <p class="back-bio">Rosemary Adwoa is a dedicated customer experience professional responsible for ensuring every Abak client receives prompt, friendly, and effective service. She handles enquiries, order confirmations, complaints resolution, and ongoing client communication — building the loyalty that keeps customers coming back.</p>
+              <p class="back-bio">Rosemary ensures exceptional customer service by managing enquiries, orders, complaints, and client communications, helping build lasting customer loyalty.</p>
               <div class="back-dept-tag tag-officer">🤝 Customer Experience</div>
               <div class="back-contact">
                 <a href="mailto:info@abakcompany.com" class="contact-pill pill-email">✉ Email</a>
@@ -1237,7 +1237,7 @@
               <div class="back-name">Rosemary Efe Appiaduah</div>
               <div class="back-role back-role-rose">Customer Experience Officer</div>
               <div class="back-divider back-divider-rose"></div>
-              <p class="back-bio">Rosemary Efe supports Abak's customer-facing operations with dedication and warmth. She manages client onboarding, order tracking, follow-up communications, and satisfaction surveys — helping to create a seamless and positive experience at every touchpoint of the customer journey.</p>
+              <p class="back-bio">Rosemary supports customer onboarding, order tracking, follow-ups, and client engagement, creating a smooth and positive customer experience.</p>
               <div class="back-dept-tag tag-officer">🤝 Customer Experience</div>
               <div class="back-contact">
                 <a href="mailto:info@abakcompany.com" class="contact-pill pill-email">✉ Email</a>
@@ -1270,7 +1270,7 @@
               <div class="back-name">Frederick Laryea</div>
               <div class="back-role back-role-rose">Accounts Assistant</div>
               <div class="back-divider back-divider-rose"></div>
-              <p class="back-bio">Frederick supports Abak's accounts department with meticulous record-keeping, invoice processing, payment reconciliation, and data entry. His attention to detail and consistency ensures that the finance team operates accurately and that financial records remain clean and audit-ready at all times.</p>
+              <p class="back-bio">Frederick manages invoicing, reconciliations, and financial records, ensuring accuracy, accountability and audit readiness.</p>
               <div class="back-dept-tag tag-officer">💼 Accounts &amp; Finance</div>
               <div class="back-contact">
                 <a href="mailto:accounts@abakcompany.com" class="contact-pill pill-email">✉ Email</a>
@@ -1303,7 +1303,7 @@
               <div class="back-name">Michael Mireku</div>
               <div class="back-role back-role-rose">Logistics &amp; Transport Officer</div>
               <div class="back-divider back-divider-rose"></div>
-              <p class="back-bio">Michael is a key operational member of Abak's logistics team — assisting with delivery coordination, vehicle dispatch, waybill preparation, and on-ground logistics support. He plays an important hands-on role in ensuring that products reach clients efficiently, safely, and on time.</p>
+              <p class="back-bio">Michael coordinates deliveries, dispatch activities, logistics support, and transport operations, ensuring products reach customers safely and on time.</p>
               <div class="back-dept-tag tag-officer">🚚 Logistics &amp; Transport</div>
               <div class="back-contact">
                 <a href="mailto:logistics@abakcompany.com" class="contact-pill pill-email">✉ Email</a>
@@ -1336,7 +1336,7 @@
               <div class="back-name">Richlove Owusu Ansah</div>
               <div class="back-role back-role-rose">Marketing &amp; Communications Officer</div>
               <div class="back-divider back-divider-rose"></div>
-              <p class="back-bio">Richlove manages Abak's brand presence and communications — crafting digital content, managing social media channels, coordinating marketing campaigns, and supporting business development outreach. She ensures that Abak's voice is consistent, compelling, and reaching the right audiences across Ghana.</p>
+              <p class="back-bio">Richlove leads marketing and communications through content creation, campaigns, social media management and business outreach, strengthening Abak’s brand presence.</p>
               <div class="back-dept-tag tag-officer">📣 Marketing &amp; Communications</div>
               <div class="back-contact">
                 <a href="mailto:marketing@abakcompany.com" class="contact-pill pill-email">✉ Email</a>
@@ -1414,7 +1414,7 @@
           <li><a href="about.html">About Us</a></li>
           <li><a href="products.html">Products</a></li>
           <li><a href="services.html">Services</a></li>
-          <li><a href="suppliers.html">Suppliers &amp; Sourcing</a></li>
+          <li><a href="suppliers.html">Suppliers</a></li>
           <li><a href="team.html">Our Team</a></li>
           <li><a href="articles.html">Blog</a></li>
           <li><a href="faq.html">FAQs</a></li>
@@ -1427,8 +1427,8 @@
         <h5>Products</h5>
         <ul>
           <li><a href="products.html#poultry">Poultry</a></li>
-          <li><a href="products.html#fish">Fish &amp; Seafood</a></li>
-          <li><a href="products.html#meat">Red Meat</a></li>
+          <li><a href="products.html#seafood">Seafood</a></li>
+          <li><a href="products.html#meat">Meat</a></li>
           <li><a href="products.html#bulk">Bulk Orders</a></li>
           <li><a href="services.html">Cold Storage</a></li>
           <li><a href="services.html">Distribution</a></li>
@@ -1443,7 +1443,7 @@
         <div class="f-contact-item">🗺 GA-262-1811</div>
         <div class="f-contact-item">📞 <a href="tel:+233247298551">+233 24 729 8551</a></div>
         <div class="f-contact-item">📞 <a href="tel:+233504967111">+233 50 496 7111</a></div>
-        <div class="f-contact-item">✉ <a href="mailto:info@abakcompany.com">info@abakcompany.com</a></div>
+        <div class="f-contact-item">✉ <a href="mailto:info@abakcompany.com">abakcoltd@gmail.com</a></div>
         <div class="f-contact-item">💬 <a href="https://wa.me/233247298551" target="_blank">WhatsApp Orders Available</a></div>
       </div>
 
