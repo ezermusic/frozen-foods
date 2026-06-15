@@ -126,12 +126,12 @@
     .nav-links {
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 2px;
       list-style: none;
     }
     .nav-links a {
       color: rgba(255,255,255,0.82);
-      font-size: 0.9rem;
+      font-size: 0.8rem;
       font-weight: 500;
       padding: 8px 14px;
       border-radius: 8px;
